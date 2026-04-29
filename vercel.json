@@ -3,7 +3,6 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/", "destination": "/flipit-landing-standalone.html" },
     { "source": "/landing", "destination": "/landing.html" },
     { "source": "/privacy", "destination": "/privacy-standalone.html" },
     { "source": "/terms", "destination": "/terms-standalone.html" },
