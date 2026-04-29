@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FlipIt AI — Soyez le premier sur chaque deal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet" />
+<style>
+:root{--bg:#0a0906;--bg2:#110f0a;--bg3:#181510;--ink:#f5eedd;--ink-dim:#a89f89;--ink-mute:#6e6754;--accent:#aee83d;--accent2:#c8f050;--line:rgba(245,238,221,0.08);--line2:rgba(245,238,221,0.14);--ok:#7bc26b;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',-apple-system,system-ui,sans-serif;font-size:16px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(1200px 800px at 15% -10%,rgba(212,160,56,0.08),transparent 60%),radial-gradient(1000px 700px at 85% 10%,rgba(212,160,56,0.04),transparent 60%);z-index:0;}
+#flipit-root{position:relative;z-index:2;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+::selection{background:var(--accent);color:#0a0906;}
+@keyframes pulse-ring{0%{transform:scale(0.9);opacity:0.8;}100%{transform:scale(2.4);opacity:0;}}
+@keyframes blink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
+@keyframes scan-sweep{0%{transform:translateY(-100%);}100%{transform:translateY(1200%);}}
+@keyframes notif-in{0%{transform:translateY(-40px) scale(0.95);opacity:0;}100%{transform:translateY(0) scale(1);opacity:1;}}
+.fi-container{width:100%;max-width:1280px;margin:0 auto;padding:0 32px;}
+@media(max-width:720px){.fi-container{padding:0 20px;}}
+body::-webkit-scrollbar{width:10px;}
+body::-webkit-scrollbar-track{background:var(--bg);}
+body::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:10px;}
+</style>
+</head>
+<body>
+<div id="flipit-root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+/* ─── COPY ─────────────────────────────────────────────────────────────── */
+const COPY = {
+  fr: {
+    nav:{ features:"Fonctionnalités", how:"Comment ça marche", pricing:"Tarifs", faq:"FAQ", support:"Support", download:"Télécharger" },
+    hero:{ tag:"SCANNER DE MARKETPLACE · 24/7", ta:"Soyez le ", tb:"premier", tc:" sur chaque deal.", sub:"FlipIt AI scanne Facebook Marketplace, Kijiji et Craigslist sans relâche. Dès qu'une annonce sous-évaluée correspond à vos critères, vous recevez la notification. Avant tout le monde.", ctaSub:"Gratuit à télécharger · Abonnement requis pour les alertes" },
+    beta:{ msg:"Bug majeur trouvé ? Récompense en jours d'abonnement gratuits →", email:"bugs@flipitapp.ai" },
+    how:{ eyebrow:"— WORKFLOW", title:"Trois étapes. Aucune recherche manuelle.", steps:[
+      { num:"01", title:"Créez votre profil de recherche", body:"Catégorie, mots-clés, prix max, rayon géographique. Aussi précis que vous voulez.", tag:"Configurer" },
+      { num:"02", title:"L'IA scanne en continu", body:"Notre moteur analyse chaque nouvelle annonce en quelques secondes, compare au marché, et filtre les vraies opportunités.", tag:"24/7" },
+      { num:"03", title:"Recevez l'alerte en temps réel", body:"Notification push instantanée avec le lien direct. Vous êtes le premier à contacter le vendeur.", tag:"< 30s" },
+    ]},
+    features:{ eyebrow:"— CAPACITÉS", title:"Conçu pour agir vite.", list:[
+      { k:"Alertes instantanées", v:"Notification push sous 30 secondes après la publication de l'annonce." },
+      { k:"Multi-plateforme", v:"Facebook Marketplace, Kijiji et Craigslist en une seule app." },
+      { k:"Filtres précis", v:"Prix, catégorie, mots-clés, zone géographique, état de l'objet." },
+      { k:"Détection de sous-évaluation", v:"L'IA compare au marché et met en avant les vraies bonnes affaires." },
+      { k:"Profils multiples", v:"Plusieurs stratégies de recherche en parallèle (plan Pro)." },
+      { k:"Historique & favoris", v:"Retrouvez et comparez toutes vos alertes passées." },
+    ]},
+    stats:{ eyebrow:"— EN DIRECT", items:[
+      { n:"2.4M+", l:"Annonces analysées cette semaine" },{ n:"< 30s", l:"Délai moyen d'alerte" },
+      { n:"3", l:"Marketplaces surveillées en continu" },{ n:"100%", l:"Automatisé, zéro recherche manuelle" },
+    ]},
+    forWho:{ eyebrow:"— POUR QUI", title:"Fait pour tous ceux qui ne veulent plus rater une affaire.", personas:[
+      { tag:"Revendeur pro", title:"Les flippers", body:"Vous achetez pour revendre. Chaque minute compte. FlipIt AI transforme des heures de scroll en alertes ciblées." },
+      { tag:"Chasseur de bonnes affaires", title:"Les particuliers malins", body:"Vous cherchez un canapé, un vélo, un iPhone. L'app vous prévient quand LA bonne offre tombe — sans passer vos soirées à rafraîchir." },
+      { tag:"Collectionneur", title:"Les niches spécifiques", body:"Vinyles rares, pièces vintage, équipement photo. Paramétrez vos critères pointus et laissez l'IA veiller." },
+    ]},
+    deals:{ eyebrow:"— EXEMPLES", title:"Le genre d'alertes que vous recevez.", sub:"Annonces détectées par FlipIt AI. Prix marché estimé par notre IA.", list:[
+      { cat:"Mobilier", item:"Canapé cuir italien — Montréal", listed:"450 $", market:"1 200 $", save:"62%", time:"il y a 12s", platform:"FB Marketplace" },
+      { cat:"Électronique", item:"iPhone 15 Pro 256GB — Laval", listed:"720 $", market:"1 050 $", save:"31%", time:"il y a 47s", platform:"Kijiji" },
+      { cat:"Vélo", item:"Vélo route carbone Cervélo", listed:"890 $", market:"2 400 $", save:"63%", time:"il y a 1m", platform:"Craigslist" },
+      { cat:"Outillage", item:"Compresseur DeWalt 60gal — neuf", listed:"380 $", market:"799 $", save:"52%", time:"il y a 2m", platform:"FB Marketplace" },
+    ]},
+    testimonials:{ eyebrow:"— UTILISATEURS BÊTA", title:"Les premiers utilisateurs ne peuvent plus s'en passer.", list:[
+      { q:"J'ai acheté un vélo Cervélo à 40% du prix marché 14 secondes après la mise en ligne. Impossible sans FlipIt.", n:"Marc L.", r:"Flipper, Montréal" },
+      { q:"Je cherchais une table Vitra depuis 6 mois. Alerte reçue un mardi à 2h du matin, contact envoyé, table achetée. Fini les heures de scroll.", n:"Sophie T.", r:"Designer, Québec" },
+      { q:"Revente de matériel photo, mon chiffre d'affaires a doublé en deux mois. L'app paie son abonnement en une seule alerte.", n:"Julien R.", r:"Revendeur pro, Laval" },
+    ]},
+    pricing:{ eyebrow:"— TARIFS", title:"Deux plans. Zéro engagement.", sub:"Annulez à tout moment. Premier mois remboursé si aucune alerte pertinente.", plans:[
+      { name:"Starter", price:"24", period:"/ mois", desc:"Un profil de recherche. Notifications instantanées illimitées.", features:["1 profil de recherche actif","Notifications push instantanées","Accès aux 3 marketplaces","Historique 30 jours","Support par courriel"], cta:"Commencer", highlight:false },
+      { name:"Pro", price:"79", period:"/ mois", desc:"Pour les flippers sérieux et chasseurs multi-catégories.", features:["Jusqu'à 5 profils de recherche","Notifications prioritaires (plus rapides)","Accès aux 3 marketplaces","Historique illimité & export","Détection de sous-évaluation avancée","Support prioritaire"], cta:"Passer Pro", highlight:true, tag:"LE PLUS POPULAIRE" },
+    ]},
+    faq:{ eyebrow:"— QUESTIONS", title:"Tout ce qu'il faut savoir.", list:[
+      { q:"C'est vraiment en temps réel ?", a:"Oui. Notre infrastructure scanne les marketplaces 24/7 et les nouvelles annonces sont analysées sous 30 secondes. Dès qu'une annonce correspond à votre profil, vous recevez une notification push." },
+      { q:"Sur quelles marketplaces ça fonctionne ?", a:"Facebook Marketplace, Kijiji et Craigslist. D'autres plateformes arriveront après la sortie de bêta." },
+      { q:"Quelle est la différence entre Starter et Pro ?", a:"Starter (24 $/mois) : 1 profil de recherche. Pro (79 $/mois) : jusqu'à 5 profils parallèles, notifications prioritaires, détection avancée et historique illimité." },
+      { q:"L'app est en bêta — qu'est-ce que ça veut dire ?", a:"L'IA apprend encore à mieux détecter vos préférences. Il peut y avoir des bugs. Tout bug majeur signalé à l'équipe est récompensé avec des jours d'abonnement gratuits." },
+      { q:"Je peux annuler quand je veux ?", a:"Oui, aucun engagement. Annulation en un clic depuis l'app. Le premier mois est remboursé si vous ne recevez aucune alerte pertinente." },
+      { q:"Quelles zones géographiques sont couvertes ?", a:"Canada (toutes les grandes villes) et États-Unis au lancement. Paramétrez un rayon autour de votre ville pour des résultats locaux." },
+    ]},
+    footer:{ tagline:"Soyez le premier sur chaque deal.", copy:"© 2026 FlipIt AI. Tous droits réservés.", madein:"Conçu au Québec 🇨🇦",
+      sections:{ product:{ title:"Produit", links:[["Fonctionnalités","#features"],["Tarifs","#pricing"],["Comment ça marche","#how"],["FAQ","#faq"]] }, company:{ title:"Entreprise", links:[["À propos","#"],["Contact","mailto:support@flipitapp.ai"],["Blog","#"],["Carrières","#"]] }, legal:{ title:"Légal", links:[["Politique de confidentialité","privacy-standalone.html"],["Termes et conditions","terms-standalone.html"],["Cookies","cookies-standalone.html"],["Mentions légales","mentions-legales-standalone.html"]] } }
+    },
+  },
+  en:{
+    nav:{ features:"Features", how:"How it works", pricing:"Pricing", faq:"FAQ", support:"Support", download:"Download" },
+    hero:{ tag:"MARKETPLACE SCANNER · 24/7", ta:"Be the ", tb:"first", tc:" on every deal.", sub:"FlipIt AI scans Facebook Marketplace, Kijiji and Craigslist non-stop. The moment an underpriced listing matches your criteria, you get the notification. Before anyone else.", ctaSub:"Free to download · Subscription required for alerts" },
+    beta:{ msg:"Found a major bug? Get free subscription days as a reward →", email:"bugs@flipitapp.ai" },
+    how:{ eyebrow:"— WORKFLOW", title:"Three steps. Zero manual searching.", steps:[
+      { num:"01", title:"Create your search profile", body:"Category, keywords, max price, geographic radius. As precise as you want.", tag:"Setup" },
+      { num:"02", title:"AI scans continuously", body:"Our engine analyzes every new listing in seconds, benchmarks against the market, and filters the real opportunities.", tag:"24/7" },
+      { num:"03", title:"Get the real-time alert", body:"Instant push notification with a direct link. You're the first to contact the seller.", tag:"< 30s" },
+    ]},
+    features:{ eyebrow:"— CAPABILITIES", title:"Built to act fast.", list:[
+      { k:"Instant alerts", v:"Push notification within 30 seconds of a listing going live." },
+      { k:"Multi-platform", v:"Facebook Marketplace, Kijiji and Craigslist in one app." },
+      { k:"Precise filters", v:"Price, category, keywords, geographic zone, item condition." },
+      { k:"Undervalue detection", v:"AI benchmarks against the market and surfaces the real deals." },
+      { k:"Multiple profiles", v:"Several search strategies running in parallel (Pro plan)." },
+      { k:"History & favourites", v:"Find and compare all your past alerts." },
+    ]},
+    stats:{ eyebrow:"— LIVE", items:[
+      { n:"2.4M+", l:"Listings analyzed this week" },{ n:"< 30s", l:"Average alert delay" },
+      { n:"3", l:"Marketplaces monitored 24/7" },{ n:"100%", l:"Automated, zero manual searching" },
+    ]},
+    forWho:{ eyebrow:"— FOR WHO", title:"Made for everyone who refuses to miss a deal.", personas:[
+      { tag:"Pro reseller", title:"The flippers", body:"You buy to resell. Every minute counts. FlipIt AI turns hours of scrolling into targeted alerts." },
+      { tag:"Deal hunter", title:"The smart shoppers", body:"You're looking for a couch, a bike, an iPhone. The app notifies you when THE right offer drops — without spending your evenings refreshing." },
+      { tag:"Collector", title:"The niche hunters", body:"Rare vinyl, vintage pieces, camera gear. Set your precise criteria and let the AI keep watch." },
+    ]},
+    deals:{ eyebrow:"— EXAMPLES", title:"The kind of alerts you'll receive.", sub:"Listings detected by FlipIt AI. Market price estimated by our AI.", list:[
+      { cat:"Furniture", item:"Italian leather sofa — Montreal", listed:"$450", market:"$1,200", save:"62%", time:"12s ago", platform:"FB Marketplace" },
+      { cat:"Electronics", item:"iPhone 15 Pro 256GB — Laval", listed:"$720", market:"$1,050", save:"31%", time:"47s ago", platform:"Kijiji" },
+      { cat:"Cycling", item:"Cervélo carbon road bike", listed:"$890", market:"$2,400", save:"63%", time:"1m ago", platform:"Craigslist" },
+      { cat:"Tools", item:"DeWalt 60gal compressor — new", listed:"$380", market:"$799", save:"52%", time:"2m ago", platform:"FB Marketplace" },
+    ]},
+    testimonials:{ eyebrow:"— BETA USERS", title:"Early users can't live without it.", list:[
+      { q:"I bought a Cervélo at 40% of market value 14 seconds after it was listed. Impossible without FlipIt.", n:"Marc L.", r:"Flipper, Montreal" },
+      { q:"I'd been searching for a Vitra table for 6 months. Alert at 2am, message sent, table bought. No more hours of scrolling.", n:"Sophie T.", r:"Designer, Quebec City" },
+      { q:"Camera gear reselling — my revenue doubled in two months. The app pays for itself with a single alert.", n:"Julien R.", r:"Pro reseller, Laval" },
+    ]},
+    pricing:{ eyebrow:"— PRICING", title:"Two plans. No commitment.", sub:"Cancel anytime. First month refunded if no relevant alerts received.", plans:[
+      { name:"Starter", price:"24", period:"/ month", desc:"One search profile. Unlimited instant notifications.", features:["1 active search profile","Instant push notifications","Access to all 3 marketplaces","30-day history","Email support"], cta:"Get started", highlight:false },
+      { name:"Pro", price:"79", period:"/ month", desc:"For serious flippers and multi-category hunters.", features:["Up to 5 search profiles","Priority notifications (faster)","Access to all 3 marketplaces","Unlimited history & export","Advanced undervalue detection","Priority support"], cta:"Go Pro", highlight:true, tag:"MOST POPULAR" },
+    ]},
+    faq:{ eyebrow:"— QUESTIONS", title:"Everything you need to know.", list:[
+      { q:"Is it truly real-time?", a:"Yes. Our infrastructure scans marketplaces 24/7 and new listings are analyzed within 30 seconds. As soon as a listing matches your profile, you receive a push notification." },
+      { q:"Which marketplaces does it cover?", a:"Facebook Marketplace, Kijiji and Craigslist. More platforms will be added after the beta period." },
+      { q:"What's the difference between Starter and Pro?", a:"Starter ($24/month): 1 search profile. Pro ($79/month): up to 5 parallel profiles, priority notifications, advanced detection and unlimited history." },
+      { q:"The app is in beta — what does that mean?", a:"The AI is still learning your preferences. There may be bugs. Any major bug reported to the team is rewarded with free subscription days." },
+      { q:"Can I cancel anytime?", a:"Yes, no commitment. Cancel in one click from the app. First month refunded if you receive no relevant alerts." },
+      { q:"Which geographic areas are covered?", a:"Canada (all major cities) and the United States at launch. Set a radius around your city for local results." },
+    ]},
+    footer:{ tagline:"Be the first on every deal.", copy:"© 2026 FlipIt AI. All rights reserved.", madein:"Built in Quebec 🇨🇦",
+      sections:{ product:{ title:"Product", links:[["Features","#features"],["Pricing","#pricing"],["How it works","#how"],["FAQ","#faq"]] }, company:{ title:"Company", links:[["About","#"],["Contact","mailto:support@flipitapp.ai"],["Blog","#"],["Careers","#"]] }, legal:{ title:"Legal", links:[["Privacy Policy","privacy-standalone.html"],["Terms and Conditions","terms-standalone.html"],["Cookies","cookies-standalone.html"],["Legal notices","mentions-legales-standalone.html"]] } }
+    },
+  },
+};
+
+/* ─── NOTIF DATA ────────────────────────────────────────────────────────── */
+const NOTIFS = [
+  { cat:"🪑 Mobilier", title:"Canapé cuir italien — 450 $", sub:"Marché estimé 1 200 $ · -62%", time:"À l'instant", platform:"FB Marketplace" },
+  { cat:"📱 Électronique", title:"iPhone 15 Pro 256GB — 720 $", sub:"Marché estimé 1 050 $ · -31%", time:"12s", platform:"Kijiji" },
+  { cat:"🚴 Vélo", title:"Cervélo carbone R5 — 890 $", sub:"Marché estimé 2 400 $ · -63%", time:"47s", platform:"Craigslist" },
+  { cat:"🛠️ Outillage", title:"Compresseur DeWalt 60gal — 380 $", sub:"Marché estimé 799 $ · -52%", time:"1m", platform:"FB Marketplace" },
+  { cat:"📸 Photo", title:"Canon R6 + 24-70 2.8 — 2100 $", sub:"Marché estimé 3 500 $ · -40%", time:"2m", platform:"Kijiji" },
+];
+
+/* ─── PRIMITIVES ────────────────────────────────────────────────────────── */
+function Eyebrow({ children, style }) {
+  return <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:12, letterSpacing:"0.15em", color:"var(--accent)", textTransform:"uppercase", marginBottom:20, ...style }}>{children}</div>;
+}
+function STitle({ children, style }) {
+  return <h2 style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"clamp(32px,5vw,58px)", fontWeight:500, letterSpacing:"-0.02em", lineHeight:1.05, margin:0, marginBottom:24, textWrap:"balance", ...style }}>{children}</h2>;
+}
+function Btn({ children, href="#", primary, icon, style }) {
+  const base = { display:"inline-flex", alignItems:"center", gap:10, padding:"15px 24px", borderRadius:999, fontWeight:600, fontSize:15, cursor:"pointer", fontFamily:"inherit", textDecoration:"none", transition:"all 0.2s" };
+  const primS = { background:"var(--accent)", color:"#0a0906", border:"none", boxShadow:"0 8px 30px rgba(212,160,56,0.25)" };
+  const ghostS = { background:"rgba(245,238,221,0.04)", color:"var(--ink)", border:"1px solid var(--line2)" };
+  return (
+    <a href={href} style={{ ...base, ...(primary ? primS : ghostS), ...style }}
+      onMouseEnter={e => { e.currentTarget.style.transform="translateY(-2px)"; e.currentTarget.style.boxShadow=primary?"0 14px 40px rgba(212,160,56,0.4)":"none"; }}
+      onMouseLeave={e => { e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow=primary?"0 8px 30px rgba(212,160,56,0.25)":"none"; }}
+    >{icon}{children}</a>
+  );
+}
+function StoreBtn({ ios, href="#" }) {
+  return (
+    <a href={href} style={{ display:"inline-flex", alignItems:"center", gap:12, padding:"12px 22px", background:"#0a0906", color:"var(--ink)", border:"1px solid var(--line2)", borderRadius:14, transition:"all 0.2s", textDecoration:"none", minWidth:180 }}
+      onMouseEnter={e=>{ e.currentTarget.style.borderColor="var(--accent)"; e.currentTarget.style.transform="translateY(-2px)"; }}
+      onMouseLeave={e=>{ e.currentTarget.style.borderColor="var(--line2)"; e.currentTarget.style.transform="translateY(0)"; }}
+    >
+      {ios ? (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+      ) : (
+        <svg width="26" height="26" viewBox="0 0 24 24"><defs><linearGradient id="gp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#D4A038"/><stop offset="1" stopColor="#e8bc5a"/></linearGradient></defs><path d="M3.609 1.814 13.792 12 3.609 22.186a1 1 0 0 1-.609-.923V2.737a1 1 0 0 1 .609-.923z" fill="url(#gp)"/></svg>
+      )}
+      <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-start", lineHeight:1.1 }}>
+        <span style={{ fontSize:10, color:"var(--ink-dim)", fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.05em" }}>{ios?"TÉLÉCHARGER SUR":"DISPONIBLE SUR"}</span>
+        <span style={{ fontSize:16, fontWeight:600, letterSpacing:"-0.01em" }}>{ios?"App Store":"Google Play"}</span>
+      </div>
+    </a>
+  );
+}
+function Reveal({ children, delay=0, style }) {
+  const ref = useRef(null);
+  const [vis, setVis] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(es => { if(es[0].isIntersecting){ setVis(true); obs.disconnect(); } }, { threshold:0.1 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return <div ref={ref} style={{ opacity:vis?1:0, transform:vis?"translateY(0)":"translateY(24px)", transition:`opacity 0.8s ease ${delay}ms, transform 0.8s ease ${delay}ms`, ...style }}>{children}</div>;
+}
+function DotGrid() {
+  return <div style={{ position:"absolute", inset:0, backgroundImage:"radial-gradient(circle,rgba(245,238,221,0.08) 1px,transparent 1px)", backgroundSize:"32px 32px", pointerEvents:"none", maskImage:"radial-gradient(ellipse at center,black 20%,transparent 70%)", WebkitMaskImage:"radial-gradient(ellipse at center,black 20%,transparent 70%)" }} />;
+}
+function LogoMark() {
+  return (
+    <div style={{ width:36, height:36, borderRadius:10, background:"linear-gradient(135deg,var(--accent),var(--accent2))", display:"flex", alignItems:"center", justifyContent:"center", boxShadow:"0 4px 16px rgba(212,160,56,0.35)", flexShrink:0 }}>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0906" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+    </div>
+  );
+}
+const IC_DL = <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>;
+const IC_CHECK = <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{flexShrink:0,marginTop:2}}><polyline points="20 6 9 17 4 12"/></svg>;
+
+/* ─── PHONE MOCKUP ──────────────────────────────────────────────────────── */
+function PhoneMockup({ accent }) {
+  const [notifs, setNotifs] = useState([NOTIFS[0], NOTIFS[1], NOTIFS[2]]);
+  const idxRef = useRef(3);
+  const [time, setTime] = useState("");
+  useEffect(() => {
+    const upd = () => { const d=new Date(); setTime(`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`); };
+    upd(); const t=setInterval(upd,10000); return ()=>clearInterval(t);
+  }, []);
+  useEffect(() => {
+    const t = setInterval(() => {
+      setNotifs(prev => [NOTIFS[idxRef.current % NOTIFS.length], ...prev.slice(0,2)]);
+      idxRef.current++;
+    }, 3500);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <div style={{ position:"relative", width:300, height:610, margin:"0 auto" }}>
+      <div style={{ position:"absolute", inset:-60, background:`radial-gradient(ellipse at center,${accent}22,transparent 65%)`, filter:"blur(40px)", pointerEvents:"none" }} />
+      <div style={{ position:"relative", width:"100%", height:"100%", borderRadius:46, background:"linear-gradient(145deg,#2a241b 0%,#0a0906 50%,#1a160f 100%)", padding:10, boxShadow:"0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(245,238,221,0.08),inset 0 2px 2px rgba(255,255,255,0.05)" }}>
+        {/* buttons */}
+        <div style={{ position:"absolute", right:-2, top:120, width:3, height:56, background:"#1a160f", borderRadius:2 }} />
+        <div style={{ position:"absolute", left:-2, top:100, width:3, height:30, background:"#1a160f", borderRadius:2 }} />
+        <div style={{ position:"absolute", left:-2, top:145, width:3, height:52, background:"#1a160f", borderRadius:2 }} />
+        <div style={{ position:"absolute", left:-2, top:210, width:3, height:52, background:"#1a160f", borderRadius:2 }} />
+        {/* screen */}
+        <div style={{ width:"100%", height:"100%", borderRadius:37, overflow:"hidden", position:"relative", background:`radial-gradient(ellipse at 50% -10%,${accent}15,transparent 50%),linear-gradient(180deg,#0f0d08,#060503)` }}>
+          {/* status bar */}
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"13px 26px 8px", fontSize:13, fontWeight:600, color:"#f5eedd", fontFamily:"-apple-system,sans-serif" }}>
+            <span>{time||"10:24"}</span>
+            <div style={{ display:"flex", alignItems:"center", gap:4 }}>
+              <svg width="15" height="10" viewBox="0 0 16 10" fill="currentColor"><rect x="0" y="6" width="3" height="4" rx="0.5"/><rect x="4" y="4" width="3" height="6" rx="0.5"/><rect x="8" y="2" width="3" height="8" rx="0.5"/><rect x="12" y="0" width="3" height="10" rx="0.5"/></svg>
+              <div style={{ position:"relative", width:22, height:10, border:"1px solid #f5eedd", borderRadius:3, padding:1 }}>
+                <div style={{ width:"75%", height:"100%", background:"#f5eedd", borderRadius:1 }} />
+              </div>
+            </div>
+          </div>
+          {/* dynamic island */}
+          <div style={{ position:"absolute", top:13, left:"50%", transform:"translateX(-50%)", width:100, height:30, background:"#000", borderRadius:999, zIndex:10 }} />
+          {/* header */}
+          <div style={{ padding:"40px 18px 16px", textAlign:"center" }}>
+            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, letterSpacing:"0.2em", color:accent, marginBottom:6, display:"inline-flex", alignItems:"center", gap:6 }}>
+              <span style={{ width:6, height:6, borderRadius:999, background:accent, boxShadow:`0 0 12px ${accent}`, animation:"blink 1.2s infinite" }} />
+              FLIPIT · LIVE
+            </div>
+            <div style={{ fontSize:20, fontWeight:600, letterSpacing:"-0.02em", color:"#f5eedd" }}>Nouvelles offres</div>
+            <div style={{ fontSize:10, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", marginTop:3 }}>3 plateformes · 24/7</div>
+          </div>
+          {/* scan sweep */}
+          <div style={{ position:"absolute", left:0, right:0, top:130, height:36, background:`linear-gradient(180deg,transparent,${accent}20,transparent)`, animation:"scan-sweep 3.5s linear infinite", pointerEvents:"none" }} />
+          {/* notifs */}
+          <div style={{ padding:"0 12px", display:"flex", flexDirection:"column", gap:9 }}>
+            {notifs.map((n,i) => (
+              <div key={`${n.title}-${i}`} style={{ background:i===0?`linear-gradient(135deg,${accent}22,${accent}08)`:"rgba(245,238,221,0.04)", border:i===0?`1px solid ${accent}66`:"1px solid rgba(245,238,221,0.07)", borderRadius:16, padding:"11px 13px", animation:i===0?"notif-in 0.6s cubic-bezier(0.2,0.8,0.2,1)":"none", opacity:i===0?1:0.9-i*0.2 }}>
+                <div style={{ display:"flex", justifyContent:"space-between", marginBottom:5 }}>
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9.5, color:i===0?accent:"var(--ink-dim)", fontWeight:600, letterSpacing:"0.05em" }}>FLIPIT · {n.platform.toUpperCase()}</div>
+                  <div style={{ fontSize:10, color:"var(--ink-mute)" }}>{n.time}</div>
+                </div>
+                <div style={{ fontSize:11.5, color:"var(--ink-dim)", marginBottom:2 }}>{n.cat}</div>
+                <div style={{ fontSize:13, fontWeight:600, color:"#f5eedd", letterSpacing:"-0.01em", marginBottom:2 }}>{n.title}</div>
+                <div style={{ fontSize:10.5, color:i===0?"#ffd37a":"var(--ink-dim)", fontFamily:"'JetBrains Mono',monospace" }}>{n.sub}</div>
+              </div>
+            ))}
+          </div>
+          {/* home indicator */}
+          <div style={{ position:"absolute", bottom:7, left:"50%", transform:"translateX(-50%)", width:120, height:4, background:"#f5eedd", borderRadius:999, opacity:0.5 }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── BETA BANNER ───────────────────────────────────────────────────────── */
+const BANNER_H = 38;
+function BetaBanner({ accent, lang, onClose }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+  const c = COPY[lang].beta;
+  return (
+    <div style={{ position:"fixed", top:0, left:0, right:0, zIndex:200, height:BANNER_H, background: scrolled ? "rgba(10,9,6,0.97)" : `linear-gradient(90deg,${accent}18,${accent}08)`, backdropFilter: scrolled ? "blur(14px)" : "none", WebkitBackdropFilter: scrolled ? "blur(14px)" : "none", borderBottom: `1px solid ${scrolled ? "rgba(245,238,221,0.12)" : accent+"33"}`, transition:"background 0.3s, border-color 0.3s", padding:"0 20px", display:"flex", alignItems:"center", justifyContent:"center", gap:12, fontSize:12, fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.02em", overflow:"hidden" }}>
+      <span style={{ padding:"2px 8px", background:accent, color:"#0a0906", fontSize:10, fontWeight:700, letterSpacing:"0.15em", borderRadius:4, flexShrink:0 }}>BETA</span>
+      <span style={{ color:"var(--ink-dim)", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{c.msg}</span>
+      <a href={`mailto:${c.email}`} style={{ color:accent, borderBottom:`1px solid ${accent}55`, flexShrink:0, whiteSpace:"nowrap" }}>{c.email}</a>
+      <button onClick={onClose} style={{ marginLeft:4, width:22, height:22, flexShrink:0, borderRadius:999, border:"1px solid var(--line2)", color:"var(--ink-dim)", display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer", background:"transparent" }}>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  );
+}
+
+/* ─── NAV ───────────────────────────────────────────────────────────────── */
+function Nav({ lang, setLang, bannerOffset }) {
+  const c = COPY[lang].nav;
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+  const links = [["#features",c.features],["#how",c.how],["#pricing",c.pricing],["#faq",c.faq],["mailto:support@flipitapp.ai",c.support]];
+  return (
+    <nav style={{ position:"fixed", top:bannerOffset, left:0, right:0, zIndex:100, padding:scrolled?"12px 0":"20px 0", background:scrolled?"rgba(10,9,6,0.88)":"transparent", backdropFilter:scrolled?"blur(14px)":"none", WebkitBackdropFilter:scrolled?"blur(14px)":"none", borderBottom:scrolled?"1px solid var(--line)":"1px solid transparent", transition:"all 0.3s" }}>
+      <div className="fi-container" style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+        <a href="#top" style={{ display:"flex", alignItems:"center", gap:10 }}>
+          <LogoMark />
+          <span style={{ fontWeight:600, fontSize:18, letterSpacing:"-0.02em" }}>FlipIt <span style={{ color:"var(--accent)" }}>AI</span></span>
+        </a>
+        {/* desktop links */}
+        <div className="fi-nav-links" style={{ display:"flex", alignItems:"center", gap:28 }}>
+          {links.map(([h,l]) => <a key={h} href={h} style={{ fontSize:14, color:"var(--ink-dim)", fontWeight:500, transition:"color 0.2s" }} onMouseEnter={e=>e.currentTarget.style.color="var(--ink)"} onMouseLeave={e=>e.currentTarget.style.color="var(--ink-dim)"}>{l}</a>)}
+        </div>
+        {/* right controls */}
+        <div className="fi-nav-cta" style={{ display:"flex", gap:10, alignItems:"center" }}>
+          {/* lang toggle */}
+          <div style={{ display:"flex", alignItems:"center", background:"rgba(245,238,221,0.04)", border:"1px solid var(--line2)", borderRadius:999, padding:3, gap:2 }}>
+            {["fr","en"].map(l => (
+              <button key={l} onClick={() => setLang(l)} style={{ padding:"5px 12px", borderRadius:999, background:lang===l?"var(--accent)":"transparent", color:lang===l?"#0a0906":"var(--ink-dim)", fontFamily:"'JetBrains Mono',monospace", fontSize:11, fontWeight:700, letterSpacing:"0.08em", cursor:"pointer", border:"none", transition:"all 0.2s", textTransform:"uppercase" }}>{l}</button>
+            ))}
+          </div>
+          <Btn href="#download" primary icon={IC_DL} style={{ padding:"10px 18px", fontSize:14 }}>{c.download}</Btn>
+        </div>
+        {/* mobile hamburger */}
+        <button className="fi-hamburger" onClick={() => setOpen(!open)} style={{ display:"none", width:40, height:40, border:"1px solid var(--line2)", borderRadius:10, alignItems:"center", justifyContent:"center" }}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+      {open && (
+        <div style={{ background:"rgba(10,9,6,0.98)", backdropFilter:"blur(20px)", borderTop:"1px solid var(--line)", padding:"20px 32px", display:"flex", flexDirection:"column", gap:14 }}>
+          {links.map(([h,l]) => <a key={h} href={h} onClick={()=>setOpen(false)} style={{ fontSize:16, color:"var(--ink)", padding:"8px 0" }}>{l}</a>)}
+          <div style={{ display:"flex", gap:10, paddingTop:8 }}>
+            <StoreBtn ios /><StoreBtn />
+          </div>
+        </div>
+      )}
+      <style>{`@media(max-width:860px){.fi-nav-links,.fi-nav-cta{display:none!important;}.fi-hamburger{display:flex!important;}}`}</style>
+    </nav>
+  );
+}
+
+/* ─── HERO ──────────────────────────────────────────────────────────────── */
+function Hero({ lang, accent }) {
+  const c = COPY[lang].hero;
+  const [count, setCount] = useState(2438291);
+  useEffect(() => { const t=setInterval(()=>setCount(n=>n+Math.floor(Math.random()*9)+3),1200); return ()=>clearInterval(t); }, []);
+  return (
+    <section id="top" style={{ position:"relative", minHeight:"100vh", paddingTop:140, paddingBottom:80, overflow:"hidden" }}>
+      <DotGrid />
+      <div style={{ position:"absolute", top:"15%", right:"-10%", width:600, height:600, borderRadius:"50%", background:`radial-gradient(circle,${accent}22,transparent 60%)`, filter:"blur(60px)", pointerEvents:"none" }} />
+      <div className="fi-container" style={{ position:"relative", zIndex:2 }}>
+        <div className="fi-hero-grid" style={{ display:"grid", gridTemplateColumns:"1.1fr 1fr", gap:60, alignItems:"center" }}>
+          <div>
+            <Reveal>
+              <div style={{ display:"inline-flex", alignItems:"center", gap:10, padding:"8px 14px", background:"rgba(245,238,221,0.04)", border:"1px solid var(--line2)", borderRadius:999, fontFamily:"'JetBrains Mono',monospace", fontSize:11, letterSpacing:"0.12em", color:"var(--ink-dim)", marginBottom:32 }}>
+                <span style={{ width:8, height:8, borderRadius:999, background:accent, position:"relative", boxShadow:`0 0 12px ${accent}`, animation:"blink 1.8s infinite" }} />
+                {c.tag}
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <h1 style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"clamp(44px,7vw,88px)", fontWeight:500, letterSpacing:"-0.035em", lineHeight:1.02, margin:0, marginBottom:24, textWrap:"balance" }}>
+                {c.ta}<span style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400, background:`linear-gradient(135deg,${accent},#f0ca6a)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>{c.tb}</span>{c.tc}
+              </h1>
+            </Reveal>
+            <Reveal delay={200}>
+              <p style={{ fontSize:"clamp(16px,1.4vw,19px)", color:"var(--ink-dim)", lineHeight:1.55, margin:0, marginBottom:40, maxWidth:560, textWrap:"pretty" }}>{c.sub}</p>
+            </Reveal>
+            <Reveal delay={300}>
+              <div style={{ display:"flex", gap:14, flexWrap:"wrap", marginBottom:16 }}>
+                <StoreBtn ios /><StoreBtn />
+              </div>
+              <div style={{ fontSize:12, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.03em" }}>{c.ctaSub}</div>
+            </Reveal>
+            <Reveal delay={400}>
+              <div style={{ marginTop:48, padding:"14px 20px", background:"rgba(245,238,221,0.03)", border:"1px solid var(--line)", borderRadius:14, display:"inline-flex", alignItems:"center", gap:14, fontFamily:"'JetBrains Mono',monospace" }}>
+                <span style={{ width:8, height:8, borderRadius:999, background:"var(--ok)", boxShadow:"0 0 10px var(--ok)", animation:"blink 1.4s infinite" }} />
+                <span style={{ fontSize:11, color:"var(--ink-mute)", letterSpacing:"0.1em" }}>ANNONCES ANALYSÉES</span>
+                <span style={{ fontSize:18, fontWeight:600, fontVariantNumeric:"tabular-nums" }}>{count.toLocaleString("fr-CA")}</span>
+              </div>
+            </Reveal>
+          </div>
+          <div className="fi-hero-phone" style={{ display:"flex", justifyContent:"center" }}>
+            <Reveal delay={200}><PhoneMockup accent={accent} /></Reveal>
+          </div>
+        </div>
+      </div>
+      <style>{`@media(max-width:960px){.fi-hero-grid{grid-template-columns:1fr!important;gap:50px!important;}}`}</style>
+    </section>
+  );
+}
+
+/* ─── HOW IT WORKS ──────────────────────────────────────────────────────── */
+function StepVisual({ idx, accent }) {
+  if (idx === 0) {
+    return (
+      <div style={{ display:"flex", flexDirection:"column", gap:6, marginTop:24 }}>
+        {[["Catégorie","Vélos · Route"],["Prix max","1 200 $"],["Rayon","50 km · Montréal"],["Mots-clés","carbone, Shimano"]].map(([k,v],i) => (
+          <div key={i} style={{ display:"flex", justifyContent:"space-between", padding:"9px 12px", background:"rgba(245,238,221,0.03)", border:"1px solid var(--line)", borderRadius:8, fontFamily:"'JetBrains Mono',monospace", fontSize:11 }}>
+            <span style={{ color:"var(--ink-mute)" }}>{k}</span>
+            <span style={{ color:"var(--ink)" }}>{v}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  if (idx === 1) {
+    return (
+      <div style={{ position:"relative", height:120, marginTop:24, background:"#070604", border:"1px solid var(--line)", borderRadius:10, overflow:"hidden", fontFamily:"'JetBrains Mono',monospace", fontSize:11 }}>
+        <div style={{ position:"absolute", left:0, right:0, top:0, height:18, background:`linear-gradient(180deg,${accent}44,transparent)`, animation:"scan-sweep 2.5s linear infinite" }} />
+        <div style={{ padding:"12px 14px", color:"var(--ink-mute)", lineHeight:1.8 }}>
+          <div>[fb] scan annonce #8224...</div>
+          <div style={{ color:"var(--ok)" }}>[ok] marché estimé 1 200$</div>
+          <div style={{ color:accent }}>[!] sous-évaluée -62%</div>
+          <div>[push] envoi notification...</div>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div style={{ marginTop:24, background:`linear-gradient(135deg,${accent}22,${accent}08)`, border:`1px solid ${accent}55`, borderRadius:14, padding:"14px 16px" }}>
+      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, color:accent, letterSpacing:"0.08em", marginBottom:6 }}>FLIPIT AI · À L'INSTANT</div>
+      <div style={{ fontSize:14, fontWeight:600, color:"var(--ink)", marginBottom:3 }}>Nouvelle alerte — Vélo route</div>
+      <div style={{ fontSize:12, color:"var(--ink-dim)" }}>Cervélo R5 carbone · 890 $ · -63%</div>
+    </div>
+  );
+}
+
+function HowItWorks({ lang, accent }) {
+  const c = COPY[lang].how;
+  return (
+    <section id="how" style={{ position:"relative", padding:"120px 0" }}>
+      <div className="fi-container">
+        <Reveal><Eyebrow>{c.eyebrow}</Eyebrow><STitle style={{ maxWidth:820, marginBottom:72 }}>{c.title}</STitle></Reveal>
+        <div className="fi-how-grid" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:20 }}>
+          {c.steps.map((s,i) => (
+            <Reveal key={i} delay={i*120}>
+              <div style={{ position:"relative", padding:"30px 26px 28px", background:"linear-gradient(180deg,rgba(245,238,221,0.035),rgba(245,238,221,0.01))", border:"1px solid var(--line)", borderRadius:20, overflow:"hidden", height:"100%", display:"flex", flexDirection:"column" }}>
+                <div style={{ position:"absolute", top:18, right:18, fontFamily:"'JetBrains Mono',monospace", fontSize:11, letterSpacing:"0.1em", color:accent, padding:"3px 9px", border:`1px solid ${accent}55`, borderRadius:6 }}>{s.tag}</div>
+                <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:13, color:accent, marginBottom:22 }}>{s.num}</div>
+                <h3 style={{ fontSize:22, fontWeight:500, letterSpacing:"-0.02em", lineHeight:1.15, margin:0, marginBottom:10 }}>{s.title}</h3>
+                <p style={{ fontSize:15, color:"var(--ink-dim)", lineHeight:1.55, margin:0 }}>{s.body}</p>
+                <StepVisual idx={i} accent={accent} />
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+      <style>{`@media(max-width:860px){.fi-how-grid{grid-template-columns:1fr!important;}}`}</style>
+    </section>
+  );
+}
+
+/* ─── FEATURES ──────────────────────────────────────────────────────────── */
+function Features({ lang, accent }) {
+  const c = COPY[lang].features;
+  const icons = [
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>,
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>,
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>,
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5L12 2Z"/></svg>,
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>,
+  ];
+  return (
+    <section id="features" style={{ padding:"120px 0", background:"linear-gradient(180deg,transparent,rgba(245,238,221,0.012))" }}>
+      <div className="fi-container">
+        <Reveal><Eyebrow>{c.eyebrow}</Eyebrow><STitle style={{ maxWidth:700, marginBottom:64 }}>{c.title}</STitle></Reveal>
+        <div className="fi-feat-grid" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:1, background:"var(--line)", border:"1px solid var(--line)", borderRadius:20, overflow:"hidden" }}>
+          {c.list.map((f,i) => (
+            <Reveal key={i} delay={i*50}>
+              <div style={{ padding:"32px 28px", background:"var(--bg)", height:"100%", display:"flex", flexDirection:"column", gap:14 }}
+                onMouseEnter={e=>e.currentTarget.style.background="rgba(245,238,221,0.02)"}
+                onMouseLeave={e=>e.currentTarget.style.background="var(--bg)"}
+              >
+                <div style={{ width:42, height:42, borderRadius:11, background:`linear-gradient(135deg,${accent}28,${accent}08)`, border:`1px solid ${accent}55`, display:"flex", alignItems:"center", justifyContent:"center", color:accent }}>
+                  <div style={{ width:20, height:20 }}>{icons[i]}</div>
+                </div>
+                <h3 style={{ fontSize:17, fontWeight:600, margin:0, letterSpacing:"-0.01em" }}>{f.k}</h3>
+                <p style={{ margin:0, fontSize:14, color:"var(--ink-dim)", lineHeight:1.55 }}>{f.v}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+      <style>{`@media(max-width:860px){.fi-feat-grid{grid-template-columns:1fr!important;}}@media(max-width:1100px) and (min-width:861px){.fi-feat-grid{grid-template-columns:repeat(2,1fr)!important;}}`}</style>
+    </section>
+  );
+}
+
+/* ─── STATS ─────────────────────────────────────────────────────────────── */
+function Stats({ lang, accent }) {
+  const c = COPY[lang].stats;
+  return (
+    <section style={{ padding:"80px 0" }}>
+      <div className="fi-container">
+        <Reveal><Eyebrow>{c.eyebrow}</Eyebrow></Reveal>
+        <div className="fi-stats-grid" style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", borderTop:"1px solid var(--line)", borderBottom:"1px solid var(--line)" }}>
+          {c.items.map((s,i) => (
+            <Reveal key={i} delay={i*80}>
+              <div style={{ padding:"44px 28px", borderRight:i<c.items.length-1?"1px solid var(--line)":"none" }}>
+                <div style={{ fontSize:"clamp(34px,4vw,54px)", fontWeight:500, letterSpacing:"-0.03em", lineHeight:1, marginBottom:12, color:accent }}>{s.n}</div>
+                <div style={{ fontSize:13, color:"var(--ink-dim)", lineHeight:1.45 }}>{s.l}</div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+      <style>{`@media(max-width:860px){.fi-stats-grid{grid-template-columns:repeat(2,1fr)!important;}}`}</style>
+    </section>
+  );
+}
+
+/* ─── FOR WHO ────────────────────────────────────────────────────────────── */
+function ForWho({ lang, accent }) {
+  const c = COPY[lang].forWho;
+  return (
+    <section style={{ padding:"120px 0" }}>
+      <div className="fi-container">
+        <Reveal><Eyebrow>{c.eyebrow}</Eyebrow><STitle style={{ maxWidth:800, marginBottom:64 }}>{c.title}</STitle></Reveal>
+        <div className="fi-who-grid" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:20 }}>
+          {c.personas.map((p,i) => (
+            <Reveal key={i} delay={i*100}>
+              <div style={{ position:"relative", padding:"36px 28px", borderRadius:20, border:"1px solid var(--line2)", background:i===1?`linear-gradient(160deg,${accent}18,transparent 60%)`:"rgba(245,238,221,0.02)", height:"100%" }}>
+                <div style={{ position:"absolute", top:20, right:22, fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:"var(--ink-mute)", letterSpacing:"0.1em" }}>0{i+1}</div>
+                <div style={{ display:"inline-block", padding:"4px 10px", fontSize:10.5, fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.1em", color:accent, background:`${accent}15`, border:`1px solid ${accent}44`, borderRadius:999, marginBottom:28, textTransform:"uppercase" }}>{p.tag}</div>
+                <h3 style={{ fontSize:26, fontWeight:500, letterSpacing:"-0.02em", lineHeight:1.1, margin:0, marginBottom:14 }}>{p.title}</h3>
+                <p style={{ fontSize:15, color:"var(--ink-dim)", lineHeight:1.6, margin:0 }}>{p.body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+      <style>{`@media(max-width:860px){.fi-who-grid{grid-template-columns:1fr!important;}}`}</style>
+    </section>
+  );
+}
+
+/* ─── DEALS ──────────────────────────────────────────────────────────────── */
+function Deals({ lang, accent }) {
+  const c = COPY[lang].deals;
+  return (
+    <section style={{ padding:"120px 0", background:"linear-gradient(180deg,rgba(245,238,221,0.012),transparent)" }}>
+      <div className="fi-container">
+        <Reveal><Eyebrow>{c.eyebrow}</Eyebrow><STitle style={{ maxWidth:700, marginBottom:10 }}>{c.title}</STitle>
+          <p style={{ fontSize:16, color:"var(--ink-dim)", margin:0, marginBottom:52 }}>{c.sub}</p>
+        </Reveal>
+        <Reveal delay={100}>
+          <div style={{ border:"1px solid var(--line2)", borderRadius:18, overflow:"hidden", background:"linear-gradient(180deg,rgba(245,238,221,0.02),transparent)" }}>
+            {/* terminal header */}
+            <div style={{ padding:"13px 20px", background:"rgba(245,238,221,0.03)", borderBottom:"1px solid var(--line)", display:"flex", alignItems:"center", gap:12, fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:"var(--ink-mute)", letterSpacing:"0.08em" }}>
+              <div style={{ display:"flex", gap:5 }}>
+                <span style={{ width:10, height:10, borderRadius:999, background:"#e7644e" }}/><span style={{ width:10, height:10, borderRadius:999, background:"#e8bc5a" }}/><span style={{ width:10, height:10, borderRadius:999, background:"#7bc26b" }}/>
+              </div>
+              <span>flipit-ai — live feed</span>
+              <div style={{ flex:1 }}/>
+              <span style={{ color:"var(--ok)", display:"flex", alignItems:"center", gap:5 }}>
+                <span style={{ width:6, height:6, borderRadius:999, background:"var(--ok)", animation:"blink 1.2s infinite" }}/>
+                CONNECTÉ · 3 SCANNERS
+              </span>
+            </div>
+            {c.list.map((d,i) => (
+              <div key={i} style={{ display:"grid", gridTemplateColumns:"auto 1fr auto auto", gap:20, padding:"20px 22px", alignItems:"center", borderBottom:i<c.list.length-1?"1px solid var(--line)":"none", cursor:"default", transition:"background 0.2s" }}
+                onMouseEnter={e=>e.currentTarget.style.background="rgba(245,238,221,0.025)"}
+                onMouseLeave={e=>e.currentTarget.style.background="transparent"}
+              >
+                <div style={{ width:44, height:44, borderRadius:11, background:"rgba(245,238,221,0.04)", border:"1px solid var(--line)", display:"flex", alignItems:"center", justifyContent:"center" }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={accent} strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+                <div>
+                  <div style={{ fontSize:11, fontFamily:"'JetBrains Mono',monospace", color:"var(--ink-mute)", letterSpacing:"0.08em", marginBottom:4, textTransform:"uppercase" }}>{d.cat} · {d.platform} · {d.time}</div>
+                  <div style={{ fontSize:16, fontWeight:500, letterSpacing:"-0.01em" }}>{d.item}</div>
+                </div>
+                <div style={{ textAlign:"right", fontFamily:"'JetBrains Mono',monospace" }}>
+                  <div style={{ fontSize:12, color:"var(--ink-mute)", textDecoration:"line-through" }}>{d.market}</div>
+                  <div style={{ fontSize:18, fontWeight:600, letterSpacing:"-0.01em" }}>{d.listed}</div>
+                </div>
+                <div style={{ padding:"8px 14px", background:`${accent}15`, border:`1px solid ${accent}66`, borderRadius:10, color:accent, fontFamily:"'JetBrains Mono',monospace", fontSize:14, fontWeight:600, minWidth:58, textAlign:"center" }}>-{d.save}</div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── TESTIMONIALS ──────────────────────────────────────────────────────── */
+function Testimonials({ lang, accent }) {
+  const c = COPY[lang].testimonials;
+  return (
+    <section style={{ padding:"120px 0" }}>
+      <div className="fi-container">
+        <Reveal><Eyebrow>{c.eyebrow}</Eyebrow><STitle style={{ maxWidth:780, marginBottom:56 }}>{c.title}</STitle></Reveal>
+        <div className="fi-test-grid" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:18 }}>
+          {c.list.map((t,i) => (
+            <Reveal key={i} delay={i*90}>
+              <div style={{ padding:"30px 26px", border:"1px solid var(--line2)", borderRadius:18, background:"rgba(245,238,221,0.025)", height:"100%", display:"flex", flexDirection:"column", gap:20 }}>
+                <div style={{ color:accent, fontFamily:"'Instrument Serif',serif", fontSize:46, lineHeight:0.8, height:22 }}>"</div>
+                <p style={{ fontSize:15.5, lineHeight:1.55, margin:0, flex:1, letterSpacing:"-0.005em" }}>{t.q}</p>
+                <div style={{ display:"flex", alignItems:"center", gap:12, paddingTop:14, borderTop:"1px solid var(--line)" }}>
+                  <div style={{ width:34, height:34, borderRadius:999, background:`linear-gradient(135deg,${accent},${accent}88)`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, fontWeight:600, color:"#0a0906" }}>{t.n.charAt(0)}</div>
+                  <div><div style={{ fontSize:14, fontWeight:500 }}>{t.n}</div><div style={{ fontSize:12, color:"var(--ink-mute)" }}>{t.r}</div></div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+      <style>{`@media(max-width:860px){.fi-test-grid{grid-template-columns:1fr!important;}}`}</style>
+    </section>
+  );
+}
+
+/* ─── PRICING ────────────────────────────────────────────────────────────── */
+function Pricing({ lang, accent }) {
+  const c = COPY[lang].pricing;
+  return (
+    <section id="pricing" style={{ padding:"120px 0", background:"linear-gradient(180deg,transparent,rgba(245,238,221,0.012))" }}>
+      <div className="fi-container">
+        <Reveal><Eyebrow>{c.eyebrow}</Eyebrow><STitle style={{ maxWidth:680, marginBottom:10 }}>{c.title}</STitle>
+          <p style={{ fontSize:16, color:"var(--ink-dim)", margin:0, marginBottom:52, maxWidth:520 }}>{c.sub}</p>
+        </Reveal>
+        <div className="fi-price-grid" style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:18, maxWidth:860 }}>
+          {c.plans.map((p,i) => (
+            <Reveal key={i} delay={i*100}>
+              <div style={{ position:"relative", padding:"34px 30px 30px", borderRadius:22, border:p.highlight?`1px solid ${accent}`:"1px solid var(--line2)", background:p.highlight?`linear-gradient(160deg,${accent}22,${accent}06 70%)`:"rgba(245,238,221,0.025)", boxShadow:p.highlight?`0 20px 60px ${accent}20`:"none", height:"100%", display:"flex", flexDirection:"column" }}>
+                {p.tag && <div style={{ position:"absolute", top:-12, left:30, padding:"4px 12px", background:accent, color:"#0a0906", fontSize:11, fontWeight:600, letterSpacing:"0.08em", fontFamily:"'JetBrains Mono',monospace", borderRadius:999 }}>{p.tag}</div>}
+                <div style={{ fontSize:13, fontFamily:"'JetBrains Mono',monospace", color:accent, letterSpacing:"0.05em", marginBottom:6 }}>{p.name.toUpperCase()}</div>
+                <div style={{ display:"flex", alignItems:"baseline", gap:4, marginBottom:10 }}>
+                  <span style={{ fontSize:58, fontWeight:500, letterSpacing:"-0.03em", lineHeight:1 }}>{p.price} $</span>
+                  <span style={{ fontSize:14, color:"var(--ink-mute)" }}>{p.period}</span>
+                </div>
+                <p style={{ fontSize:14, color:"var(--ink-dim)", lineHeight:1.5, margin:0, marginBottom:24 }}>{p.desc}</p>
+                <ul style={{ listStyle:"none", padding:0, margin:0, display:"flex", flexDirection:"column", gap:11, marginBottom:28, flex:1 }}>
+                  {p.features.map((f,j) => <li key={j} style={{ display:"flex", alignItems:"flex-start", gap:9, fontSize:14 }}>{IC_CHECK}<span>{f}</span></li>)}
+                </ul>
+                <Btn href="#download" primary={p.highlight} style={{ width:"100%", justifyContent:"center" }}>{p.cta}</Btn>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal delay={200}>
+          <div style={{ marginTop:32, padding:"16px 22px", border:"1px dashed var(--line2)", borderRadius:14, display:"inline-flex", alignItems:"center", gap:14, flexWrap:"wrap", fontSize:13, color:"var(--ink-dim)", maxWidth:860 }}>
+            <span style={{ padding:"3px 10px", background:`${accent}18`, color:accent, fontFamily:"'JetBrains Mono',monospace", fontSize:10, letterSpacing:"0.1em", borderRadius:999, border:`1px solid ${accent}55` }}>BÊTA</span>
+            <span>{lang==="fr"?"Signalez un bug majeur · Recevez des jours d'abonnement gratuits en récompense.":"Report a major bug · Get free subscription days as a reward."}</span>
+          </div>
+        </Reveal>
+      </div>
+      <style>{`@media(max-width:720px){.fi-price-grid{grid-template-columns:1fr!important;}}`}</style>
+    </section>
+  );
+}
+
+/* ─── FAQ ────────────────────────────────────────────────────────────────── */
+function FAQ({ lang, accent }) {
+  const c = COPY[lang].faq;
+  const [open, setOpen] = useState(0);
+  return (
+    <section id="faq" style={{ padding:"120px 0" }}>
+      <div className="fi-container">
+        <div className="fi-faq-layout" style={{ display:"grid", gridTemplateColumns:"1fr 1.4fr", gap:80 }}>
+          <div>
+            <Reveal>
+              <Eyebrow>{c.eyebrow}</Eyebrow>
+              <STitle style={{ marginBottom:20 }}>{c.title}</STitle>
+              <p style={{ color:"var(--ink-dim)", fontSize:15, lineHeight:1.6, maxWidth:300 }}>
+                {lang==="fr"?"Une question ? ":"Have a question? "}
+                <a href="mailto:support@flipitapp.ai" style={{ color:accent, borderBottom:`1px solid ${accent}55` }}>support@flipitapp.ai</a>
+              </p>
+            </Reveal>
+          </div>
+          <div>
+            {c.list.map((f,i) => (
+              <Reveal key={i} delay={i*50}>
+                <div style={{ borderBottom:"1px solid var(--line)", padding:"20px 0", cursor:"pointer" }} onClick={()=>setOpen(open===i?-1:i)}>
+                  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:20 }}>
+                    <h3 style={{ margin:0, fontSize:16, fontWeight:500, letterSpacing:"-0.01em" }}>{f.q}</h3>
+                    <div style={{ width:30, height:30, flexShrink:0, borderRadius:999, border:"1px solid var(--line2)", display:"flex", alignItems:"center", justifyContent:"center", color:open===i?accent:"var(--ink-dim)", transform:open===i?"rotate(45deg)":"rotate(0)", transition:"all 0.25s" }}>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </div>
+                  </div>
+                  <div style={{ maxHeight:open===i?200:0, overflow:"hidden", transition:"max-height 0.35s ease, margin-top 0.3s, opacity 0.3s", marginTop:open===i?12:0, opacity:open===i?1:0 }}>
+                    <p style={{ margin:0, fontSize:14.5, color:"var(--ink-dim)", lineHeight:1.6, paddingRight:50 }}>{f.a}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+      <style>{`@media(max-width:860px){.fi-faq-layout{grid-template-columns:1fr!important;gap:40px!important;}}`}</style>
+    </section>
+  );
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+function Footer({ lang, accent }) {
+  const c = COPY[lang].footer;
+  return (
+    <footer id="download" style={{ position:"relative", padding:"100px 0 40px", borderTop:"1px solid var(--line)", overflow:"hidden" }}>
+      <div className="fi-container" style={{ position:"relative", zIndex:2 }}>
+        {/* final CTA */}
+        <div style={{ textAlign:"center", marginBottom:80, padding:"72px 40px", borderRadius:26, border:"1px solid var(--line2)", background:`radial-gradient(ellipse at top,${accent}18,transparent 60%)`, position:"relative", overflow:"hidden" }}>
+          <DotGrid />
+          <Reveal>
+            <div style={{ position:"relative", zIndex:2 }}>
+              <h2 style={{ fontSize:"clamp(34px,5vw,62px)", fontWeight:500, letterSpacing:"-0.03em", lineHeight:1.05, margin:0, marginBottom:14, textWrap:"balance" }}>{c.tagline}</h2>
+              <p style={{ fontSize:16, color:"var(--ink-dim)", margin:0, marginBottom:32 }}>{lang==="fr"?"Téléchargez l'app · Créez votre profil · Recevez l'alerte.":"Download the app · Create your profile · Get the alert."}</p>
+              <div style={{ display:"flex", gap:14, flexWrap:"wrap", justifyContent:"center" }}>
+                <StoreBtn ios /><StoreBtn />
+              </div>
+            </div>
+          </Reveal>
+        </div>
+        {/* footer grid */}
+        <div className="fi-footer-grid" style={{ display:"grid", gridTemplateColumns:"1.4fr 1fr 1fr 1fr", gap:36, paddingBottom:56, borderBottom:"1px solid var(--line)" }}>
+          <div>
+            <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:14 }}><LogoMark /><span style={{ fontWeight:600, fontSize:17, letterSpacing:"-0.02em" }}>FlipIt <span style={{ color:accent }}>AI</span></span></div>
+            <p style={{ fontSize:14, color:"var(--ink-dim)", lineHeight:1.55, margin:0, maxWidth:260 }}>{lang==="fr"?"Scanner intelligent pour Facebook Marketplace, Kijiji et Craigslist.":"Smart scanner for Facebook Marketplace, Kijiji and Craigslist."}</p>
+          </div>
+          {Object.entries(c.sections).map(([key,sec]) => (
+            <div key={key}>
+              <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, letterSpacing:"0.12em", color:"var(--ink-mute)", textTransform:"uppercase", marginBottom:18 }}>{sec.title}</div>
+              <ul style={{ listStyle:"none", padding:0, margin:0, display:"flex", flexDirection:"column", gap:10 }}>
+                {sec.links.map(([label,href],i) => (
+                  <li key={i}><a href={href} style={{ fontSize:14, color:"var(--ink-dim)", transition:"color 0.2s" }} onMouseEnter={e=>e.currentTarget.style.color="var(--ink)"} onMouseLeave={e=>e.currentTarget.style.color="var(--ink-dim)"}>{label}</a></li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        {/* bottom strip */}
+        <div style={{ paddingTop:28, display:"flex", justifyContent:"space-between", alignItems:"center", gap:16, flexWrap:"wrap", fontSize:13, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.02em" }}>
+          <div>{c.copy}</div>
+          <div style={{ display:"flex", gap:20, alignItems:"center" }}>
+            <a href="privacy-standalone.html" style={{ color:"var(--ink-mute)" }}>{lang==="fr"?"Confidentialité":"Privacy"}</a>
+            <a href="terms-standalone.html" style={{ color:"var(--ink-mute)" }}>{lang==="fr"?"Termes":"Terms"}</a>
+            <span>{c.madein}</span>
+          </div>
+        </div>
+      </div>
+      <style>{`@media(max-width:760px){.fi-footer-grid{grid-template-columns:1fr 1fr!important;}.fi-footer-grid>div:first-child{grid-column:1/3;}}`}</style>
+    </footer>
+  );
+}
+
+/* ─── APP ────────────────────────────────────────────────────────────────── */
+function App() {
+  const [lang, setLang] = useState("fr");
+  const [accent] = useState("#aee83d");
+  const [bannerClosed, setBannerClosed] = useState(false);
+  const bannerVisible = !bannerClosed;
+  const bannerOffset = bannerVisible ? BANNER_H : 0;
+  useEffect(() => {
+    document.documentElement.style.setProperty("--accent", accent);
+    document.documentElement.style.setProperty("--accent2", "#c8f050");
+  }, [accent]);
+  return (
+    <>
+      {bannerVisible && <BetaBanner accent={accent} lang={lang} onClose={() => setBannerClosed(true)} />}
+      <div style={{ paddingTop: bannerOffset }}>
+        <Nav lang={lang} setLang={setLang} bannerOffset={bannerOffset} />
+        <Hero lang={lang} accent={accent} />
+        <HowItWorks lang={lang} accent={accent} />
+        <Features lang={lang} accent={accent} />
+        <Stats lang={lang} accent={accent} />
+        <ForWho lang={lang} accent={accent} />
+        <Deals lang={lang} accent={accent} />
+        <Testimonials lang={lang} accent={accent} />
+        <Pricing lang={lang} accent={accent} />
+        <FAQ lang={lang} accent={accent} />
+        <Footer lang={lang} accent={accent} />
+      </div>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("flipit-root")).render(<App />);
+</script>
+</body>
+</html>

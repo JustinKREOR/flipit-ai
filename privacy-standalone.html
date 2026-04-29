@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FlipIt AI — Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0906;--ink:#f5eedd;--ink-dim:#a89f89;--ink-mute:#6e6754;--accent:#aee83d;--accent2:#c8f050;--line:rgba(245,238,221,0.08);--line2:rgba(245,238,221,0.14);}
+*{box-sizing:border-box;}html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',-apple-system,system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(900px 600px at 80% -5%,rgba(174,232,61,0.06),transparent 60%);z-index:0;}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(174,232,61,0.3);}a:hover{border-bottom-color:var(--accent);}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes blink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
+@keyframes bar-grow{from{width:0;}to{width:100%;}}
+</style>
+</head>
+<body>
+<div id="legal-root" style="position:relative;z-index:2;"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const {useState,useEffect,useRef} = React;
+
+const COPY = {
+  fr:{
+    title:"Privacy Policy",
+    subtitle:"FlipIt AI Inc. s'engage à protéger la confidentialité et la sécurité des données personnelles de ses utilisateurs.",
+    updated:"Dernière mise à jour : Avril 2026",
+    compliance:"Conforme : Loi 25 (QC) · LPRPDE · RGPD",
+    sections:[
+      {num:"01",title:"Introduction",body:"FlipIt AI Inc. (\"FlipIt AI\", \"nous\", \"notre\", \"l'Application\") s'engage à protéger la confidentialité et la sécurité des données personnelles de ses utilisateurs. Cette Politique est conforme aux lois applicables incluant la Loi sur la protection des renseignements personnels (Canada), le RGPD (le cas échéant) et les exigences Apple App Store et Google Play. En utilisant FlipIt AI, vous acceptez cette Politique."},
+      {num:"02",title:"Définitions",list:["Données personnelles : toute information permettant d'identifier un utilisateur","Traitement : toute opération (collecte, stockage, analyse, etc.)","Plateformes tierces : services externes (ex : marketplaces)","Données publiques : informations accessibles publiquement sur internet"]},
+      {num:"03",title:"Données collectées",grid:[{label:"Données fournies",body:"Nom, courriel, identifiants de compte, préférences de recherche, informations de paiement (via tiers)"},{label:"Données automatiques",body:"Adresse IP, appareil / OS, identifiants techniques, logs, crash reports"},{label:"Données d'utilisation",body:"Recherches effectuées, alertes reçues, interactions avec l'application"},{label:"Données dérivées (IA)",body:"Score de valeur, détection de fraude, modèles comportementaux anonymisés"}]},
+      {num:"04",title:"Finalité",list:["Fournir le service et envoyer les alertes","Optimiser l'algorithme d'intelligence artificielle","Prévenir la fraude et les abus","Assurer le support client","Réaliser des analyses produit"]},
+      {num:"05",title:"Base légale",list:["Consentement de l'utilisateur","Exécution du contrat d'abonnement","Intérêt légitime de FlipIt AI"]},
+      {num:"06",title:"Données tierces",callout:"IMPORTANT — FlipIt AI peut analyser des données provenant de sources publiques accessibles. Nous ne contrôlons pas ces sources, ne garantissons pas leur exactitude, et ne sommes pas affiliés à ces plateformes. L'accès à ces données peut changer, être limité ou interrompu à tout moment sans responsabilité de notre part."},
+      {num:"07",title:"Partage des données",body:"Nous ne vendons pas vos données personnelles.",list:["Prestataires de paiement (Stripe, Apple, Google)","Fournisseurs d'infrastructure infonuagique (AWS, Firebase)","Outils d'analyse anonymisés","Autorités légales compétentes, sur obligation"]},
+      {num:"08",title:"Conservation",list:["Données de compte actif : conservées pendant la durée d'activité","Logs techniques : jusqu'à 24 mois","Données anonymisées : conservation illimitée"]},
+      {num:"09",title:"Sécurité",body:"Mesures mises en place : chiffrement SSL, accès restreint aux systèmes, monitoring en temps réel. Aucun système n'est infaillible — nous ne pouvons garantir une sécurité absolue."},
+      {num:"10",title:"Intelligence artificielle",body:"FlipIt AI utilise des modèles automatisés. Les résultats produits sont probabilistes, peuvent être inexacts et ne doivent pas être considérés comme fiables à 100 %."},
+      {num:"11",title:"Vos droits",body:"Vous pouvez à tout moment accéder, modifier, supprimer vos données ou retirer votre consentement en contactant : support@flipitapp.ai"},
+      {num:"12",title:"Transferts internationaux",body:"Les données peuvent être traitées en dehors du Canada, notamment aux États-Unis. Ces transferts sont effectués dans le respect des lois applicables."},
+      {num:"13",title:"Mineurs",body:"FlipIt AI est interdit aux personnes de moins de 18 ans. Nous ne collectons sciemment aucune donnée relative à des mineurs."},
+      {num:"14",title:"Cookies",body:"Nous utilisons des cookies à des fins de fonctionnement, d'analyse et de performance. Aucun cookie publicitaire tiers n'est utilisé dans l'application mobile."},
+      {num:"15",title:"Limitation de responsabilité",body:"FlipIt AI ne peut être tenu responsable des accès non autorisés, pertes de données, erreurs d'algorithme ou inexactitudes provenant de sources tierces."},
+      {num:"16",title:"Modifications",body:"Nous pouvons modifier cette politique à tout moment. Les changements significatifs seront notifiés par courriel. La poursuite de l'utilisation du service vaut acceptation."},
+      {num:"17",title:"Contact",body:"Pour toute question : support@flipitapp.ai"},
+    ]
+  },
+  en:{
+    title:"Privacy Policy",
+    subtitle:"FlipIt AI Inc. is committed to protecting the privacy and security of its users' personal data.",
+    updated:"Last updated: April 2026",
+    compliance:"Compliant: Quebec Law 25 · PIPEDA · GDPR",
+    sections:[
+      {num:"01",title:"Introduction",body:"FlipIt AI Inc. (\"FlipIt AI\", \"we\", \"our\", \"the App\") is committed to protecting the privacy and security of its users' personal data. This Policy complies with applicable laws including the Personal Information Protection and Electronic Documents Act (Canada), GDPR (where applicable), and Apple App Store and Google Play requirements. By using FlipIt AI, you accept this Policy."},
+      {num:"02",title:"Definitions",list:["Personal data: any information that can identify a user","Processing: any operation (collection, storage, analysis, etc.)","Third-party platforms: external services (e.g. marketplaces)","Public data: information publicly accessible on the internet"]},
+      {num:"03",title:"Data collected",grid:[{label:"Provided data",body:"Name, email, account credentials, search preferences, payment information (via third parties)"},{label:"Automatic data",body:"IP address, device / OS, technical identifiers, logs, crash reports"},{label:"Usage data",body:"Searches performed, alerts received, interactions with the app"},{label:"Derived data (AI)",body:"Value score, fraud detection, anonymized behavioral patterns"}]},
+      {num:"04",title:"Purpose",list:["Provide the service and send alerts","Optimize the AI algorithm","Prevent fraud and abuse","Provide customer support","Conduct product analytics"]},
+      {num:"05",title:"Legal basis",list:["User consent","Performance of the subscription contract","Legitimate interest of FlipIt AI"]},
+      {num:"06",title:"Third-party data",callout:"IMPORTANT — FlipIt AI may analyze data from publicly accessible sources. We do not control these sources, do not guarantee their accuracy, and are not affiliated with these platforms. Access to this data may change, be restricted or interrupted at any time without any liability on our part."},
+      {num:"07",title:"Data sharing",body:"We do not sell your personal data.",list:["Payment providers (Stripe, Apple, Google)","Cloud infrastructure (AWS, Firebase)","Anonymized analytics tools","Legal authorities, when required by law"]},
+      {num:"08",title:"Retention",list:["Active account data: retained while account is active","Technical logs: up to 24 months","Anonymized data: unlimited retention"]},
+      {num:"09",title:"Security",body:"Measures in place: SSL encryption, restricted system access, real-time monitoring. No system is infallible — we cannot guarantee absolute security."},
+      {num:"10",title:"Artificial intelligence",body:"FlipIt AI uses automated models. Results are probabilistic, may be inaccurate and should not be considered 100% reliable."},
+      {num:"11",title:"Your rights",body:"You may at any time access, modify, delete your data or withdraw consent by contacting: support@flipitapp.ai"},
+      {num:"12",title:"International transfers",body:"Data may be processed outside Canada, including in the United States. Such transfers comply with applicable laws."},
+      {num:"13",title:"Minors",body:"FlipIt AI is prohibited for persons under 18 years of age. We do not knowingly collect data from minors."},
+      {num:"14",title:"Cookies",body:"We use cookies for operation, analytics and performance purposes. No third-party advertising cookies are used in the mobile app."},
+      {num:"15",title:"Limitation of liability",body:"FlipIt AI cannot be held liable for unauthorized access, data loss, algorithm errors or inaccuracies from third-party sources."},
+      {num:"16",title:"Modifications",body:"We may modify this policy at any time. Significant changes will be notified by email. Continued use of the service constitutes acceptance."},
+      {num:"17",title:"Contact",body:"For any questions: support@flipitapp.ai"},
+    ]
+  }
+};
+
+function LogoMark(){return(<div style={{width:32,height:32,borderRadius:9,background:"linear-gradient(135deg,var(--accent),var(--accent2))",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 14px rgba(174,232,61,0.3)",flexShrink:0}}><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0a0906" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>);}
+
+function Reveal({children,delay=0}){
+  const ref=useRef(null);const[vis,setVis]=useState(false);
+  useEffect(()=>{const el=ref.current;if(!el)return;const obs=new IntersectionObserver(es=>{if(es[0].isIntersecting){setVis(true);obs.disconnect();}},{threshold:0.1});obs.observe(el);return()=>obs.disconnect();},[]);
+  return <div ref={ref} style={{opacity:vis?1:0,transform:vis?"translateY(0)":"translateY(20px)",transition:`opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`}}>{children}</div>;
+}
+
+function LegalPage({pageKey}){
+  const[lang,setLang]=useState("fr");
+  const[scrolled,setScrolled]=useState(false);
+  useEffect(()=>{const fn=()=>setScrolled(window.scrollY>20);window.addEventListener("scroll",fn);return()=>window.removeEventListener("scroll",fn);},[]);
+  const c=COPY[lang];
+  return(
+    <div style={{minHeight:"100vh"}}>
+      {/* NAV */}
+      <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:100,padding:"14px 32px",background:scrolled?"rgba(10,9,6,0.92)":"transparent",backdropFilter:scrolled?"blur(14px)":"none",borderBottom:scrolled?"1px solid var(--line)":"1px solid transparent",transition:"all 0.3s",display:"flex",alignItems:"center",gap:12}}>
+        <LogoMark/>
+        <span style={{fontWeight:600,fontSize:17,letterSpacing:"-0.02em"}}>FlipIt <span style={{color:"var(--accent)"}}>AI</span></span>
+        <a href="flipit-landing-standalone.html" style={{marginLeft:0,fontSize:13,color:"var(--ink-dim)",border:"none",display:"flex",alignItems:"center",gap:6,fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.04em"}}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          {lang==="fr"?"Accueil":"Home"}
+        </a>
+        <div style={{flex:1}}/>
+        <div style={{display:"flex",alignItems:"center",background:"rgba(245,238,221,0.04)",border:"1px solid var(--line2)",borderRadius:999,padding:3,gap:2}}>
+          {["fr","en"].map(l=>(
+            <button key={l} onClick={()=>setLang(l)} style={{padding:"4px 11px",borderRadius:999,background:lang===l?"var(--accent)":"transparent",color:lang===l?"#0a0906":"var(--ink-dim)",fontFamily:"'JetBrains Mono',monospace",fontSize:11,fontWeight:700,letterSpacing:"0.08em",cursor:"pointer",border:"none",transition:"all 0.2s",textTransform:"uppercase"}}>{l}</button>
+          ))}
+        </div>
+      </nav>
+
+      {/* HERO */}
+      <div style={{paddingTop:120,paddingBottom:60,padding:"120px 32px 60px",maxWidth:860,margin:"0 auto"}}>
+        <div style={{animation:"fade-up 0.8s ease both"}}>
+          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,letterSpacing:"0.15em",color:"var(--accent)",textTransform:"uppercase",marginBottom:16}}>— {lang==="fr"?"Légal":"Legal"}</div>
+          <h1 style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:"clamp(38px,6vw,72px)",fontWeight:500,letterSpacing:"-0.03em",lineHeight:1.04,margin:"0 0 18px"}}>{c.title}</h1>
+          <p style={{fontSize:18,color:"var(--ink-dim)",maxWidth:600,lineHeight:1.55,margin:"0 0 28px",textWrap:"pretty"}}>{c.subtitle}</p>
+          <div style={{display:"flex",gap:16,flexWrap:"wrap",fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink-mute)",letterSpacing:"0.04em"}}>
+            <span>{c.updated}</span><span style={{color:"var(--line2)"}}>·</span><span>{c.compliance}</span>
+          </div>
+        </div>
+        {/* animated progress bar */}
+        <div style={{marginTop:40,height:1,background:"var(--line)",borderRadius:999,overflow:"hidden"}}>
+          <div style={{height:"100%",background:`linear-gradient(90deg,var(--accent),transparent)`,animation:"bar-grow 1.2s cubic-bezier(0.2,0.8,0.2,1) 0.3s both"}}/>
+        </div>
+      </div>
+
+      {/* CONTENT */}
+      <div style={{maxWidth:860,margin:"0 auto",padding:"0 32px 100px"}}>
+        {c.sections.map((s,i)=>(
+          <Reveal key={i} delay={i*30}>
+            <div style={{marginBottom:52,paddingBottom:52,borderBottom:i<c.sections.length-1?"1px solid var(--line)":"none"}}>
+              <div style={{display:"flex",alignItems:"baseline",gap:14,marginBottom:14}}>
+                <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--accent)",letterSpacing:"0.1em"}}>{s.num}</span>
+                <h2 style={{fontSize:22,fontWeight:600,letterSpacing:"-0.01em",margin:0}}>{s.title}</h2>
+              </div>
+              {s.callout&&<div style={{padding:"16px 20px",border:"1px solid rgba(174,232,61,0.3)",borderLeft:"3px solid var(--accent)",background:"rgba(174,232,61,0.05)",borderRadius:10,marginBottom:14}}><p style={{margin:0,fontSize:15,color:"var(--ink)",lineHeight:1.6}}>{s.callout}</p></div>}
+              {s.body&&<p style={{fontSize:15.5,color:"var(--ink-dim)",lineHeight:1.65,margin:"0 0 12px"}}>{s.body}</p>}
+              {s.grid&&<div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:12,margin:"12px 0"}}>
+                {s.grid.map((g,j)=>(
+                  <div key={j} style={{padding:"14px 16px",background:"rgba(245,238,221,0.03)",border:"1px solid var(--line)",borderRadius:10}}>
+                    <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:11,letterSpacing:"0.1em",color:"var(--accent)",textTransform:"uppercase",marginBottom:6}}>{g.label}</div>
+                    <p style={{margin:0,fontSize:14,color:"var(--ink-dim)",lineHeight:1.5}}>{g.body}</p>
+                  </div>
+                ))}
+              </div>}
+              {s.list&&<ul style={{listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:9}}>
+                {s.list.map((item,j)=>(
+                  <li key={j} style={{display:"flex",alignItems:"flex-start",gap:10,fontSize:15,color:"var(--ink-dim)"}}>
+                    <span style={{color:"var(--accent)",fontFamily:"'JetBrains Mono',monospace",flexShrink:0,marginTop:1}}>–</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>}
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      {/* FOOTER */}
+      <div style={{borderTop:"1px solid var(--line)",padding:"28px 32px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16,fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink-mute)"}}>
+        <span>© 2026 FlipIt AI Inc.</span>
+        <div style={{display:"flex",gap:20}}>
+          <a href="privacy-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Privacy</a>
+          <a href="terms-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Terms</a>
+          <a href="cookies-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Cookies</a>
+          <a href="mentions-legales-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>{lang==="fr"?"Mentions légales":"Legal notices"}</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("legal-root")).render(<LegalPage pageKey="privacy"/>);
+</script>
+</body>
+</html>

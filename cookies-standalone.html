@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FlipIt AI — Politique de cookies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0906;--ink:#f5eedd;--ink-dim:#a89f89;--ink-mute:#6e6754;--accent:#aee83d;--accent2:#c8f050;--line:rgba(245,238,221,0.08);--line2:rgba(245,238,221,0.14);}
+*{box-sizing:border-box;}html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',-apple-system,system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(900px 600px at 50% -10%,rgba(174,232,61,0.05),transparent 55%);z-index:0;}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(174,232,61,0.3);}a:hover{border-bottom-color:var(--accent);}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bar-grow{from{width:0;}to{width:100%;}}
+@keyframes cookie-spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<div id="legal-root" style="position:relative;z-index:2;"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const {useState,useEffect,useRef} = React;
+
+const COPY = {
+  fr:{
+    title:"Politique de cookies",
+    subtitle:"Cette politique explique comment FlipIt AI utilise les cookies et technologies similaires sur son site web et son application mobile.",
+    updated:"Dernière mise à jour : Avril 2026",
+    compliance:"FlipIt AI Inc. · Québec, Canada",
+    types:[
+      {icon:"⚙️",label:"Essentiels",tag:"Toujours actifs",desc:"Nécessaires au fonctionnement du site. Ne peuvent pas être désactivés.",color:"#aee83d"},
+      {icon:"📊",label:"Analytics",tag:"Optionnel",desc:"Nous aident à comprendre comment le site est utilisé, de manière anonymisée.",color:"#a89f89"},
+      {icon:"⚡",label:"Performance",tag:"Optionnel",desc:"Améliorent la vitesse et la stabilité de votre expérience.",color:"#a89f89"},
+      {icon:"🚫",label:"Publicitaires",tag:"Non utilisés",desc:"FlipIt AI n'utilise aucun cookie publicitaire tiers.",color:"#6e6754"},
+    ],
+    sections:[
+      {num:"01",title:"Qu'est-ce qu'un cookie ?",body:"Un cookie est un petit fichier texte stocké sur votre appareil lorsque vous visitez un site web. Il permet au site de mémoriser vos préférences, d'analyser votre utilisation et d'améliorer votre expérience."},
+      {num:"02",title:"Cookies que nous utilisons",body:"FlipIt AI utilise uniquement les catégories suivantes de cookies (détaillées dans le tableau ci-dessus)."},
+      {num:"03",title:"Cookies essentiels",body:"Ces cookies sont indispensables au fonctionnement du site web. Ils permettent par exemple de maintenir votre session active, de mémoriser votre langue préférée et d'assurer la sécurité de votre connexion. Il n'est pas possible de les refuser.",list:["Session utilisateur et authentification","Préférences de langue","Sécurité et protection contre la fraude","Panier d'abonnement et tunnel de paiement"]},
+      {num:"04",title:"Cookies analytiques",body:"Nous utilisons des outils d'analyse anonymisés pour comprendre comment les visiteurs utilisent notre site. Ces données ne permettent pas de vous identifier personnellement.",list:["Pages les plus consultées","Temps passé sur chaque section","Taux de conversion (téléchargements)","Origine du trafic (pays, appareil)"]},
+      {num:"05",title:"Cookies de performance",body:"Ces cookies permettent de mémoriser vos préférences d'utilisation et d'optimiser le chargement du site."},
+      {num:"06",title:"Cookies publicitaires",callout:"FlipIt AI n'utilise AUCUN cookie publicitaire tiers. Nous ne vendons pas vos données et ne participons à aucun réseau de publicité ciblée."},
+      {num:"07",title:"Application mobile",body:"Notre application iOS et Android ne dépose aucun cookie sur votre appareil mobile. Les données collectées dans l'app sont régies par notre Politique de confidentialité."},
+      {num:"08",title:"Durée de conservation",list:["Cookies de session : supprimés à la fermeture du navigateur","Cookies persistants essentiels : maximum 12 mois","Cookies analytiques : maximum 26 mois (anonymisés)"]},
+      {num:"09",title:"Gestion et refus",body:"Vous pouvez à tout moment modifier vos préférences de cookies depuis les paramètres de votre navigateur. La désactivation de certains cookies non essentiels peut affecter votre expérience sur le site.",list:["Chrome : Paramètres → Confidentialité → Cookies","Firefox : Paramètres → Vie privée → Cookies","Safari : Préférences → Confidentialité","Edge : Paramètres → Cookies et autorisations de site"]},
+      {num:"10",title:"Modifications",body:"Nous pouvons mettre à jour cette politique à tout moment. La date de dernière modification est indiquée en haut de cette page."},
+      {num:"11",title:"Contact",body:"Pour toute question relative aux cookies : support@flipitapp.ai"},
+    ]
+  },
+  en:{
+    title:"Cookie Policy",
+    subtitle:"This policy explains how FlipIt AI uses cookies and similar technologies on its website and mobile application.",
+    updated:"Last updated: April 2026",
+    compliance:"FlipIt AI Inc. · Quebec, Canada",
+    types:[
+      {icon:"⚙️",label:"Essential",tag:"Always active",desc:"Necessary for the website to function. Cannot be disabled.",color:"#aee83d"},
+      {icon:"📊",label:"Analytics",tag:"Optional",desc:"Help us understand how the site is used, in an anonymized way.",color:"#a89f89"},
+      {icon:"⚡",label:"Performance",tag:"Optional",desc:"Improve the speed and stability of your experience.",color:"#a89f89"},
+      {icon:"🚫",label:"Advertising",tag:"Not used",desc:"FlipIt AI does not use any third-party advertising cookies.",color:"#6e6754"},
+    ],
+    sections:[
+      {num:"01",title:"What is a cookie?",body:"A cookie is a small text file stored on your device when you visit a website. It allows the site to remember your preferences, analyze your usage and improve your experience."},
+      {num:"02",title:"Cookies we use",body:"FlipIt AI only uses the following categories of cookies (detailed in the table above)."},
+      {num:"03",title:"Essential cookies",body:"These cookies are essential for the website to function. They allow, for example, keeping your session active, remembering your preferred language and ensuring the security of your connection. They cannot be refused.",list:["User session and authentication","Language preferences","Security and fraud protection","Subscription cart and payment flow"]},
+      {num:"04",title:"Analytics cookies",body:"We use anonymized analytics tools to understand how visitors use our site. This data does not allow you to be personally identified.",list:["Most visited pages","Time spent on each section","Conversion rates (downloads)","Traffic sources (country, device)"]},
+      {num:"05",title:"Performance cookies",body:"These cookies remember your usage preferences and optimize site loading."},
+      {num:"06",title:"Advertising cookies",callout:"FlipIt AI does NOT use any third-party advertising cookies. We do not sell your data and do not participate in any targeted advertising network."},
+      {num:"07",title:"Mobile application",body:"Our iOS and Android application does not deposit any cookies on your mobile device. Data collected in the app is governed by our Privacy Policy."},
+      {num:"08",title:"Retention period",list:["Session cookies: deleted when browser is closed","Essential persistent cookies: maximum 12 months","Analytics cookies: maximum 26 months (anonymized)"]},
+      {num:"09",title:"Management and refusal",body:"You can modify your cookie preferences at any time from your browser settings. Disabling some non-essential cookies may affect your experience on the site.",list:["Chrome: Settings → Privacy → Cookies","Firefox: Settings → Privacy → Cookies","Safari: Preferences → Privacy","Edge: Settings → Cookies and site permissions"]},
+      {num:"10",title:"Modifications",body:"We may update this policy at any time. The date of last modification is indicated at the top of this page."},
+      {num:"11",title:"Contact",body:"For any questions about cookies: support@flipitapp.ai"},
+    ]
+  }
+};
+
+function LogoMark(){return(<div style={{width:32,height:32,borderRadius:9,background:"linear-gradient(135deg,var(--accent),var(--accent2))",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 14px rgba(174,232,61,0.3)",flexShrink:0}}><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0a0906" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>);}
+
+function Reveal({children,delay=0}){
+  const ref=useRef(null);const[vis,setVis]=useState(false);
+  useEffect(()=>{const el=ref.current;if(!el)return;const obs=new IntersectionObserver(es=>{if(es[0].isIntersecting){setVis(true);obs.disconnect();}},{threshold:0.1});obs.observe(el);return()=>obs.disconnect();},[]);
+  return <div ref={ref} style={{opacity:vis?1:0,transform:vis?"translateY(0)":"translateY(20px)",transition:`opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`}}>{children}</div>;
+}
+
+function CookieTypeCard({icon,label,tag,desc,color,delay}){
+  return(
+    <Reveal delay={delay}>
+      <div style={{padding:"22px 20px",background:"rgba(245,238,221,0.025)",border:`1px solid ${color}44`,borderRadius:16,display:"flex",flexDirection:"column",gap:12}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <span style={{fontSize:24}}>{icon}</span>
+          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:10,color:color,background:`${color}18`,border:`1px solid ${color}55`,padding:"3px 9px",borderRadius:999,letterSpacing:"0.08em",textTransform:"uppercase"}}>{tag}</span>
+        </div>
+        <div style={{fontSize:16,fontWeight:600,letterSpacing:"-0.01em"}}>{label}</div>
+        <div style={{fontSize:13.5,color:"var(--ink-dim)",lineHeight:1.5}}>{desc}</div>
+      </div>
+    </Reveal>
+  );
+}
+
+function App(){
+  const[lang,setLang]=useState("fr");
+  const[scrolled,setScrolled]=useState(false);
+  useEffect(()=>{const fn=()=>setScrolled(window.scrollY>20);window.addEventListener("scroll",fn);return()=>window.removeEventListener("scroll",fn);},[]);
+  const c=COPY[lang];
+  return(
+    <div style={{minHeight:"100vh"}}>
+      <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:100,padding:"14px 32px",background:scrolled?"rgba(10,9,6,0.92)":"transparent",backdropFilter:scrolled?"blur(14px)":"none",borderBottom:scrolled?"1px solid var(--line)":"1px solid transparent",transition:"all 0.3s",display:"flex",alignItems:"center",gap:12}}>
+        <LogoMark/>
+        <span style={{fontWeight:600,fontSize:17,letterSpacing:"-0.02em"}}>FlipIt <span style={{color:"var(--accent)"}}>AI</span></span>
+        <a href="flipit-landing-standalone.html" style={{fontSize:13,color:"var(--ink-dim)",border:"none",display:"flex",alignItems:"center",gap:6,fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.04em"}}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          {lang==="fr"?"Accueil":"Home"}
+        </a>
+        <div style={{flex:1}}/>
+        <div style={{display:"flex",alignItems:"center",background:"rgba(245,238,221,0.04)",border:"1px solid var(--line2)",borderRadius:999,padding:3,gap:2}}>
+          {["fr","en"].map(l=>(<button key={l} onClick={()=>setLang(l)} style={{padding:"4px 11px",borderRadius:999,background:lang===l?"var(--accent)":"transparent",color:lang===l?"#0a0906":"var(--ink-dim)",fontFamily:"'JetBrains Mono',monospace",fontSize:11,fontWeight:700,letterSpacing:"0.08em",cursor:"pointer",border:"none",transition:"all 0.2s",textTransform:"uppercase"}}>{l}</button>))}
+        </div>
+      </nav>
+
+      <div style={{paddingTop:120,padding:"120px 32px 60px",maxWidth:860,margin:"0 auto"}}>
+        <div style={{animation:"fade-up 0.8s ease both"}}>
+          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,letterSpacing:"0.15em",color:"var(--accent)",textTransform:"uppercase",marginBottom:16}}>— {lang==="fr"?"Légal":"Legal"}</div>
+          <h1 style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:"clamp(38px,6vw,72px)",fontWeight:500,letterSpacing:"-0.03em",lineHeight:1.04,margin:"0 0 18px"}}>{c.title}</h1>
+          <p style={{fontSize:18,color:"var(--ink-dim)",maxWidth:600,lineHeight:1.55,margin:"0 0 28px",textWrap:"pretty"}}>{c.subtitle}</p>
+          <div style={{display:"flex",gap:16,flexWrap:"wrap",fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink-mute)",letterSpacing:"0.04em"}}>
+            <span>{c.updated}</span><span style={{color:"var(--line2)"}}>·</span><span>{c.compliance}</span>
+          </div>
+        </div>
+        <div style={{marginTop:40,height:1,background:"var(--line)",borderRadius:999,overflow:"hidden"}}><div style={{height:"100%",background:"linear-gradient(90deg,var(--accent),transparent)",animation:"bar-grow 1.2s cubic-bezier(0.2,0.8,0.2,1) 0.3s both"}}/></div>
+      </div>
+
+      {/* Cookie type cards */}
+      <div style={{maxWidth:860,margin:"0 auto",padding:"0 32px 48px"}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:14}}>
+          {c.types.map((t,i)=><CookieTypeCard key={i} {...t} delay={i*80}/>)}
+        </div>
+      </div>
+
+      <div style={{maxWidth:860,margin:"0 auto",padding:"0 32px 100px"}}>
+        {c.sections.map((s,i)=>(
+          <Reveal key={i} delay={i*30}>
+            <div style={{marginBottom:52,paddingBottom:52,borderBottom:i<c.sections.length-1?"1px solid var(--line)":"none"}}>
+              <div style={{display:"flex",alignItems:"baseline",gap:14,marginBottom:14}}>
+                <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--accent)",letterSpacing:"0.1em"}}>{s.num}</span>
+                <h2 style={{fontSize:22,fontWeight:600,letterSpacing:"-0.01em",margin:0}}>{s.title}</h2>
+              </div>
+              {s.callout&&<div style={{padding:"16px 20px",border:"1px solid rgba(174,232,61,0.3)",borderLeft:"3px solid var(--accent)",background:"rgba(174,232,61,0.05)",borderRadius:10,marginBottom:14}}><p style={{margin:0,fontSize:15,color:"var(--ink)",lineHeight:1.6}}>{s.callout}</p></div>}
+              {s.body&&<p style={{fontSize:15.5,color:"var(--ink-dim)",lineHeight:1.65,margin:"0 0 12px"}}>{s.body}</p>}
+              {s.list&&<ul style={{listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:9}}>
+                {s.list.map((item,j)=><li key={j} style={{display:"flex",alignItems:"flex-start",gap:10,fontSize:15,color:"var(--ink-dim)"}}><span style={{color:"var(--accent)",fontFamily:"'JetBrains Mono',monospace",flexShrink:0,marginTop:1}}>–</span><span>{item}</span></li>)}
+              </ul>}
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      <div style={{borderTop:"1px solid var(--line)",padding:"28px 32px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16,fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink-mute)"}}>
+        <span>© 2026 FlipIt AI Inc.</span>
+        <div style={{display:"flex",gap:20}}>
+          <a href="privacy-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Privacy</a>
+          <a href="terms-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Terms</a>
+          <a href="cookies-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Cookies</a>
+          <a href="mentions-legales-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>{lang==="fr"?"Mentions légales":"Legal notices"}</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("legal-root")).render(<App/>);
+</script>
+</body>
+</html>

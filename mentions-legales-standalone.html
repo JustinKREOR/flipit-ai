@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FlipIt AI — Mentions légales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0906;--ink:#f5eedd;--ink-dim:#a89f89;--ink-mute:#6e6754;--accent:#aee83d;--accent2:#c8f050;--line:rgba(245,238,221,0.08);--line2:rgba(245,238,221,0.14);}
+*{box-sizing:border-box;}html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',-apple-system,system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(900px 600px at 70% -5%,rgba(174,232,61,0.05),transparent 55%);z-index:0;}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(174,232,61,0.3);}a:hover{border-bottom-color:var(--accent);}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bar-grow{from{width:0;}to{width:100%;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+</style>
+</head>
+<body>
+<div id="legal-root" style="position:relative;z-index:2;"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const {useState,useEffect,useRef} = React;
+
+const COPY = {
+  fr:{
+    title:"Mentions légales",
+    subtitle:"Informations légales relatives à l'éditeur, l'hébergement, la propriété intellectuelle et la responsabilité éditoriale de FlipIt AI.",
+    updated:"Dernière mise à jour : Avril 2026",
+    compliance:"FlipIt AI Inc. · Québec, Canada",
+    identity:[
+      {label:"Nom de la société",value:"FlipIt AI Inc."},
+      {label:"Forme juridique",value:"Société par actions (Canada)"},
+      {label:"Province",value:"Québec, Canada"},
+      {label:"Courriel",value:"support@flipitapp.ai"},
+      {label:"Site web",value:"flipitapp.ai"},
+      {label:"Application",value:"FlipIt AI (iOS & Android)"},
+    ],
+    sections:[
+      {num:"01",title:"Éditeur du site",body:"Le site web flipitapp.ai et l'application mobile FlipIt AI sont édités par FlipIt AI Inc., société par actions constituée au Québec, Canada. Responsable de la publication : l'équipe FlipIt AI — support@flipitapp.ai"},
+      {num:"02",title:"Hébergement",body:"Le site web et l'infrastructure de l'application sont hébergés sur des serveurs en nuage situés au Canada et aux États-Unis, fournis par Amazon Web Services (AWS) et/ou Google Firebase. Ces prestataires disposent de leurs propres politiques de confidentialité et de sécurité."},
+      {num:"03",title:"Propriété intellectuelle",body:"L'ensemble des éléments constituant le site flipitapp.ai et l'application FlipIt AI — notamment le code source, les algorithmes d'intelligence artificielle, les textes, visuels, marques, logos et icônes — sont la propriété exclusive de FlipIt AI Inc. et sont protégés par les lois canadiennes et internationales sur la propriété intellectuelle.",list:["Toute reproduction totale ou partielle est interdite sans autorisation préalable écrite","La marque « FlipIt AI » est une marque commerciale de FlipIt AI Inc.","L'utilisation non autorisée expose son auteur à des poursuites judiciaires"]},
+      {num:"04",title:"Nature du service",body:"FlipIt AI est un outil technologique d'analyse automatisée de données publiques. Il ne constitue pas une marketplace, un service de courtage, ou un intermédiaire commercial. Les annonces affichées proviennent de plateformes tierces (Facebook Marketplace, Kijiji, Craigslist) et restent la propriété de leurs auteurs respectifs."},
+      {num:"05",title:"Responsabilité éditoriale",body:"FlipIt AI s'efforce d'assurer l'exactitude des informations publiées sur son site et dans son application. Toutefois, nous ne pouvons garantir l'exhaustivité, la précision ou l'actualité de ces informations. FlipIt AI décline toute responsabilité en cas d'erreur, d'omission ou d'utilisation inadaptée des informations fournies."},
+      {num:"06",title:"Liens hypertextes",body:"Le site peut contenir des liens vers des sites tiers. Ces liens sont fournis à titre informatif uniquement. FlipIt AI n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu, leur disponibilité ou leur politique de confidentialité."},
+      {num:"07",title:"Droit applicable et juridiction",body:"Les présentes mentions légales sont régies par les lois de la province de Québec et du Canada. Tout litige relatif à leur interprétation ou à leur exécution sera soumis à la compétence exclusive des tribunaux du district judiciaire de Montréal, Québec."},
+      {num:"08",title:"Accessibilité",body:"FlipIt AI s'engage à rendre son site et son application accessibles au plus grand nombre. Si vous rencontrez des difficultés d'accès, veuillez nous contacter à support@flipitapp.ai"},
+      {num:"09",title:"Contact",body:"Pour toute question d'ordre légal : support@flipitapp.ai — Nous répondons dans un délai de 5 jours ouvrables."},
+    ]
+  },
+  en:{
+    title:"Legal notices",
+    subtitle:"Legal information regarding the publisher, hosting, intellectual property and editorial responsibility of FlipIt AI.",
+    updated:"Last updated: April 2026",
+    compliance:"FlipIt AI Inc. · Quebec, Canada",
+    identity:[
+      {label:"Company name",value:"FlipIt AI Inc."},
+      {label:"Legal form",value:"Corporation (Canada)"},
+      {label:"Province",value:"Quebec, Canada"},
+      {label:"Email",value:"support@flipitapp.ai"},
+      {label:"Website",value:"flipitapp.ai"},
+      {label:"Application",value:"FlipIt AI (iOS & Android)"},
+    ],
+    sections:[
+      {num:"01",title:"Publisher",body:"The website flipitapp.ai and the FlipIt AI mobile application are published by FlipIt AI Inc., a corporation incorporated in Quebec, Canada. Publication manager: FlipIt AI team — support@flipitapp.ai"},
+      {num:"02",title:"Hosting",body:"The website and application infrastructure are hosted on cloud servers located in Canada and the United States, provided by Amazon Web Services (AWS) and/or Google Firebase. These providers have their own privacy and security policies."},
+      {num:"03",title:"Intellectual property",body:"All elements constituting the flipitapp.ai website and the FlipIt AI application — including source code, artificial intelligence algorithms, texts, visuals, trademarks, logos and icons — are the exclusive property of FlipIt AI Inc. and are protected by Canadian and international intellectual property laws.",list:["Any total or partial reproduction is prohibited without prior written authorization","The trademark 'FlipIt AI' is a trademark of FlipIt AI Inc.","Unauthorized use exposes its author to legal proceedings"]},
+      {num:"04",title:"Nature of service",body:"FlipIt AI is a technological tool for automated analysis of public data. It does not constitute a marketplace, a brokerage service, or a commercial intermediary. The listings displayed come from third-party platforms (Facebook Marketplace, Kijiji, Craigslist) and remain the property of their respective authors."},
+      {num:"05",title:"Editorial responsibility",body:"FlipIt AI strives to ensure the accuracy of information published on its website and in its application. However, we cannot guarantee the completeness, accuracy or timeliness of this information. FlipIt AI disclaims all liability for errors, omissions or inappropriate use of the information provided."},
+      {num:"06",title:"Hyperlinks",body:"The site may contain links to third-party websites. These links are provided for information purposes only. FlipIt AI has no control over these sites and disclaims all liability for their content, availability or privacy policy."},
+      {num:"07",title:"Governing law and jurisdiction",body:"These legal notices are governed by the laws of the Province of Quebec and Canada. Any dispute relating to their interpretation or execution will be subject to the exclusive jurisdiction of the courts of the judicial district of Montreal, Quebec."},
+      {num:"08",title:"Accessibility",body:"FlipIt AI is committed to making its website and application accessible to as many people as possible. If you encounter access difficulties, please contact us at support@flipitapp.ai"},
+      {num:"09",title:"Contact",body:"For any legal questions: support@flipitapp.ai — We respond within 5 business days."},
+    ]
+  }
+};
+
+function LogoMark(){return(<div style={{width:32,height:32,borderRadius:9,background:"linear-gradient(135deg,var(--accent),var(--accent2))",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 14px rgba(174,232,61,0.3)",flexShrink:0}}><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0a0906" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>);}
+
+function Reveal({children,delay=0}){
+  const ref=useRef(null);const[vis,setVis]=useState(false);
+  useEffect(()=>{const el=ref.current;if(!el)return;const obs=new IntersectionObserver(es=>{if(es[0].isIntersecting){setVis(true);obs.disconnect();}},{threshold:0.1});obs.observe(el);return()=>obs.disconnect();},[]);
+  return <div ref={ref} style={{opacity:vis?1:0,transform:vis?"translateY(0)":"translateY(20px)",transition:`opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`}}>{children}</div>;
+}
+
+function IdentityCard({identity,delay}){
+  return(
+    <Reveal delay={delay}>
+      <div style={{border:"1px solid var(--line2)",borderRadius:18,overflow:"hidden",marginBottom:48}}>
+        <div style={{padding:"14px 20px",background:"rgba(245,238,221,0.03)",borderBottom:"1px solid var(--line)",fontFamily:"'JetBrains Mono',monospace",fontSize:11,color:"var(--ink-mute)",letterSpacing:"0.1em",textTransform:"uppercase"}}>
+          {identity[0]?.label === "Nom de la société" ? "— Identité de l'éditeur" : "— Publisher identity"}
+        </div>
+        {identity.map((row,i)=>(
+          <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"14px 20px",borderBottom:i<identity.length-1?"1px solid var(--line)":"none",gap:20}}>
+            <span style={{fontSize:13,color:"var(--ink-mute)",fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.04em",flexShrink:0}}>{row.label}</span>
+            <span style={{fontSize:14,color:"var(--ink)",fontWeight:500,textAlign:"right"}}>{row.value}</span>
+          </div>
+        ))}
+      </div>
+    </Reveal>
+  );
+}
+
+function App(){
+  const[lang,setLang]=useState("fr");
+  const[scrolled,setScrolled]=useState(false);
+  useEffect(()=>{const fn=()=>setScrolled(window.scrollY>20);window.addEventListener("scroll",fn);return()=>window.removeEventListener("scroll",fn);},[]);
+  const c=COPY[lang];
+  return(
+    <div style={{minHeight:"100vh"}}>
+      <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:100,padding:"14px 32px",background:scrolled?"rgba(10,9,6,0.92)":"transparent",backdropFilter:scrolled?"blur(14px)":"none",borderBottom:scrolled?"1px solid var(--line)":"1px solid transparent",transition:"all 0.3s",display:"flex",alignItems:"center",gap:12}}>
+        <LogoMark/>
+        <span style={{fontWeight:600,fontSize:17,letterSpacing:"-0.02em"}}>FlipIt <span style={{color:"var(--accent)"}}>AI</span></span>
+        <a href="flipit-landing-standalone.html" style={{fontSize:13,color:"var(--ink-dim)",border:"none",display:"flex",alignItems:"center",gap:6,fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.04em"}}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          {lang==="fr"?"Accueil":"Home"}
+        </a>
+        <div style={{flex:1}}/>
+        <div style={{display:"flex",alignItems:"center",background:"rgba(245,238,221,0.04)",border:"1px solid var(--line2)",borderRadius:999,padding:3,gap:2}}>
+          {["fr","en"].map(l=>(<button key={l} onClick={()=>setLang(l)} style={{padding:"4px 11px",borderRadius:999,background:lang===l?"var(--accent)":"transparent",color:lang===l?"#0a0906":"var(--ink-dim)",fontFamily:"'JetBrains Mono',monospace",fontSize:11,fontWeight:700,letterSpacing:"0.08em",cursor:"pointer",border:"none",transition:"all 0.2s",textTransform:"uppercase"}}>{l}</button>))}
+        </div>
+      </nav>
+
+      <div style={{paddingTop:120,padding:"120px 32px 60px",maxWidth:860,margin:"0 auto"}}>
+        <div style={{animation:"fade-up 0.8s ease both"}}>
+          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,letterSpacing:"0.15em",color:"var(--accent)",textTransform:"uppercase",marginBottom:16}}>— {lang==="fr"?"Légal":"Legal"}</div>
+          <h1 style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:"clamp(38px,6vw,72px)",fontWeight:500,letterSpacing:"-0.03em",lineHeight:1.04,margin:"0 0 18px"}}>{c.title}</h1>
+          <p style={{fontSize:18,color:"var(--ink-dim)",maxWidth:600,lineHeight:1.55,margin:"0 0 28px",textWrap:"pretty"}}>{c.subtitle}</p>
+          <div style={{display:"flex",gap:16,flexWrap:"wrap",fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink-mute)",letterSpacing:"0.04em"}}>
+            <span>{c.updated}</span><span style={{color:"var(--line2)"}}>·</span><span>{c.compliance}</span>
+          </div>
+        </div>
+        <div style={{marginTop:40,height:1,background:"var(--line)",borderRadius:999,overflow:"hidden"}}><div style={{height:"100%",background:"linear-gradient(90deg,var(--accent),transparent)",animation:"bar-grow 1.2s cubic-bezier(0.2,0.8,0.2,1) 0.3s both"}}/></div>
+      </div>
+
+      <div style={{maxWidth:860,margin:"0 auto",padding:"0 32px 0"}}>
+        <IdentityCard identity={c.identity} delay={100}/>
+      </div>
+
+      <div style={{maxWidth:860,margin:"0 auto",padding:"0 32px 100px"}}>
+        {c.sections.map((s,i)=>(
+          <Reveal key={i} delay={i*30}>
+            <div style={{marginBottom:52,paddingBottom:52,borderBottom:i<c.sections.length-1?"1px solid var(--line)":"none"}}>
+              <div style={{display:"flex",alignItems:"baseline",gap:14,marginBottom:14}}>
+                <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--accent)",letterSpacing:"0.1em"}}>{s.num}</span>
+                <h2 style={{fontSize:22,fontWeight:600,letterSpacing:"-0.01em",margin:0}}>{s.title}</h2>
+              </div>
+              {s.body&&<p style={{fontSize:15.5,color:"var(--ink-dim)",lineHeight:1.65,margin:"0 0 12px"}}>{s.body}</p>}
+              {s.list&&<ul style={{listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:9}}>
+                {s.list.map((item,j)=><li key={j} style={{display:"flex",alignItems:"flex-start",gap:10,fontSize:15,color:"var(--ink-dim)"}}><span style={{color:"var(--accent)",fontFamily:"'JetBrains Mono',monospace",flexShrink:0,marginTop:1}}>–</span><span>{item}</span></li>)}
+              </ul>}
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      <div style={{borderTop:"1px solid var(--line)",padding:"28px 32px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16,fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink-mute)"}}>
+        <span>© 2026 FlipIt AI Inc.</span>
+        <div style={{display:"flex",gap:20}}>
+          <a href="privacy-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Privacy</a>
+          <a href="terms-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Terms</a>
+          <a href="cookies-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Cookies</a>
+          <a href="mentions-legales-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>{lang==="fr"?"Mentions légales":"Legal notices"}</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("legal-root")).render(<App/>);
+</script>
+</body>
+</html>

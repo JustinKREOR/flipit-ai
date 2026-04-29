@@ -1,0 +1,29 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/flipit-landing-standalone.html" },
+    { "source": "/landing", "destination": "/landing.html" },
+    { "source": "/privacy", "destination": "/privacy-standalone.html" },
+    { "source": "/terms", "destination": "/terms-standalone.html" },
+    { "source": "/cookies", "destination": "/cookies-standalone.html" },
+    { "source": "/mentions-legales", "destination": "/mentions-legales-standalone.html" },
+    { "source": "/conditions-generales", "destination": "/terms-standalone.html" },
+    { "source": "/politique-de-confidentialite", "destination": "/privacy-standalone.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)\\.(html|jsx|pdf)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/uploads/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    }
+  ]
+}

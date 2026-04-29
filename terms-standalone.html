@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FlipIt AI — Terms of Service</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0906;--ink:#f5eedd;--ink-dim:#a89f89;--ink-mute:#6e6754;--accent:#aee83d;--accent2:#c8f050;--line:rgba(245,238,221,0.08);--line2:rgba(245,238,221,0.14);}
+*{box-sizing:border-box;}html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',-apple-system,system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(900px 600px at 20% -5%,rgba(174,232,61,0.06),transparent 60%);z-index:0;}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(174,232,61,0.3);}a:hover{border-bottom-color:var(--accent);}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bar-grow{from{width:0;}to{width:100%;}}
+</style>
+</head>
+<body>
+<div id="legal-root" style="position:relative;z-index:2;"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const {useState,useEffect,useRef} = React;
+
+const COPY = {
+  fr:{
+    title:"Terms of Service",
+    subtitle:"En utilisant FlipIt AI, vous acceptez l'intégralité des conditions ci-dessous. Veuillez les lire attentivement avant d'utiliser l'application.",
+    updated:"Dernière mise à jour : Avril 2026",
+    compliance:"FlipIt AI Inc. · Québec, Canada",
+    sections:[
+      {num:"01",title:"Acceptation",body:"En utilisant FlipIt AI, vous acceptez ces conditions."},
+      {num:"02",title:"Nature du service",body:"FlipIt AI est un outil d'analyse automatisée basé sur l'intelligence artificielle.",list:["Nous ne sommes PAS une marketplace","Nous ne sommes PAS un courtier","Nous ne sommes PAS un intermédiaire"]},
+      {num:"03",title:"Aucun conseil financier",body:"FlipIt AI ne fournit AUCUN conseil financier, légal ou d'investissement. Toutes les décisions prises sur la base des informations fournies par l'application sont de la responsabilité exclusive de l'utilisateur."},
+      {num:"04",title:"Aucune garantie",list:["L'exactitude des informations","La profitabilité des opportunités détectées","La disponibilité continue du service","La rapidité des alertes"]},
+      {num:"05",title:"Transactions externes",callout:"CRITIQUE — FlipIt AI n'est PAS impliqué dans les transactions entre utilisateurs et vendeurs. Nous déclinons toute responsabilité concernant les rencontres physiques, transactions Marketplace, fraudes, vols, blessures, agressions ou tout autre incident. Vous assumez 100 % des risques liés à toute transaction."},
+      {num:"06",title:"Plateformes tierces",body:"FlipIt AI dépend de plateformes externes (Facebook Marketplace, Kijiji, Craigslist, etc.). Nous ne sommes pas responsables de leur contenu, de leur disponibilité, ni des changements qu'elles peuvent apporter à leurs services."},
+      {num:"07",title:"Données publiques",body:"FlipIt AI peut s'appuyer sur des données accessibles publiquement. L'accès à ces données peut changer, être restreint ou disparaître à tout moment sans que notre responsabilité ne puisse être engagée."},
+      {num:"08",title:"Limitation de responsabilité",body:"Dans la limite maximale permise par la loi, FlipIt AI ne sera pas responsable des pertes financières, dommages indirects, opportunités manquées, erreurs de données ou décisions prises par l'utilisateur. La responsabilité maximale de FlipIt AI est limitée au montant payé par l'utilisateur au cours des 12 derniers mois."},
+      {num:"09",title:"Indemnisation",body:"Vous acceptez d'indemniser FlipIt AI contre toute réclamation liée à votre utilisation du service, à vos transactions ou à vos interactions avec des tiers."},
+      {num:"10",title:"Suspension",body:"Nous nous réservons le droit de suspendre ou de fermer un compte, sans préavis et à notre discrétion, en cas de violation des présentes conditions."},
+      {num:"11",title:"Paiements",list:["Les abonnements sont récurrents et se renouvellent automatiquement","Non remboursables, sauf obligation légale","Les prix peuvent être modifiés avec préavis"]},
+      {num:"12",title:"Apple / Google",body:"Les paiements effectués via l'App Store ou Google Play sont soumis aux conditions de ces plateformes. Apple et Google ne sont pas responsables du service FlipIt AI."},
+      {num:"13",title:"Propriété intellectuelle",body:"L'ensemble du code, de l'intelligence artificielle, de la marque et des actifs de FlipIt AI sont la propriété exclusive de FlipIt AI Inc. Aucun droit de propriété n'est transféré à l'utilisateur."},
+      {num:"14",title:"Interdictions",list:["Copier ou reproduire le service ou son contenu","Effectuer du reverse engineering","Exploiter abusivement le service ou ses données"]},
+      {num:"15",title:"Arbitrage & recours",body:"Vous acceptez de ne pas initier de recours collectif. Les litiges doivent être traités individuellement, avec tentative de résolution amiable préalable obligatoire."},
+      {num:"16",title:"Force majeure",body:"FlipIt AI ne peut être tenu responsable en cas de panne, d'attaque informatique, de blocage externe ou de changement affectant les plateformes tierces."},
+      {num:"17",title:"Modification du service",body:"Nous nous réservons le droit de modifier, limiter ou arrêter le service à tout moment, sans compensation."},
+      {num:"18",title:"Loi applicable",body:"Les présentes conditions sont régies par les lois du Québec, Canada."},
+      {num:"19",title:"Contact",body:"Pour toute question relative aux présentes conditions : support@flipitapp.ai"},
+    ]
+  },
+  en:{
+    title:"Terms of Service",
+    subtitle:"By using FlipIt AI, you accept all of the conditions below. Please read them carefully before using the application.",
+    updated:"Last updated: April 2026",
+    compliance:"FlipIt AI Inc. · Quebec, Canada",
+    sections:[
+      {num:"01",title:"Acceptance",body:"By using FlipIt AI, you accept these terms."},
+      {num:"02",title:"Nature of service",body:"FlipIt AI is an AI-based automated analysis tool.",list:["We are NOT a marketplace","We are NOT a broker","We are NOT an intermediary"]},
+      {num:"03",title:"No financial advice",body:"FlipIt AI provides NO financial, legal or investment advice. All decisions made based on information provided by the application are the sole responsibility of the user."},
+      {num:"04",title:"No guarantee",list:["The accuracy of information","The profitability of detected opportunities","The continuous availability of the service","The speed of alerts"]},
+      {num:"05",title:"External transactions",callout:"CRITICAL — FlipIt AI is NOT involved in transactions between users and sellers. We disclaim all liability for physical meetings, Marketplace transactions, fraud, theft, injuries, assaults or any other incident. You assume 100% of the risks associated with any transaction."},
+      {num:"06",title:"Third-party platforms",body:"FlipIt AI depends on external platforms (Facebook Marketplace, Kijiji, Craigslist, etc.). We are not responsible for their content, availability, or changes they may make to their services."},
+      {num:"07",title:"Public data",body:"FlipIt AI may rely on publicly accessible data. Access to this data may change, be restricted or disappear at any time without any liability on our part."},
+      {num:"08",title:"Limitation of liability",body:"To the maximum extent permitted by law, FlipIt AI will not be liable for financial losses, indirect damages, missed opportunities, data errors or decisions made by the user. FlipIt AI's maximum liability is limited to the amount paid by the user in the last 12 months."},
+      {num:"09",title:"Indemnification",body:"You agree to indemnify FlipIt AI against any claims related to your use of the service, your transactions or your interactions with third parties."},
+      {num:"10",title:"Suspension",body:"We reserve the right to suspend or close an account, without notice and at our discretion, in case of violation of these terms."},
+      {num:"11",title:"Payments",list:["Subscriptions are recurring and renew automatically","Non-refundable, except as required by law","Prices may be changed with notice"]},
+      {num:"12",title:"Apple / Google",body:"Payments made via the App Store or Google Play are subject to those platforms' terms. Apple and Google are not responsible for the FlipIt AI service."},
+      {num:"13",title:"Intellectual property",body:"All code, artificial intelligence, branding and assets of FlipIt AI are the exclusive property of FlipIt AI Inc. No ownership rights are transferred to the user."},
+      {num:"14",title:"Prohibited activities",list:["Copying or reproducing the service or its content","Reverse engineering","Abusively exploiting the service or its data"]},
+      {num:"15",title:"Arbitration & remedies",body:"You agree not to initiate a class action. Disputes must be handled individually, with a mandatory prior attempt at amicable resolution."},
+      {num:"16",title:"Force majeure",body:"FlipIt AI cannot be held liable in case of outage, cyberattack, external blockage or changes affecting third-party platforms."},
+      {num:"17",title:"Service modifications",body:"We reserve the right to modify, limit or discontinue the service at any time, without compensation."},
+      {num:"18",title:"Governing law",body:"These terms are governed by the laws of Quebec, Canada."},
+      {num:"19",title:"Contact",body:"For any questions regarding these terms: support@flipitapp.ai"},
+    ]
+  }
+};
+
+function LogoMark(){return(<div style={{width:32,height:32,borderRadius:9,background:"linear-gradient(135deg,var(--accent),var(--accent2))",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 14px rgba(174,232,61,0.3)",flexShrink:0}}><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0a0906" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>);}
+
+function Reveal({children,delay=0}){
+  const ref=useRef(null);const[vis,setVis]=useState(false);
+  useEffect(()=>{const el=ref.current;if(!el)return;const obs=new IntersectionObserver(es=>{if(es[0].isIntersecting){setVis(true);obs.disconnect();}},{threshold:0.1});obs.observe(el);return()=>obs.disconnect();},[]);
+  return <div ref={ref} style={{opacity:vis?1:0,transform:vis?"translateY(0)":"translateY(20px)",transition:`opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`}}>{children}</div>;
+}
+
+function App(){
+  const[lang,setLang]=useState("fr");
+  const[scrolled,setScrolled]=useState(false);
+  useEffect(()=>{const fn=()=>setScrolled(window.scrollY>20);window.addEventListener("scroll",fn);return()=>window.removeEventListener("scroll",fn);},[]);
+  const c=COPY[lang];
+  return(
+    <div style={{minHeight:"100vh"}}>
+      <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:100,padding:"14px 32px",background:scrolled?"rgba(10,9,6,0.92)":"transparent",backdropFilter:scrolled?"blur(14px)":"none",borderBottom:scrolled?"1px solid var(--line)":"1px solid transparent",transition:"all 0.3s",display:"flex",alignItems:"center",gap:12}}>
+        <LogoMark/>
+        <span style={{fontWeight:600,fontSize:17,letterSpacing:"-0.02em"}}>FlipIt <span style={{color:"var(--accent)"}}>AI</span></span>
+        <a href="flipit-landing-standalone.html" style={{fontSize:13,color:"var(--ink-dim)",border:"none",display:"flex",alignItems:"center",gap:6,fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.04em"}}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          {lang==="fr"?"Accueil":"Home"}
+        </a>
+        <div style={{flex:1}}/>
+        <div style={{display:"flex",alignItems:"center",background:"rgba(245,238,221,0.04)",border:"1px solid var(--line2)",borderRadius:999,padding:3,gap:2}}>
+          {["fr","en"].map(l=>(<button key={l} onClick={()=>setLang(l)} style={{padding:"4px 11px",borderRadius:999,background:lang===l?"var(--accent)":"transparent",color:lang===l?"#0a0906":"var(--ink-dim)",fontFamily:"'JetBrains Mono',monospace",fontSize:11,fontWeight:700,letterSpacing:"0.08em",cursor:"pointer",border:"none",transition:"all 0.2s",textTransform:"uppercase"}}>{l}</button>))}
+        </div>
+      </nav>
+      <div style={{paddingTop:120,padding:"120px 32px 60px",maxWidth:860,margin:"0 auto"}}>
+        <div style={{animation:"fade-up 0.8s ease both"}}>
+          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,letterSpacing:"0.15em",color:"var(--accent)",textTransform:"uppercase",marginBottom:16}}>— {lang==="fr"?"Légal":"Legal"}</div>
+          <h1 style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:"clamp(38px,6vw,72px)",fontWeight:500,letterSpacing:"-0.03em",lineHeight:1.04,margin:"0 0 18px"}}>{c.title}</h1>
+          <p style={{fontSize:18,color:"var(--ink-dim)",maxWidth:600,lineHeight:1.55,margin:"0 0 28px",textWrap:"pretty"}}>{c.subtitle}</p>
+          <div style={{display:"flex",gap:16,flexWrap:"wrap",fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink-mute)",letterSpacing:"0.04em"}}>
+            <span>{c.updated}</span><span style={{color:"var(--line2)"}}>·</span><span>{c.compliance}</span>
+          </div>
+        </div>
+        <div style={{marginTop:40,height:1,background:"var(--line)",borderRadius:999,overflow:"hidden"}}><div style={{height:"100%",background:"linear-gradient(90deg,var(--accent),transparent)",animation:"bar-grow 1.2s cubic-bezier(0.2,0.8,0.2,1) 0.3s both"}}/></div>
+      </div>
+      <div style={{maxWidth:860,margin:"0 auto",padding:"0 32px 100px"}}>
+        {c.sections.map((s,i)=>(
+          <Reveal key={i} delay={i*30}>
+            <div style={{marginBottom:52,paddingBottom:52,borderBottom:i<c.sections.length-1?"1px solid var(--line)":"none"}}>
+              <div style={{display:"flex",alignItems:"baseline",gap:14,marginBottom:14}}>
+                <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--accent)",letterSpacing:"0.1em"}}>{s.num}</span>
+                <h2 style={{fontSize:22,fontWeight:600,letterSpacing:"-0.01em",margin:0}}>{s.title}</h2>
+              </div>
+              {s.callout&&<div style={{padding:"16px 20px",border:"1px solid rgba(231,100,78,0.4)",borderLeft:"3px solid #e7644e",background:"rgba(231,100,78,0.06)",borderRadius:10,marginBottom:14}}><p style={{margin:0,fontSize:15,color:"var(--ink)",lineHeight:1.6}}>{s.callout}</p></div>}
+              {s.body&&<p style={{fontSize:15.5,color:"var(--ink-dim)",lineHeight:1.65,margin:"0 0 12px"}}>{s.body}</p>}
+              {s.list&&<ul style={{listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:9}}>
+                {s.list.map((item,j)=><li key={j} style={{display:"flex",alignItems:"flex-start",gap:10,fontSize:15,color:"var(--ink-dim)"}}><span style={{color:"var(--accent)",fontFamily:"'JetBrains Mono',monospace",flexShrink:0,marginTop:1}}>–</span><span>{item}</span></li>)}
+              </ul>}
+            </div>
+          </Reveal>
+        ))}
+      </div>
+      <div style={{borderTop:"1px solid var(--line)",padding:"28px 32px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16,fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink-mute)"}}>
+        <span>© 2026 FlipIt AI Inc.</span>
+        <div style={{display:"flex",gap:20}}>
+          <a href="privacy-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Privacy</a>
+          <a href="terms-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Terms</a>
+          <a href="cookies-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Cookies</a>
+          <a href="mentions-legales-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>{lang==="fr"?"Mentions légales":"Legal notices"}</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("legal-root")).render(<App/>);
+</script>
+</body>
+</html>

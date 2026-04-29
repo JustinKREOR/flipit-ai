@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Politique de confidentialité — FlipIt AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0906; --ink: #f5eedd; --ink-dim: #a89f89; --ink-mute: #6e6754;
+    --accent: #D4A038; --line: rgba(245,238,221,0.08); --line-2: rgba(245,238,221,0.14);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Space Grotesk', -apple-system, system-ui, sans-serif; line-height: 1.65; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(212,160,56,0.35); }
+  a:hover { border-bottom-color: var(--accent); }
+  .nav { border-bottom: 1px solid var(--line); padding: 18px 32px; display: flex; align-items: center; gap: 10px; }
+  .nav-brand { font-weight: 600; letter-spacing: -0.02em; font-size: 18px; }
+  .nav-brand span { color: var(--accent); }
+  .logo { width: 32px; height: 32px; border-radius: 9px; background: linear-gradient(135deg, #D4A038, #e8bc5a); display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(212,160,56,0.35); flex-shrink: 0; }
+  .back { font-size: 13px; color: var(--ink-dim); margin-left: auto; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; border: none; white-space: nowrap; }
+  .container { max-width: 780px; margin: 0 auto; padding: 64px 32px 120px; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 18px; }
+  h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; margin: 0 0 16px; }
+  .lead { font-size: 17px; color: var(--ink-dim); margin: 0 0 40px; max-width: 640px; line-height: 1.55; }
+  .meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-mute); letter-spacing: 0.05em; margin-bottom: 56px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin: 52px 0 14px; color: var(--ink); display: flex; align-items: baseline; gap: 10px; }
+  h2 .num { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 0.1em; }
+  h3 { font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim); margin: 24px 0 10px; font-family: 'JetBrains Mono', monospace; }
+  p { font-size: 15.5px; color: var(--ink-dim); margin: 0 0 14px; }
+  ul { padding-left: 0; margin: 0 0 16px; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  li { font-size: 15px; color: var(--ink-dim); display: flex; align-items: flex-start; gap: 10px; }
+  li::before { content: "–"; color: var(--accent); flex-shrink: 0; font-family: 'JetBrains Mono', monospace; }
+  strong { color: var(--ink); font-weight: 500; }
+  .callout { margin: 28px 0; padding: 18px 20px; border: 1px solid rgba(212,160,56,0.35); border-left: 3px solid var(--accent); background: rgba(212,160,56,0.05); border-radius: 10px; }
+  .callout p { margin: 0; font-size: 14.5px; }
+  .data-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 16px 0 24px; }
+  .data-cell { padding: 14px 16px; background: rgba(245,238,221,0.03); border: 1px solid var(--line); border-radius: 10px; }
+  .data-cell .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+  .data-cell p { font-size: 13.5px; margin: 0; line-height: 1.5; }
+  .footer-bar { padding: 28px 32px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-mute); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .footer-bar a { color: var(--ink-mute); border: none; }
+  @media (max-width: 600px) { .container { padding: 40px 20px 80px; } .nav { padding: 14px 20px; } .data-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a0906" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+  </div>
+  <span class="nav-brand">FlipIt <span>AI</span></span>
+  <a href="landing.html" class="back">← Retour à l'accueil</a>
+</nav>
+
+<main class="container">
+  <div class="eyebrow">— Légal</div>
+  <h1>Privacy Policy</h1>
+  <p class="lead">FlipIt AI Inc. s'engage à protéger la confidentialité et la sécurité des données personnelles de ses utilisateurs. En utilisant FlipIt AI, vous acceptez la présente politique.</p>
+  <div class="meta">Dernière mise à jour : Avril 2026 &nbsp;·&nbsp; FlipIt AI Inc. &nbsp;·&nbsp; Conforme : Loi 25 (QC) · LPRPDE · RGPD</div>
+
+  <h2><span class="num">01</span> Introduction</h2>
+  <p>FlipIt AI Inc. ("FlipIt AI", "nous", "notre", "l'Application") s'engage à protéger la confidentialité et la sécurité des données personnelles de ses utilisateurs. Cette Politique est conforme aux lois applicables incluant la Loi sur la protection des renseignements personnels (Canada), le RGPD (le cas échéant) et les exigences Apple App Store et Google Play.</p>
+
+  <h2><span class="num">02</span> Définitions</h2>
+  <ul>
+    <li><strong>Données personnelles</strong> : toute information permettant d'identifier un utilisateur</li>
+    <li><strong>Traitement</strong> : toute opération (collecte, stockage, analyse, etc.)</li>
+    <li><strong>Plateformes tierces</strong> : services externes (ex : marketplaces)</li>
+    <li><strong>Données publiques</strong> : informations accessibles publiquement sur internet</li>
+  </ul>
+
+  <h2><span class="num">03</span> Données collectées</h2>
+  <div class="data-grid">
+    <div class="data-cell">
+      <div class="label">Données fournies</div>
+      <p>Nom, courriel, identifiants de compte, préférences de recherche, informations de paiement (via tiers)</p>
+    </div>
+    <div class="data-cell">
+      <div class="label">Données automatiques</div>
+      <p>Adresse IP, appareil / OS, identifiants techniques, logs, crash reports</p>
+    </div>
+    <div class="data-cell">
+      <div class="label">Données d'utilisation</div>
+      <p>Recherches effectuées, alertes reçues, interactions avec l'application</p>
+    </div>
+    <div class="data-cell">
+      <div class="label">Données dérivées (IA)</div>
+      <p>Score de valeur, détection de fraude, modèles comportementaux anonymisés</p>
+    </div>
+  </div>
+
+  <h2><span class="num">04</span> Finalité</h2>
+  <p>Vos données sont utilisées pour :</p>
+  <ul>
+    <li>Fournir le service et envoyer les alertes</li>
+    <li>Optimiser l'algorithme d'intelligence artificielle</li>
+    <li>Prévenir la fraude et les abus</li>
+    <li>Assurer le support client</li>
+    <li>Réaliser des analyses produit</li>
+  </ul>
+
+  <h2><span class="num">05</span> Base légale</h2>
+  <ul>
+    <li>Consentement de l'utilisateur</li>
+    <li>Exécution du contrat d'abonnement</li>
+    <li>Intérêt légitime de FlipIt AI</li>
+  </ul>
+
+  <h2><span class="num">06</span> Données tierces</h2>
+  <div class="callout">
+    <p><strong>IMPORTANT —</strong> FlipIt AI peut analyser des données provenant de sources publiques accessibles. Nous ne contrôlons pas ces sources, ne garantissons pas leur exactitude, et ne sommes pas affiliés à ces plateformes. L'accès à ces données peut changer, être limité ou interrompu à tout moment sans responsabilité de notre part.</p>
+  </div>
+
+  <h2><span class="num">07</span> Partage des données</h2>
+  <p>Nous ne vendons pas vos données personnelles. Un partage peut être effectué uniquement avec :</p>
+  <ul>
+    <li>Prestataires de paiement (Stripe, Apple, Google)</li>
+    <li>Fournisseurs d'infrastructure infonuagique (AWS, Firebase)</li>
+    <li>Outils d'analyse anonymisés</li>
+    <li>Autorités légales compétentes, sur obligation</li>
+  </ul>
+
+  <h2><span class="num">08</span> Conservation</h2>
+  <ul>
+    <li>Données de compte actif : conservées pendant la durée d'activité</li>
+    <li>Logs techniques : jusqu'à 24 mois</li>
+    <li>Données anonymisées : conservation illimitée</li>
+  </ul>
+
+  <h2><span class="num">09</span> Sécurité</h2>
+  <p>Mesures mises en place : chiffrement SSL, accès restreint aux systèmes, monitoring en temps réel. Aucun système n'est infaillible — nous ne pouvons garantir une sécurité absolue.</p>
+
+  <h2><span class="num">10</span> Intelligence artificielle</h2>
+  <p>FlipIt AI utilise des modèles automatisés. Les résultats produits sont probabilistes, peuvent être inexacts et ne doivent pas être considérés comme fiables à 100 %.</p>
+
+  <h2><span class="num">11</span> Vos droits</h2>
+  <p>Vous pouvez à tout moment accéder, modifier, supprimer vos données ou retirer votre consentement en contactant : <a href="mailto:support@flipitapp.ai">support@flipitapp.ai</a></p>
+
+  <h2><span class="num">12</span> Transferts internationaux</h2>
+  <p>Les données peuvent être traitées en dehors du Canada, notamment aux États-Unis. Ces transferts sont effectués dans le respect des lois applicables.</p>
+
+  <h2><span class="num">13</span> Mineurs</h2>
+  <p>FlipIt AI est interdit aux personnes de moins de <strong>18 ans</strong>. Nous ne collectons sciemment aucune donnée relative à des mineurs.</p>
+
+  <h2><span class="num">14</span> Cookies</h2>
+  <p>Nous utilisons des cookies à des fins de fonctionnement, d'analyse et de performance. Aucun cookie publicitaire tiers n'est utilisé dans l'application mobile.</p>
+
+  <h2><span class="num">15</span> Limitation de responsabilité</h2>
+  <p>FlipIt AI ne peut être tenu responsable des accès non autorisés, pertes de données, erreurs d'algorithme ou inexactitudes provenant de sources tierces.</p>
+
+  <h2><span class="num">16</span> Modifications</h2>
+  <p>Nous pouvons modifier cette politique à tout moment. Les changements significatifs seront notifiés par courriel. La poursuite de l'utilisation du service vaut acceptation.</p>
+
+  <h2><span class="num">17</span> Contact</h2>
+  <p>Pour toute question relative à cette politique de confidentialité : <a href="mailto:support@flipitapp.ai">support@flipitapp.ai</a></p>
+</main>
+
+<div class="footer-bar">
+  <span>© 2026 FlipIt AI Inc. Tous droits réservés.</span>
+  <div style="display:flex;gap:20px;">
+    <a href="privacy.html">Confidentialité</a>
+    <a href="terms.html">Termes</a>
+    <a href="landing.html">Accueil</a>
+  </div>
+</div>
+
+</body>
+</html>
