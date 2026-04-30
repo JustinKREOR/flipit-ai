@@ -385,8 +385,8 @@ function Hero({ lang, accent }) {
               </div>
             </Reveal>
             <Reveal delay={100}>
-              <h1 style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"clamp(44px,7vw,88px)", fontWeight:500, letterSpacing:"-0.035em", lineHeight:1.02, margin:0, marginBottom:24, textWrap:"balance" }}>
-                {c.ta}<span style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400, background:`linear-gradient(135deg,${accent},#f0ca6a)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>{c.tb}</span>{c.tc}
+              <h1 style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"clamp(44px,7vw,88px)", fontWeight:500, letterSpacing:"-0.035em", lineHeight:1.08, margin:0, marginBottom:24, textWrap:"balance" }}>
+                {c.ta}<span style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400, display:"inline-block", background:`linear-gradient(135deg,${accent},#f0ca6a)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text", paddingRight:"0.12em" }}>{c.tb}</span>{c.tc}
               </h1>
             </Reveal>
             <Reveal delay={200}>
@@ -515,6 +515,59 @@ function Features({ lang, accent }) {
 }
 
 /* ─── STATS ─────────────────────────────────────────────────────────────── */
+// Parse a stat string into { prefix, value, suffix } for animation
+// e.g. "2.4M+" → { prefix:"", value:2.4, suffix:"M+" }
+// "< 30s" → not numeric, return null
+// "100%" → { prefix:"", value:100, suffix:"%" }
+// "3" → { prefix:"", value:3, suffix:"" }
+function parseStatNum(n) {
+  const m = n.match(/^([^0-9]*)(\d+\.?\d*)(.*)$/);
+  if (!m) return null;
+  return { prefix: m[1], value: parseFloat(m[2]), suffix: m[3] };
+}
+
+function AnimatedStat({ n, accent }) {
+  const parsed = parseStatNum(n);
+  const ref = useRef(null);
+  const [displayed, setDisplayed] = useState(parsed ? 0 : null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (!parsed) return;
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !started.current) {
+        started.current = true;
+        obs.disconnect();
+        const duration = 1800;
+        const start = performance.now();
+        const target = parsed.value;
+        const isDecimal = String(target).includes(".");
+        const tick = (now) => {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // ease out expo
+          const eased = 1 - Math.pow(1 - progress, 4);
+          const current = eased * target;
+          setDisplayed(isDecimal ? Math.round(current * 10) / 10 : Math.floor(current));
+          if (progress < 1) requestAnimationFrame(tick);
+          else setDisplayed(target);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.3 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const display = parsed
+    ? `${parsed.prefix}${displayed}${parsed.suffix}`
+    : n;
+
+  return <span ref={ref}>{display}</span>;
+}
+
 function Stats({ lang, accent }) {
   const c = COPY[lang].stats;
   return (
@@ -525,7 +578,9 @@ function Stats({ lang, accent }) {
           {c.items.map((s,i) => (
             <Reveal key={i} delay={i*80}>
               <div style={{ padding:"44px 28px", borderRight:i<c.items.length-1?"1px solid var(--line)":"none" }}>
-                <div style={{ fontSize:"clamp(34px,4vw,54px)", fontWeight:500, letterSpacing:"-0.03em", lineHeight:1, marginBottom:12, color:accent }}>{s.n}</div>
+                <div style={{ fontSize:"clamp(34px,4vw,54px)", fontWeight:500, letterSpacing:"-0.03em", lineHeight:1, marginBottom:12, color:accent, fontVariantNumeric:"tabular-nums" }}>
+                  <AnimatedStat n={s.n} accent={accent} />
+                </div>
                 <div style={{ fontSize:13, color:"var(--ink-dim)", lineHeight:1.45 }}>{s.l}</div>
               </div>
             </Reveal>
