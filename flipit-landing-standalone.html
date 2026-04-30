@@ -299,16 +299,31 @@ const BANNER_H_DESKTOP = 38;
 const BANNER_H_MOBILE = 52;
 const BANNER_H = typeof window !== 'undefined' && window.innerWidth < 600 ? BANNER_H_MOBILE : BANNER_H_DESKTOP;
 
-function BetaBanner({ accent, lang, onClose }) {
+function BetaBanner({ accent, lang, onClose, onHeightChange }) {
   const [scrolled, setScrolled] = useState(false);
+  const bannerRef = useRef(null);
+
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", fn);
     return () => window.removeEventListener("scroll", fn);
   }, []);
+
+  // Measure real height and report it up
+  useEffect(() => {
+    const el = bannerRef.current;
+    if (!el || !onHeightChange) return;
+    const obs = new ResizeObserver(() => {
+      onHeightChange(el.offsetHeight);
+    });
+    obs.observe(el);
+    onHeightChange(el.offsetHeight);
+    return () => obs.disconnect();
+  }, []);
+
   const c = COPY[lang].beta;
   return (
-    <div style={{ position:"fixed", top:0, left:0, right:0, zIndex:200, minHeight:BANNER_H_DESKTOP, background: scrolled ? "rgba(10,9,6,0.97)" : `linear-gradient(90deg,${accent}18,${accent}08)`, backdropFilter: scrolled ? "blur(14px)" : "none", WebkitBackdropFilter: scrolled ? "blur(14px)" : "none", borderBottom: `1px solid ${scrolled ? "rgba(245,238,221,0.12)" : accent+"33"}`, transition:"background 0.3s, border-color 0.3s", padding:"6px 12px", display:"flex", alignItems:"center", justifyContent:"center", gap:8, fontSize:11.5, fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.02em", flexWrap:"wrap" }}>
+    <div ref={bannerRef} style={{ position:"fixed", top:0, left:0, right:0, zIndex:200, background: scrolled ? "rgba(10,9,6,0.97)" : `linear-gradient(90deg,${accent}18,${accent}08)`, backdropFilter: scrolled ? "blur(14px)" : "none", WebkitBackdropFilter: scrolled ? "blur(14px)" : "none", borderBottom: `1px solid ${scrolled ? "rgba(245,238,221,0.12)" : accent+"33"}`, transition:"background 0.3s, border-color 0.3s", padding:"8px 12px", display:"flex", alignItems:"center", justifyContent:"center", gap:8, fontSize:11.5, fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.02em", flexWrap:"wrap" }}>
       <span style={{ padding:"2px 8px", background:accent, color:"#0a0906", fontSize:10, fontWeight:700, letterSpacing:"0.15em", borderRadius:4, flexShrink:0 }}>BETA</span>
       <span style={{ color:"var(--ink-dim)", textAlign:"center", lineHeight:1.4 }}>{c.msg}</span>
       <a href={`mailto:${c.email}`} onClick={e=>{e.preventDefault();}} style={{ color:accent, borderBottom:`1px solid ${accent}55`, flexShrink:0, whiteSpace:"nowrap" }}>{c.email}</a>
@@ -1035,13 +1050,8 @@ function App() {
   const [bannerClosed, setBannerClosed] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const bannerVisible = !bannerClosed;
-  const [winW, setWinW] = useState(typeof window !== 'undefined' ? window.innerWidth : 1280);
-  useEffect(() => {
-    const fn = () => setWinW(window.innerWidth);
-    window.addEventListener("resize", fn);
-    return () => window.removeEventListener("resize", fn);
-  }, []);
-  const bannerOffset = bannerVisible ? (winW < 600 ? 52 : 38) : 0;
+  const [bannerHeight, setBannerHeight] = useState(38);
+  const bannerOffset = bannerVisible ? bannerHeight : 0;
 
   useEffect(() => {
     document.documentElement.style.setProperty("--accent", accent);
@@ -1073,7 +1083,7 @@ function App() {
 
   return (
     <>
-      {bannerVisible && <BetaBanner accent={accent} lang={lang} onClose={() => setBannerClosed(true)} />}
+      {bannerVisible && <BetaBanner accent={accent} lang={lang} onClose={() => setBannerClosed(true)} onHeightChange={setBannerHeight} />}
       {contactOpen && <ContactModal lang={lang} accent={accent} onClose={() => setContactOpen(false)} />}
       <div style={{ paddingTop: bannerOffset }}>
         <Nav lang={lang} setLang={setLang} bannerOffset={bannerOffset} onContactClick={openContact} />
