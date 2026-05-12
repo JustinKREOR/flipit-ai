@@ -4,6 +4,7 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/landing", "destination": "/landing.html" },
+    { "source": "/waitlist", "destination": "/waitlist-standalone.html" },
     { "source": "/privacy", "destination": "/privacy-standalone.html" },
     { "source": "/terms", "destination": "/terms-standalone.html" },
     { "source": "/cookies", "destination": "/cookies-standalone.html" },
