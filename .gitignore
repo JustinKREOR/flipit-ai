@@ -31,3 +31,22 @@ desktop.ini
 dist/
 build/
 .cache/
+
+# Internal planning / non-site assets (not for public repo)
+*.pptx
+*.docx
+*.xlsx
+
+# Email campaign assets (used externally, not by the site)
+email-*.html
+email-*-apercu.pdf
+flipit-email-*.zip
+flipit-icon-wordmark.png
+flipit-logo-bimi.svg
+flipit-logo-email.png
+
+# Marketing visuals not referenced by site HTML
+mockup_*.png
+notif-*.png
+social-card-*.png
+photos/

@@ -48,7 +48,7 @@ const COPY = {
   fr: {
     nav:{ features:"Fonctionnalités", how:"Comment ça marche", pricing:"Tarifs", faq:"FAQ", support:"Support", download:"Télécharger" },
     hero:{ tag:"SCANNER DE MARKETPLACE · 24/7", ta:"Soyez le ", tb:"premier", tc:" sur chaque deal.", sub:"FlipIt AI scanne Facebook Marketplace, Kijiji et Craigslist sans relâche. Dès qu'une annonce sous-évaluée correspond à vos critères, vous recevez la notification. Avant tout le monde.", ctaSub:"Gratuit à télécharger · Abonnement requis pour les alertes" },
-    beta:{ msg:"Bug majeur trouvé ? Récompense en jours d'abonnement gratuits →", email:"bugs@flipitapp.ai" },
+    beta:{ msg:"Sortie publique le 15 juillet 2026 sur l'App Store · Une question ?", email:"support@flipitapp.ai" },
     how:{ eyebrow:"— WORKFLOW", title:"Trois étapes. Aucune recherche manuelle.", steps:[
       { num:"01", title:"Créez votre profil de recherche", body:"Catégorie, mots-clés, prix max, rayon géographique. Aussi précis que vous voulez.", tag:"Configurer" },
       { num:"02", title:"L'IA scanne en continu", body:"Notre moteur analyse chaque nouvelle annonce en quelques secondes, compare au marché, et filtre les vraies opportunités.", tag:"24/7" },
@@ -101,7 +101,7 @@ const COPY = {
   en:{
     nav:{ features:"Features", how:"How it works", pricing:"Pricing", faq:"FAQ", support:"Support", download:"Download" },
     hero:{ tag:"MARKETPLACE SCANNER · 24/7", ta:"Be the ", tb:"first", tc:" on every deal.", sub:"FlipIt AI scans Facebook Marketplace, Kijiji and Craigslist non-stop. The moment an underpriced listing matches your criteria, you get the notification. Before anyone else.", ctaSub:"Free to download · Subscription required for alerts" },
-    beta:{ msg:"Found a major bug? Get free subscription days as a reward →", email:"bugs@flipitapp.ai" },
+    beta:{ msg:"Public launch July 15, 2026 on the App Store · Questions?", email:"support@flipitapp.ai" },
     how:{ eyebrow:"— WORKFLOW", title:"Three steps. Zero manual searching.", steps:[
       { num:"01", title:"Create your search profile", body:"Category, keywords, max price, geographic radius. As precise as you want.", tag:"Setup" },
       { num:"02", title:"AI scans continuously", body:"Our engine analyzes every new listing in seconds, benchmarks against the market, and filters the real opportunities.", tag:"24/7" },
@@ -1087,9 +1087,7 @@ function App() {
       const text = a.textContent || "";
       if (
         href === "mailto:support@flipitapp.ai" ||
-        href === "mailto:bugs@flipitapp.ai" ||
-        text.includes("support@flipitapp.ai") ||
-        text.includes("bugs@flipitapp.ai")
+        text.includes("support@flipitapp.ai")
       ) {
         e.preventDefault();
         setContactOpen(true);

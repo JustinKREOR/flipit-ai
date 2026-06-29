@@ -39,8 +39,8 @@ function BetaBanner({ accent, lang, onClose }) {
           ? "Bug majeur trouvé ? Récompense en jours d'abonnement gratuits →"
           : "Found a major bug? Get free subscription days as a reward →"}
       </span>
-      <a href="mailto:bugs@flipitapp.ai" style={{ color: accent, borderBottom: `1px solid ${accent}55`, flexShrink: 0, whiteSpace: "nowrap" }}>
-        bugs@flipitapp.ai
+      <a href="mailto:support@flipitapp.ai" style={{ color: accent, borderBottom: `1px solid ${accent}55`, flexShrink: 0, whiteSpace: "nowrap" }}>
+        support@flipitapp.ai
       </a>
       <button onClick={onClose} style={{
         marginLeft: 4,
