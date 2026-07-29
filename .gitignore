@@ -57,3 +57,14 @@ mockup_*.png
 notif-*.png
 social-card-*.png
 photos/
+
+# Outil d'envoi de courriels — mot de passe, journal des envois, config (NE JAMAIS publier)
+Envoi-courriels/
+Tracking-ouvertures/
+*mdp*.txt
+*password*.txt
+*mot*passe*.txt
+
+# Fichiers techniques Python
+__pycache__/
+*.pyc
