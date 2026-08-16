@@ -3,11 +3,6 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" href="/favicon.ico" sizes="any" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
-<meta name="theme-color" content="#aee83d" />
 <title>FlipIt AI — Soyez le premier sur chaque deal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -181,15 +176,15 @@ function Btn({ children, href="#", primary, icon, style }) {
   );
 }
 const APPLE_URL = "https://apps.apple.com/ca/app/flipit-ai/id6770477370?l=fr-CA";
-const ANDROID_MAILTO = "mailto:support@flipitapp.ai?subject=Android%20Internal%20Testing%20-%20FlipIt%20AI&body=Bonjour%2C%20j'aimerais%20participer%20au%20test%20interne%20Android%20de%20FlipIt%20AI.%20Voici%20mon%20adresse%20Google%20(Gmail)%20%3A%20";
+const ANDROID_URL = null;
 function StoreBtn({ ios, lang="fr" }) {
-  const href = ios ? APPLE_URL : ANDROID_MAILTO;
+  const href = ios ? APPLE_URL : undefined;
   const topLabel = ios
     ? (lang==="fr" ? "TÉLÉCHARGER SUR" : "DOWNLOAD ON THE")
-    : (lang==="fr" ? "BIENTÔT · TEST INTERNE" : "SOON · INTERNAL TESTING");
+    : (lang==="fr" ? "DÈS LE 25 AOÛT 2026" : "AVAILABLE AUG 25, 2026");
   const mainLabel = ios ? "App Store" : "Google Play";
   return (
-    <a href={href} {...(ios ? { target:"_blank", rel:"noopener noreferrer" } : {})} title={ios ? undefined : (lang==="fr" ? "Rejoindre le test interne Android — écrivez-nous" : "Join the Android internal test — email us")} style={{ display:"inline-flex", alignItems:"center", gap:12, padding:"12px 22px", background:"#0a0906", color:"var(--ink)", border:"1px solid var(--line2)", borderRadius:14, transition:"all 0.2s", textDecoration:"none", minWidth:180, opacity: ios ? 1 : 0.82 }}
+    <a href={href} {...(ios ? { target:"_blank", rel:"noopener noreferrer" } : {})} title={ios ? undefined : (lang==="fr" ? "Version officielle Android disponible dès le 25 août 2026" : "Official Android release available August 25, 2026")} style={{ display:"inline-flex", alignItems:"center", gap:12, padding:"12px 22px", background:"#0a0906", color:"var(--ink)", border:"1px solid var(--line2)", borderRadius:14, transition:"all 0.2s", textDecoration:"none", minWidth:180, opacity: ios ? 1 : 0.82 }}
       onMouseEnter={e=>{ e.currentTarget.style.borderColor="var(--accent)"; e.currentTarget.style.transform="translateY(-2px)"; e.currentTarget.style.opacity=1; }}
       onMouseLeave={e=>{ e.currentTarget.style.borderColor="var(--line2)"; e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.opacity= ios ? 1 : 0.82; }}
     >
@@ -436,8 +431,8 @@ function Hero({ lang, accent }) {
               <div style={{ fontSize:12, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.03em" }}>{c.ctaSub}</div>
               <div style={{ marginTop:12, fontSize:12.5, color:"var(--ink-dim)", lineHeight:1.5, maxWidth:440 }}>
                 {lang==="fr"
-                  ? <>📱 Android arrive bientôt (test interne en cours). Pour y participer, écrivez-nous à <a href="mailto:support@flipitapp.ai?subject=Android%20Internal%20Testing%20-%20FlipIt%20AI" style={{ color:"var(--accent)", borderBottom:"1px solid rgba(174,232,61,0.4)" }}>support@flipitapp.ai</a>.</>
-                  : <>📱 Android coming soon (internal testing in progress). To join, email us at <a href="mailto:support@flipitapp.ai?subject=Android%20Internal%20Testing%20-%20FlipIt%20AI" style={{ color:"var(--accent)", borderBottom:"1px solid rgba(174,232,61,0.4)" }}>support@flipitapp.ai</a>.</>}
+                  ? <>📱 Le test interne Google Play est complété. La version officielle Android sera disponible d'ici le <strong style={{ color:"var(--accent)", fontWeight:600 }}>25 août 2026</strong>.</>
+                  : <>📱 Google Play internal testing is complete. The official Android release will be available by <strong style={{ color:"var(--accent)", fontWeight:600 }}>August 25, 2026</strong>.</>}
               </div>
             </Reveal>
             <Reveal delay={400}>
@@ -835,8 +830,8 @@ function Footer({ lang, accent }) {
               </div>
               <div style={{ fontSize:12.5, color:"var(--ink-dim)", lineHeight:1.6, maxWidth:440, margin:"0 auto 40px", textWrap:"pretty" }}>
                 {lang==="fr"
-                  ? <>📱 Android arrive bientôt — test interne en cours.<br/>Pour y participer : <a href="mailto:support@flipitapp.ai?subject=Android%20Internal%20Testing%20-%20FlipIt%20AI" style={{ color:"var(--accent)", borderBottom:"1px solid rgba(174,232,61,0.4)", whiteSpace:"nowrap" }}>support@flipitapp.ai</a></>
-                  : <>📱 Android coming soon — internal testing underway.<br/>To join: <a href="mailto:support@flipitapp.ai?subject=Android%20Internal%20Testing%20-%20FlipIt%20AI" style={{ color:"var(--accent)", borderBottom:"1px solid rgba(174,232,61,0.4)", whiteSpace:"nowrap" }}>support@flipitapp.ai</a></>}
+                  ? <>📱 Le test interne Google Play est complété.<br/>Version officielle Android d'ici le <strong style={{ color:"var(--accent)", fontWeight:600, whiteSpace:"nowrap" }}>25 août 2026</strong>.</>
+                  : <>📱 Google Play internal testing is complete.<br/>Official Android release by <strong style={{ color:"var(--accent)", fontWeight:600, whiteSpace:"nowrap" }}>August 25, 2026</strong>.</>}
               </div>
               <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:14, flexWrap:"wrap", paddingTop:24, borderTop:"1px solid var(--line)" }}>
                 <span style={{ fontSize:12, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.08em", textTransform:"uppercase" }}>{lang==="fr"?"Pas encore lancé ?":"Not launched yet?"}</span>
