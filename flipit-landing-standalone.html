@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="FlipIt AI" />
 <meta property="og:url" content="https://flipitapp.ai/" />
 <meta property="og:title" content="FlipIt AI — Soyez le premier sur chaque deal" />
-<meta property="og:description" content="FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist 24/7. Recevez les alertes sur les annonces sous-évaluées avant tout le monde. Bientôt Leboncoin (FR) et Gumtree (UK)." />
+<meta property="og:description" content="FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist 24/7. Recevez les alertes sur les annonces sous-évaluées avant tout le monde. Bientôt eBay, OfferUp (US), Leboncoin (FR), Gumtree (UK)." />
 <meta property="og:image" content="https://flipitapp.ai/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -28,7 +28,7 @@
 <meta property="og:locale:alternate" content="en_GB" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="FlipIt AI — Soyez le premier sur chaque deal" />
-<meta name="twitter:description" content="FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist 24/7. Recevez les alertes sur les annonces sous-évaluées avant tout le monde. Bientôt Leboncoin (FR) et Gumtree (UK)." />
+<meta name="twitter:description" content="FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist 24/7. Recevez les alertes sur les annonces sous-évaluées avant tout le monde. Bientôt eBay, OfferUp (US), Leboncoin (FR), Gumtree (UK)." />
 <meta name="twitter:image" content="https://flipitapp.ai/og-image.png" />
 <title>FlipIt AI — Soyez le premier sur chaque deal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -163,7 +163,7 @@ body::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:10px;}
       "name": "Sur quelles marketplaces ça fonctionne ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Facebook Marketplace, Kijiji et Craigslist au lancement (Canada et États-Unis). Leboncoin (France) et Gumtree (Royaume-Uni) arrivent bientôt."
+        "text": "Facebook Marketplace, Kijiji et Craigslist au lancement (Canada et États-Unis). Ajouts prochains : eBay (international) et OfferUp (États-Unis) très bientôt, puis Leboncoin (France) et Gumtree (Royaume-Uni)."
       }
     },
     {
@@ -266,7 +266,7 @@ const COPY = {
     ]},
     faq:{ eyebrow:"— QUESTIONS", title:"Tout ce qu'il faut savoir.", list:[
       { q:"C'est vraiment en temps réel ?", a:"Oui. Notre infrastructure surveille les marketplaces 24/7 et les nouvelles annonces sont analysées sous 30 secondes. Dès qu'une annonce correspond à votre profil, vous recevez une notification push." },
-      { q:"Sur quelles marketplaces ça fonctionne ?", a:"Facebook Marketplace, Kijiji et Craigslist au lancement (Canada et États-Unis). Leboncoin (France) et Gumtree (Royaume-Uni) arrivent bientôt." }, { q:"Est-ce que FlipIt AI fait du scraping ?", a:"Non. FlipIt AI ne pratique aucune extraction non autorisée des plateformes. Les données publiques que nous analysons sont obtenues via des canaux autorisés d'accès aux données." },
+      { q:"Sur quelles marketplaces ça fonctionne ?", a:"Facebook Marketplace, Kijiji et Craigslist au lancement (Canada et États-Unis). Ajouts prochains : eBay (international) et OfferUp (États-Unis) très bientôt, puis Leboncoin (France) et Gumtree (Royaume-Uni)." }, { q:"Est-ce que FlipIt AI fait du scraping ?", a:"Non. FlipIt AI ne pratique aucune extraction non autorisée des plateformes. Les données publiques que nous analysons sont obtenues via des canaux autorisés d'accès aux données." },
       { q:"Quelle est la différence entre Starter et Pro ?", a:"Starter (24 $/mois) : 1 profil de recherche. Pro (79 $/mois) : jusqu'à 5 profils parallèles, notifications prioritaires, détection avancée et historique illimité." },
       { q:"L'app est en bêta — qu'est-ce que ça veut dire ?", a:"L'IA apprend encore à mieux détecter vos préférences. Il peut y avoir des bugs. Tout bug majeur signalé à l'équipe est récompensé avec des jours d'abonnement gratuits." },
       { q:"Je peux annuler quand je veux ?", a:"Oui, aucun engagement. Annulation en un clic depuis l'app. Le premier mois est remboursé si vous ne recevez aucune alerte pertinente." },
@@ -320,7 +320,7 @@ const COPY = {
     ]},
     faq:{ eyebrow:"— QUESTIONS", title:"Everything you need to know.", list:[
       { q:"Is it truly real-time?", a:"Yes. Our infrastructure monitors marketplaces 24/7 and new listings are analyzed within 30 seconds. As soon as a listing matches your profile, you receive a push notification." },
-      { q:"Which marketplaces does it cover?", a:"Facebook Marketplace, Kijiji and Craigslist at launch (Canada and USA). Leboncoin (France) and Gumtree (United Kingdom) coming soon." }, { q:"Does FlipIt AI scrape the platforms?", a:"No. FlipIt AI does not engage in unauthorized data extraction. The public data we analyze is obtained through authorized access channels." },
+      { q:"Which marketplaces does it cover?", a:"Facebook Marketplace, Kijiji and Craigslist at launch (Canada and USA). Coming next: eBay (worldwide) and OfferUp (USA) very soon, then Leboncoin (France) and Gumtree (United Kingdom)." }, { q:"Does FlipIt AI scrape the platforms?", a:"No. FlipIt AI does not engage in unauthorized data extraction. The public data we analyze is obtained through authorized access channels." },
       { q:"What's the difference between Starter and Pro?", a:"Starter ($24/month): 1 search profile. Pro ($79/month): up to 5 parallel profiles, priority notifications, advanced detection and unlimited history." },
       { q:"The app is in beta — what does that mean?", a:"The AI is still learning your preferences. There may be bugs. Any major bug reported to the team is rewarded with free subscription days." },
       { q:"Can I cancel anytime?", a:"Yes, no commitment. Cancel in one click from the app. First month refunded if you receive no relevant alerts." },
@@ -631,8 +631,8 @@ function Hero({ lang, accent }) {
               </div>
               <div style={{ marginTop:10, fontSize:12.5, color:"var(--ink-dim)", lineHeight:1.5, maxWidth:440 }}>
                 {lang==="fr"
-                  ? <>🌍 Bientôt disponible : <strong style={{ color:"var(--ink)", fontWeight:600 }}>Leboncoin</strong> (France) · <strong style={{ color:"var(--ink)", fontWeight:600 }}>Gumtree</strong> (Royaume-Uni)</>
-                  : <>🌍 Coming soon: <strong style={{ color:"var(--ink)", fontWeight:600 }}>Leboncoin</strong> (France) · <strong style={{ color:"var(--ink)", fontWeight:600 }}>Gumtree</strong> (United Kingdom)</>}
+                  ? <>🌍 Bientôt : <strong style={{ color:"var(--ink)", fontWeight:600 }}>eBay</strong> (international) · <strong style={{ color:"var(--ink)", fontWeight:600 }}>OfferUp</strong> (États-Unis) · <strong style={{ color:"var(--ink)", fontWeight:600 }}>Leboncoin</strong> (France) · <strong style={{ color:"var(--ink)", fontWeight:600 }}>Gumtree</strong> (Royaume-Uni)</>
+                  : <>🌍 Coming soon: <strong style={{ color:"var(--ink)", fontWeight:600 }}>eBay</strong> (worldwide) · <strong style={{ color:"var(--ink)", fontWeight:600 }}>OfferUp</strong> (USA) · <strong style={{ color:"var(--ink)", fontWeight:600 }}>Leboncoin</strong> (France) · <strong style={{ color:"var(--ink)", fontWeight:600 }}>Gumtree</strong> (United Kingdom)</>}
               </div>
             </Reveal>
             <Reveal delay={400}>
