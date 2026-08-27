@@ -42,6 +42,36 @@
   </url>
 
   <url>
+    <loc>https://flipitapp.ai/alertes-marketplace</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://flipitapp.ai/alertes-marketplace"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://flipitapp.ai/alertes-marketplace"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://flipitapp.ai/alertes-marketplace"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flipitapp.ai/marketplace-alerts"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://flipitapp.ai/marketplace-alerts"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://flipitapp.ai/marketplace-alerts"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://flipitapp.ai/marketplace-alerts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flipitapp.ai/marketplace-alerts"/>
+  </url>
+
+  <url>
+    <loc>https://flipitapp.ai/marketplace-alerts</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flipitapp.ai/marketplace-alerts"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://flipitapp.ai/marketplace-alerts"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://flipitapp.ai/marketplace-alerts"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://flipitapp.ai/marketplace-alerts"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://flipitapp.ai/alertes-marketplace"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://flipitapp.ai/alertes-marketplace"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://flipitapp.ai/alertes-marketplace"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flipitapp.ai/marketplace-alerts"/>
+  </url>
+
+  <url>
     <loc>https://flipitapp.ai/privacy</loc>
     <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
