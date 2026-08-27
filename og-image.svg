@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0906"/>
+      <stop offset="100%" stop-color="#181510"/>
+    </linearGradient>
+    <linearGradient id="logo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#aee83d"/>
+      <stop offset="100%" stop-color="#c8f050"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5">
+      <stop offset="0%" stop-color="#aee83d" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#aee83d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <ellipse cx="1000" cy="150" rx="500" ry="300" fill="url(#glow)"/>
+  <ellipse cx="200" cy="500" rx="400" ry="250" fill="url(#glow)"/>
+
+  <g transform="translate(80,80)">
+    <rect width="90" height="90" rx="20" ry="20" fill="url(#logo)"/>
+    <path d="M14 45 H30 L42 12 L54 78 L66 45 H82"
+          fill="none" stroke="#0a0906" stroke-width="8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="200" y="140" font-family="'Space Grotesk','Helvetica Neue',Arial,sans-serif" font-size="52" font-weight="600" fill="#f5eedd">FlipIt <tspan fill="#aee83d">AI</tspan></text>
+
+  <text x="80" y="330" font-family="'Space Grotesk','Helvetica Neue',Arial,sans-serif" font-size="76" font-weight="500" fill="#f5eedd">Be the <tspan fill="#aee83d" font-style="italic">first</tspan></text>
+  <text x="80" y="410" font-family="'Space Grotesk','Helvetica Neue',Arial,sans-serif" font-size="76" font-weight="500" fill="#f5eedd">on every deal.</text>
+
+  <text x="80" y="500" font-family="'Space Grotesk','Helvetica Neue',Arial,sans-serif" font-size="26" font-weight="400" fill="#a89f89">Smart monitor · Facebook Marketplace · Kijiji · Craigslist</text>
+
+  <g transform="translate(80,555)">
+    <circle cx="6" cy="6" r="6" fill="#aee83d"/>
+    <text x="24" y="12" font-family="'JetBrains Mono','Consolas',monospace" font-size="18" fill="#aee83d">LIVE · 24/7</text>
+  </g>
+
+  <text x="1120" y="600" font-family="'JetBrains Mono','Consolas',monospace" font-size="18" fill="#6e6754" text-anchor="end">flipitapp.ai</text>
+</svg>

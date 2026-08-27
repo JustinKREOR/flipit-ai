@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block internal / dev / marketing assets that shouldn't be indexed
+Disallow: /uploads/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://flipitapp.ai/sitemap.xml
