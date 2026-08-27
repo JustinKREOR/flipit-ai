@@ -12,12 +12,16 @@
     { "source": "/waitlist-standalone.html", "destination": "/", "permanent": true },
     { "source": "/waitlist.html", "destination": "/", "permanent": true },
     { "source": "/waitlist", "destination": "/", "permanent": true },
+    { "source": "/alertes-kijiji.html", "destination": "/alertes-kijiji", "permanent": true },
+    { "source": "/kijiji-alerts.html", "destination": "/kijiji-alerts", "permanent": true },
     { "source": "/flipit-landing-standalone.html", "destination": "/", "permanent": true },
     { "source": "/landing.html", "destination": "/landing", "permanent": true },
     { "source": "/index.html", "destination": "/", "permanent": true }
   ],
   "rewrites": [
     { "source": "/landing", "destination": "/landing.html" },
+    { "source": "/alertes-kijiji", "destination": "/alertes-kijiji.html" },
+    { "source": "/kijiji-alerts", "destination": "/kijiji-alerts.html" },
     { "source": "/privacy", "destination": "/privacy-standalone.html" },
     { "source": "/terms", "destination": "/terms-standalone.html" },
     { "source": "/cookies", "destination": "/cookies-standalone.html" },

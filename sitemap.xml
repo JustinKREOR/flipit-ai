@@ -18,6 +18,30 @@
   </url>
 
   <url>
+    <loc>https://flipitapp.ai/alertes-kijiji</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://flipitapp.ai/alertes-kijiji"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://flipitapp.ai/alertes-kijiji"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flipitapp.ai/kijiji-alerts"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://flipitapp.ai/kijiji-alerts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flipitapp.ai/kijiji-alerts"/>
+  </url>
+
+  <url>
+    <loc>https://flipitapp.ai/kijiji-alerts</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flipitapp.ai/kijiji-alerts"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://flipitapp.ai/kijiji-alerts"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://flipitapp.ai/alertes-kijiji"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://flipitapp.ai/alertes-kijiji"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flipitapp.ai/kijiji-alerts"/>
+  </url>
+
+  <url>
     <loc>https://flipitapp.ai/privacy</loc>
     <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
