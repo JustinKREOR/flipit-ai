@@ -226,7 +226,7 @@ const COPY = {
     meta:{ title:"FlipIt AI — Soyez le premier sur chaque deal", desc:"FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist 24/7. Recevez les alertes sur les annonces sous-évaluées avant tout le monde." },
     nav:{ features:"Fonctionnalités", how:"Comment ça marche", pricing:"Tarifs", faq:"FAQ", support:"Support", download:"Télécharger" },
     hero:{ tag:"SCANNER DE MARKETPLACE · 24/7", ta:"Soyez le ", tb:"premier", tc:" sur chaque deal.", sub:"FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist sans relâche. Dès qu'une annonce sous-évaluée correspond à vos critères, vous recevez la notification. Avant tout le monde.", ctaSub:"Gratuit à télécharger · Abonnement requis pour les alertes" },
-    beta:{ msg:"Sortie publique le 15 juillet 2026 sur l'App Store · Une question ?", email:"support@flipitapp.ai" },
+    beta:{ msg:"FlipIt AI est en bêta · Téléchargez sur l'App Store · Une question ?", email:"support@flipitapp.ai" },
     how:{ eyebrow:"— WORKFLOW", title:"Trois étapes. Aucune recherche manuelle.", steps:[
       { num:"01", title:"Créez votre profil de recherche", body:"Catégorie, mots-clés, prix max, rayon géographique. Aussi précis que vous voulez.", tag:"Configurer" },
       { num:"02", title:"L'IA surveille en continu", body:"Notre moteur analyse chaque nouvelle annonce en quelques secondes, compare au marché, et filtre les vraies opportunités.", tag:"24/7" },
@@ -280,7 +280,7 @@ const COPY = {
     meta:{ title:"FlipIt AI — Be the first on every deal", desc:"FlipIt AI monitors Facebook Marketplace, Kijiji and Craigslist 24/7. Get alerts on underpriced listings before anyone else." },
     nav:{ features:"Features", how:"How it works", pricing:"Pricing", faq:"FAQ", support:"Support", download:"Download" },
     hero:{ tag:"MARKETPLACE SCANNER · 24/7", ta:"Be the ", tb:"first", tc:" on every deal.", sub:"FlipIt AI monitors Facebook Marketplace, Kijiji and Craigslist non-stop. The moment an underpriced listing matches your criteria, you get the notification. Before anyone else.", ctaSub:"Free to download · Subscription required for alerts" },
-    beta:{ msg:"Public launch July 15, 2026 on the App Store · Questions?", email:"support@flipitapp.ai" },
+    beta:{ msg:"FlipIt AI is in beta · Download on the App Store · Questions?", email:"support@flipitapp.ai" },
     how:{ eyebrow:"— WORKFLOW", title:"Three steps. Zero manual searching.", steps:[
       { num:"01", title:"Create your search profile", body:"Category, keywords, max price, geographic radius. As precise as you want.", tag:"Setup" },
       { num:"02", title:"AI monitors continuously", body:"Our engine analyzes every new listing in seconds, benchmarks against the market, and filters the real opportunities.", tag:"24/7" },
@@ -377,7 +377,7 @@ function StoreBtn({ ios, lang="fr" }) {
     : (lang==="fr" ? "DÈS LE 25 AOÛT 2026" : "AVAILABLE AUG 25, 2026");
   const mainLabel = ios ? "App Store" : "Google Play";
   return (
-    <a href={href} {...(ios ? { target:"_blank", rel:"noopener noreferrer" } : {})} title={ios ? undefined : (lang==="fr" ? "Version officielle Android disponible dès le 25 août 2026" : "Official Android release available August 25, 2026")} style={{ display:"inline-flex", alignItems:"center", gap:12, padding:"12px 22px", background:"#0a0906", color:"var(--ink)", border:"1px solid var(--line2)", borderRadius:14, transition:"all 0.2s", textDecoration:"none", minWidth:180, opacity: ios ? 1 : 0.82 }}
+    <a href={href} {...(ios ? { target:"_blank", rel:"noopener noreferrer" } : {})} title={ios ? undefined : (lang==="fr" ? "Version officielle Android en approche" : "Official Android release coming soon")} style={{ display:"inline-flex", alignItems:"center", gap:12, padding:"12px 22px", background:"#0a0906", color:"var(--ink)", border:"1px solid var(--line2)", borderRadius:14, transition:"all 0.2s", textDecoration:"none", minWidth:180, opacity: ios ? 1 : 0.82 }}
       onMouseEnter={e=>{ e.currentTarget.style.borderColor="var(--accent)"; e.currentTarget.style.transform="translateY(-2px)"; e.currentTarget.style.opacity=1; }}
       onMouseLeave={e=>{ e.currentTarget.style.borderColor="var(--line2)"; e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.opacity= ios ? 1 : 0.82; }}
     >
@@ -562,12 +562,6 @@ function Nav({ lang, setLang, bannerOffset, onContactClick }) {
             ))}
           </div>
           <div className="fi-download-btn" style={{ display:"flex", gap:8 }}>
-            <a href="/waitlist" style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"10px 16px", borderRadius:999, background:"rgba(174,232,61,0.10)", color:"var(--accent)", border:"1px solid rgba(174,232,61,0.4)", fontWeight:600, fontSize:13, transition:"all 0.2s" }}
-              onMouseEnter={e=>{ e.currentTarget.style.background="rgba(174,232,61,0.18)"; e.currentTarget.style.transform="translateY(-1px)"; }}
-              onMouseLeave={e=>{ e.currentTarget.style.background="rgba(174,232,61,0.10)"; e.currentTarget.style.transform="translateY(0)"; }}>
-              <span style={{ width:6, height:6, borderRadius:999, background:"var(--accent)", boxShadow:"0 0 8px var(--accent)" }} />
-              {lang==="fr"?"Waitlist":"Waitlist"}
-            </a>
             <Btn href="#download" primary icon={IC_DL} style={{ padding:"10px 18px", fontSize:14 }}>{c.download}</Btn>
           </div>
         </div>
@@ -579,11 +573,7 @@ function Nav({ lang, setLang, bannerOffset, onContactClick }) {
       {open && (
         <div style={{ background:"rgba(10,9,6,0.98)", backdropFilter:"blur(20px)", borderTop:"1px solid var(--line)", padding:"20px 32px", display:"flex", flexDirection:"column", gap:14 }}>
           {links.map(([h,l]) => <a key={h} href={h} onClick={(e)=>{ setOpen(false); if(h==="#contact"){ onContactClick && onContactClick(e); } }} style={{ fontSize:16, color:"var(--ink)", padding:"8px 0" }}>{l}</a>)}
-          <a href="/waitlist" style={{ fontSize:16, color:"var(--accent)", padding:"10px 14px", borderRadius:10, background:"rgba(174,232,61,0.10)", border:"1px solid rgba(174,232,61,0.35)", fontWeight:600, display:"inline-flex", alignItems:"center", gap:8, alignSelf:"flex-start" }}>
-            <span style={{ width:6, height:6, borderRadius:999, background:"var(--accent)", boxShadow:"0 0 8px var(--accent)" }} />
-            {lang==="fr"?"Rejoindre la waitlist":"Join the waitlist"}
-          </a>
-          <div style={{ display:"flex", gap:10, paddingTop:8, borderTop:"1px solid var(--line)", marginTop:4 }}>
+<div style={{ display:"flex", gap:10, paddingTop:8, borderTop:"1px solid var(--line)", marginTop:4 }}>
             <StoreBtn ios lang={lang} /><StoreBtn lang={lang} />
           </div>
         </div>
@@ -626,8 +616,8 @@ function Hero({ lang, accent }) {
               <div style={{ fontSize:12, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.03em" }}>{c.ctaSub}</div>
               <div style={{ marginTop:12, fontSize:12.5, color:"var(--ink-dim)", lineHeight:1.5, maxWidth:440 }}>
                 {lang==="fr"
-                  ? <>📱 Le test interne Google Play est complété. La version officielle Android sera disponible d'ici le <strong style={{ color:"var(--accent)", fontWeight:600 }}>25 août 2026</strong>.</>
-                  : <>📱 Google Play internal testing is complete. The official Android release will be available by <strong style={{ color:"var(--accent)", fontWeight:600 }}>August 25, 2026</strong>.</>}
+                  ? <>📱 Le test interne Google Play est complété. Version officielle Android <strong style={{ color:"var(--accent)", fontWeight:600 }}>en approche</strong>.</>
+                  : <>📱 Google Play internal testing is complete. Official Android release <strong style={{ color:"var(--accent)", fontWeight:600 }}>coming soon</strong>.</>}
               </div>
               <div style={{ marginTop:10, fontSize:12.5, color:"var(--ink-dim)", lineHeight:1.5, maxWidth:440 }}>
                 {lang==="fr"
@@ -1030,18 +1020,8 @@ function Footer({ lang, accent }) {
               </div>
               <div style={{ fontSize:12.5, color:"var(--ink-dim)", lineHeight:1.6, maxWidth:440, margin:"0 auto 40px", textWrap:"pretty" }}>
                 {lang==="fr"
-                  ? <>📱 Le test interne Google Play est complété.<br/>Version officielle Android d'ici le <strong style={{ color:"var(--accent)", fontWeight:600, whiteSpace:"nowrap" }}>25 août 2026</strong>.</>
-                  : <>📱 Google Play internal testing is complete.<br/>Official Android release by <strong style={{ color:"var(--accent)", fontWeight:600, whiteSpace:"nowrap" }}>August 25, 2026</strong>.</>}
-              </div>
-              <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:14, flexWrap:"wrap", paddingTop:24, borderTop:"1px solid var(--line)" }}>
-                <span style={{ fontSize:12, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.08em", textTransform:"uppercase" }}>{lang==="fr"?"Pas encore lancé ?":"Not launched yet?"}</span>
-                <a href="/waitlist" style={{ display:"inline-flex", alignItems:"center", gap:10, padding:"11px 22px", borderRadius:999, background:"rgba(174,232,61,0.12)", color:"var(--accent)", border:"1px solid rgba(174,232,61,0.45)", fontWeight:600, fontSize:14, transition:"all 0.2s" }}
-                  onMouseEnter={e=>{ e.currentTarget.style.background="var(--accent)"; e.currentTarget.style.color="#0a0906"; e.currentTarget.style.transform="translateY(-2px)"; }}
-                  onMouseLeave={e=>{ e.currentTarget.style.background="rgba(174,232,61,0.12)"; e.currentTarget.style.color="var(--accent)"; e.currentTarget.style.transform="translateY(0)"; }}>
-                  <span style={{ width:7, height:7, borderRadius:999, background:"currentColor", boxShadow:"0 0 8px currentColor" }} />
-                  {lang==="fr"?"Rejoindre la waitlist":"Join the waitlist"}
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
+                  ? <>📱 Le test interne Google Play est complété.<br/>Version officielle Android <strong style={{ color:"var(--accent)", fontWeight:600, whiteSpace:"nowrap" }}>en approche</strong>.</>
+                  : <>📱 Google Play internal testing is complete.<br/>Official Android release <strong style={{ color:"var(--accent)", fontWeight:600, whiteSpace:"nowrap" }}>coming soon</strong>.</>}
               </div>
             </div>
           </Reveal>
