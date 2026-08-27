@@ -1106,7 +1106,7 @@ function App() {
 
   // Update document title, html lang, and meta description on lang change
   useEffect(() => {
-    const meta = (copy[lang] && copy[lang].meta) || {};
+    const meta = (COPY[lang] && COPY[lang].meta) || {};
     if (meta.title) document.title = meta.title;
     document.documentElement.lang = lang;
     const d = document.getElementById("meta-desc");
