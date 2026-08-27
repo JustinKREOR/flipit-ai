@@ -19,7 +19,7 @@ const COPY = {
       title_a: "Soyez le ",
       title_b: "premier",
       title_c: " sur chaque deal.",
-      sub: "FlipIt AI scanne Facebook Marketplace, Kijiji et Craigslist sans relâche. Dès qu'une annonce sous-évaluée correspond à vos critères, vous recevez la notification. Avant tout le monde.",
+      sub: "FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist sans relâche. Dès qu'une annonce sous-évaluée correspond à vos critères, vous recevez la notification. Avant tout le monde.",
       cta_app: "App Store",
       cta_play: "Google Play",
       cta_sub: "Gratuit à télécharger · Abonnement requis pour les alertes",
@@ -38,7 +38,7 @@ const COPY = {
         },
         {
           num: "02",
-          title: "L'IA scanne en continu",
+          title: "L'IA surveille en continu",
           body: "Notre moteur analyse chaque nouvelle annonce en quelques secondes, compare au marché, et filtre les vraies opportunités.",
           tag: "24/7",
         },
@@ -169,11 +169,15 @@ const COPY = {
       list: [
         {
           q: "C'est vraiment en temps réel ?",
-          a: "Oui. Notre infrastructure scanne les marketplaces 24/7 et les nouvelles annonces sont analysées sous 30 secondes. Dès qu'une annonce correspond à votre profil, vous recevez une notification push.",
+          a: "Oui. Notre infrastructure surveille les marketplaces 24/7 et les nouvelles annonces sont analysées sous 30 secondes. Dès qu'une annonce correspond à votre profil, vous recevez une notification push.",
         },
         {
           q: "Sur quelles marketplaces ça fonctionne ?",
           a: "Facebook Marketplace, Kijiji et Craigslist. D'autres plateformes arriveront après la sortie de bêta.",
+        },
+        {
+          q: "Est-ce que FlipIt AI fait du scraping ?",
+          a: "Non. FlipIt AI ne pratique aucune extraction non autorisée des plateformes. Les données publiques que nous analysons sont obtenues via des canaux autorisés d'accès aux données.",
         },
         {
           q: "Quelle est la différence entre Starter et Pro ?",
@@ -219,7 +223,7 @@ const COPY = {
       title_a: "Be the ",
       title_b: "first",
       title_c: " on every deal.",
-      sub: "FlipIt AI scans Facebook Marketplace, Kijiji and Craigslist non-stop. The moment an underpriced listing matches your criteria, you get the notification. Before anyone else.",
+      sub: "FlipIt AI monitors Facebook Marketplace, Kijiji and Craigslist non-stop. The moment an underpriced listing matches your criteria, you get the notification. Before anyone else.",
       cta_app: "App Store",
       cta_play: "Google Play",
       cta_sub: "Free to download · Subscription required for alerts",
@@ -231,7 +235,7 @@ const COPY = {
       title: "Three steps. Zero manual searching.",
       steps: [
         { num: "01", title: "Create your search profile", body: "Category, keywords, max price, geographic radius. As precise as you want.", tag: "Setup" },
-        { num: "02", title: "AI scans continuously", body: "Our engine analyzes every new listing in seconds, benchmarks against the market, and filters the real opportunities.", tag: "24/7" },
+        { num: "02", title: "AI monitors continuously", body: "Our engine analyzes every new listing in seconds, benchmarks against the market, and filters the real opportunities.", tag: "24/7" },
         { num: "03", title: "Get the real-time alert", body: "Instant push notification with a direct link. You're the first to contact the seller.", tag: "< 30s" },
       ],
     },
@@ -308,8 +312,9 @@ const COPY = {
       eyebrow: "— QUESTIONS",
       title: "Everything you need to know.",
       list: [
-        { q: "Is it truly real-time?", a: "Yes. Our infrastructure scans marketplaces 24/7 and new listings are analyzed within 30 seconds. As soon as a listing matches your profile, you receive a push notification." },
+        { q: "Is it truly real-time?", a: "Yes. Our infrastructure monitors marketplaces 24/7 and new listings are analyzed within 30 seconds. As soon as a listing matches your profile, you receive a push notification." },
         { q: "Which marketplaces does it cover?", a: "Facebook Marketplace, Kijiji and Craigslist. More platforms will be added after the beta period." },
+        { q: "Does FlipIt AI scrape the platforms?", a: "No. FlipIt AI does not engage in unauthorized data extraction. The public data we analyze is obtained through authorized access channels." },
         { q: "What's the difference between Starter and Pro?", a: "Starter ($24/month): 1 search profile. Pro ($79/month): up to 5 parallel profiles, priority notifications, advanced undervalue detection and unlimited history." },
         { q: "The app is in beta — what does that mean?", a: "The AI is still learning to better detect your preferences. There may be bugs. Any major bug reported to the team is rewarded with free subscription days." },
         { q: "Can I cancel anytime?", a: "Yes, no commitment. Cancel in one click from the app. First month refunded if you receive no relevant alerts." },

@@ -57,6 +57,18 @@ mockup_*.png
 notif-*.png
 social-card-*.png
 photos/
+App Store Screenshots/
+instagram-*.png
+instagram-*-template*.html
+story-*.png
+square-*.png
+flipit-logo-email-*.png
+
+# Internal prototypes / dev handoff / scope docs (never in public repo)
+Refonte UI/
+FlipIt_AI_Phase_*.pdf
+FlipIt_AI_dev_handoff*.pdf
+FlipIt_AI_remise_*.pdf
 
 # Outil d'envoi de courriels — mot de passe, journal des envois, config (NE JAMAIS publier)
 Envoi-courriels/

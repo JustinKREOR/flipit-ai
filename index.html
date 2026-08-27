@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" id="meta-desc" content="FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist 24/7. Recevez les alertes sur les annonces sous-évaluées avant tout le monde." />
 <title>FlipIt AI — Soyez le premier sur chaque deal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,12 +42,13 @@ const { useState, useEffect, useRef } = React;
 /* ─── COPY ─────────────────────────────────────────────────────────────── */
 const COPY = {
   fr: {
+    meta:{ title:"FlipIt AI — Soyez le premier sur chaque deal", desc:"FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist 24/7. Recevez les alertes sur les annonces sous-évaluées avant tout le monde." },
     nav:{ features:"Fonctionnalités", how:"Comment ça marche", pricing:"Tarifs", faq:"FAQ", support:"Support", download:"Télécharger" },
-    hero:{ tag:"SCANNER DE MARKETPLACE · 24/7", ta:"Soyez le ", tb:"premier", tc:" sur chaque deal.", sub:"FlipIt AI scanne Facebook Marketplace, Kijiji et Craigslist sans relâche. Dès qu'une annonce sous-évaluée correspond à vos critères, vous recevez la notification. Avant tout le monde.", ctaSub:"Gratuit à télécharger · Abonnement requis pour les alertes" },
+    hero:{ tag:"SCANNER DE MARKETPLACE · 24/7", ta:"Soyez le ", tb:"premier", tc:" sur chaque deal.", sub:"FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist sans relâche. Dès qu'une annonce sous-évaluée correspond à vos critères, vous recevez la notification. Avant tout le monde.", ctaSub:"Gratuit à télécharger · Abonnement requis pour les alertes" },
     beta:{ msg:"Sortie publique le 15 juillet 2026 sur l'App Store · Une question ?", email:"support@flipitapp.ai" },
     how:{ eyebrow:"— WORKFLOW", title:"Trois étapes. Aucune recherche manuelle.", steps:[
       { num:"01", title:"Créez votre profil de recherche", body:"Catégorie, mots-clés, prix max, rayon géographique. Aussi précis que vous voulez.", tag:"Configurer" },
-      { num:"02", title:"L'IA scanne en continu", body:"Notre moteur analyse chaque nouvelle annonce en quelques secondes, compare au marché, et filtre les vraies opportunités.", tag:"24/7" },
+      { num:"02", title:"L'IA surveille en continu", body:"Notre moteur analyse chaque nouvelle annonce en quelques secondes, compare au marché, et filtre les vraies opportunités.", tag:"24/7" },
       { num:"03", title:"Recevez l'alerte en temps réel", body:"Notification push instantanée avec le lien direct. Vous êtes le premier à contacter le vendeur.", tag:"< 30s" },
     ]},
     features:{ eyebrow:"— CAPACITÉS", title:"Conçu pour agir vite.", list:[
@@ -82,24 +84,25 @@ const COPY = {
       { name:"Pro", price:"79", period:"/ mois", desc:"Pour les flippers sérieux et chasseurs multi-catégories.", features:["Jusqu'à 5 profils de recherche","Notifications prioritaires (plus rapides)","Accès aux 3 marketplaces","Historique illimité & export","Détection de sous-évaluation avancée","Support prioritaire"], cta:"Passer Pro", highlight:true, tag:"LE PLUS POPULAIRE" },
     ]},
     faq:{ eyebrow:"— QUESTIONS", title:"Tout ce qu'il faut savoir.", list:[
-      { q:"C'est vraiment en temps réel ?", a:"Oui. Notre infrastructure scanne les marketplaces 24/7 et les nouvelles annonces sont analysées sous 30 secondes. Dès qu'une annonce correspond à votre profil, vous recevez une notification push." },
-      { q:"Sur quelles marketplaces ça fonctionne ?", a:"Facebook Marketplace, Kijiji et Craigslist. D'autres plateformes arriveront après la sortie de bêta." },
+      { q:"C'est vraiment en temps réel ?", a:"Oui. Notre infrastructure surveille les marketplaces 24/7 et les nouvelles annonces sont analysées sous 30 secondes. Dès qu'une annonce correspond à votre profil, vous recevez une notification push." },
+      { q:"Sur quelles marketplaces ça fonctionne ?", a:"Facebook Marketplace, Kijiji et Craigslist. D'autres plateformes arriveront après la sortie de bêta." }, { q:"Est-ce que FlipIt AI fait du scraping ?", a:"Non. FlipIt AI ne pratique aucune extraction non autorisée des plateformes. Les données publiques que nous analysons sont obtenues via des canaux autorisés d'accès aux données." },
       { q:"Quelle est la différence entre Starter et Pro ?", a:"Starter (24 $/mois) : 1 profil de recherche. Pro (79 $/mois) : jusqu'à 5 profils parallèles, notifications prioritaires, détection avancée et historique illimité." },
       { q:"L'app est en bêta — qu'est-ce que ça veut dire ?", a:"L'IA apprend encore à mieux détecter vos préférences. Il peut y avoir des bugs. Tout bug majeur signalé à l'équipe est récompensé avec des jours d'abonnement gratuits." },
       { q:"Je peux annuler quand je veux ?", a:"Oui, aucun engagement. Annulation en un clic depuis l'app. Le premier mois est remboursé si vous ne recevez aucune alerte pertinente." },
       { q:"Quelles zones géographiques sont couvertes ?", a:"Canada (toutes les grandes villes) et États-Unis au lancement. Paramétrez un rayon autour de votre ville pour des résultats locaux." },
     ]},
     footer:{ tagline:"Soyez le premier sur chaque deal.", copy:"© 2026 FlipIt AI. Tous droits réservés.", madein:"Conçu au Québec 🇨🇦",
-      sections:{ product:{ title:"Produit", links:[["Fonctionnalités","#features"],["Tarifs","#pricing"],["Comment ça marche","#how"],["FAQ","#faq"]] }, company:{ title:"Entreprise", links:[["À propos","#"],["Contact","mailto:support@flipitapp.ai"],["Blog","#"],["Carrières","#"]] }, legal:{ title:"Légal", links:[["Politique de confidentialité","privacy-standalone.html"],["Termes et conditions","terms-standalone.html"],["Cookies","cookies-standalone.html"],["Mentions légales","mentions-legales-standalone.html"]] } }
+      sections:{ product:{ title:"Produit", links:[["Fonctionnalités","#features"],["Tarifs","#pricing"],["Comment ça marche","#how"],["FAQ","#faq"]] }, company:{ title:"Entreprise", links:[["À propos","#"],["Contact","mailto:support@flipitapp.ai"],["Blog","#"],["Carrières","#"]] }, legal:{ title:"Légal", links:[["Politique de confidentialité","/privacy"],["Termes et conditions","/terms"],["Cookies","/cookies"],["Mentions légales","/mentions-legales"]] } }
     },
   },
   en:{
+    meta:{ title:"FlipIt AI — Be the first on every deal", desc:"FlipIt AI monitors Facebook Marketplace, Kijiji and Craigslist 24/7. Get alerts on underpriced listings before anyone else." },
     nav:{ features:"Features", how:"How it works", pricing:"Pricing", faq:"FAQ", support:"Support", download:"Download" },
-    hero:{ tag:"MARKETPLACE SCANNER · 24/7", ta:"Be the ", tb:"first", tc:" on every deal.", sub:"FlipIt AI scans Facebook Marketplace, Kijiji and Craigslist non-stop. The moment an underpriced listing matches your criteria, you get the notification. Before anyone else.", ctaSub:"Free to download · Subscription required for alerts" },
+    hero:{ tag:"MARKETPLACE SCANNER · 24/7", ta:"Be the ", tb:"first", tc:" on every deal.", sub:"FlipIt AI monitors Facebook Marketplace, Kijiji and Craigslist non-stop. The moment an underpriced listing matches your criteria, you get the notification. Before anyone else.", ctaSub:"Free to download · Subscription required for alerts" },
     beta:{ msg:"Public launch July 15, 2026 on the App Store · Questions?", email:"support@flipitapp.ai" },
     how:{ eyebrow:"— WORKFLOW", title:"Three steps. Zero manual searching.", steps:[
       { num:"01", title:"Create your search profile", body:"Category, keywords, max price, geographic radius. As precise as you want.", tag:"Setup" },
-      { num:"02", title:"AI scans continuously", body:"Our engine analyzes every new listing in seconds, benchmarks against the market, and filters the real opportunities.", tag:"24/7" },
+      { num:"02", title:"AI monitors continuously", body:"Our engine analyzes every new listing in seconds, benchmarks against the market, and filters the real opportunities.", tag:"24/7" },
       { num:"03", title:"Get the real-time alert", body:"Instant push notification with a direct link. You're the first to contact the seller.", tag:"< 30s" },
     ]},
     features:{ eyebrow:"— CAPABILITIES", title:"Built to act fast.", list:[
@@ -135,27 +138,36 @@ const COPY = {
       { name:"Pro", price:"79", period:"/ month", desc:"For serious flippers and multi-category hunters.", features:["Up to 5 search profiles","Priority notifications (faster)","Access to all 3 marketplaces","Unlimited history & export","Advanced undervalue detection","Priority support"], cta:"Go Pro", highlight:true, tag:"MOST POPULAR" },
     ]},
     faq:{ eyebrow:"— QUESTIONS", title:"Everything you need to know.", list:[
-      { q:"Is it truly real-time?", a:"Yes. Our infrastructure scans marketplaces 24/7 and new listings are analyzed within 30 seconds. As soon as a listing matches your profile, you receive a push notification." },
-      { q:"Which marketplaces does it cover?", a:"Facebook Marketplace, Kijiji and Craigslist. More platforms will be added after the beta period." },
+      { q:"Is it truly real-time?", a:"Yes. Our infrastructure monitors marketplaces 24/7 and new listings are analyzed within 30 seconds. As soon as a listing matches your profile, you receive a push notification." },
+      { q:"Which marketplaces does it cover?", a:"Facebook Marketplace, Kijiji and Craigslist. More platforms will be added after the beta period." }, { q:"Does FlipIt AI scrape the platforms?", a:"No. FlipIt AI does not engage in unauthorized data extraction. The public data we analyze is obtained through authorized access channels." },
       { q:"What's the difference between Starter and Pro?", a:"Starter ($24/month): 1 search profile. Pro ($79/month): up to 5 parallel profiles, priority notifications, advanced detection and unlimited history." },
       { q:"The app is in beta — what does that mean?", a:"The AI is still learning your preferences. There may be bugs. Any major bug reported to the team is rewarded with free subscription days." },
       { q:"Can I cancel anytime?", a:"Yes, no commitment. Cancel in one click from the app. First month refunded if you receive no relevant alerts." },
       { q:"Which geographic areas are covered?", a:"Canada (all major cities) and the United States at launch. Set a radius around your city for local results." },
     ]},
     footer:{ tagline:"Be the first on every deal.", copy:"© 2026 FlipIt AI. All rights reserved.", madein:"Built in Quebec 🇨🇦",
-      sections:{ product:{ title:"Product", links:[["Features","#features"],["Pricing","#pricing"],["How it works","#how"],["FAQ","#faq"]] }, company:{ title:"Company", links:[["About","#"],["Contact","mailto:support@flipitapp.ai"],["Blog","#"],["Careers","#"]] }, legal:{ title:"Legal", links:[["Privacy Policy","privacy-standalone.html"],["Terms and Conditions","terms-standalone.html"],["Cookies","cookies-standalone.html"],["Legal notices","mentions-legales-standalone.html"]] } }
+      sections:{ product:{ title:"Product", links:[["Features","#features"],["Pricing","#pricing"],["How it works","#how"],["FAQ","#faq"]] }, company:{ title:"Company", links:[["About","#"],["Contact","mailto:support@flipitapp.ai"],["Blog","#"],["Careers","#"]] }, legal:{ title:"Legal", links:[["Privacy Policy","/privacy"],["Terms and Conditions","/terms"],["Cookies","/cookies"],["Legal notices","/mentions-legales"]] } }
     },
   },
 };
 
 /* ─── NOTIF DATA ────────────────────────────────────────────────────────── */
-const NOTIFS = [
-  { cat:"🪑 Mobilier", title:"Canapé cuir italien — 450 $", sub:"Marché estimé 1 200 $ · -62%", time:"À l'instant", platform:"FB Marketplace" },
-  { cat:"📱 Électronique", title:"iPhone 15 Pro 256GB — 720 $", sub:"Marché estimé 1 050 $ · -31%", time:"12s", platform:"Kijiji" },
-  { cat:"🚴 Vélo", title:"Cervélo carbone R5 — 890 $", sub:"Marché estimé 2 400 $ · -63%", time:"47s", platform:"Craigslist" },
-  { cat:"🛠️ Outillage", title:"Compresseur DeWalt 60gal — 380 $", sub:"Marché estimé 799 $ · -52%", time:"1m", platform:"FB Marketplace" },
-  { cat:"📸 Photo", title:"Canon R6 + 24-70 2.8 — 2100 $", sub:"Marché estimé 3 500 $ · -40%", time:"2m", platform:"Kijiji" },
-];
+const NOTIFS_BY_LANG = {
+  fr: [
+    { cat:"🪑 Mobilier", title:"Canapé cuir italien — 450 $", sub:"Marché estimé 1 200 $ · -62%", time:"À l'instant", platform:"FB Marketplace" },
+    { cat:"📱 Électronique", title:"iPhone 15 Pro 256GB — 720 $", sub:"Marché estimé 1 050 $ · -31%", time:"12s", platform:"Kijiji" },
+    { cat:"🚴 Vélo", title:"Cervélo carbone R5 — 890 $", sub:"Marché estimé 2 400 $ · -63%", time:"47s", platform:"Craigslist" },
+    { cat:"🛠️ Outillage", title:"Compresseur DeWalt 60gal — 380 $", sub:"Marché estimé 799 $ · -52%", time:"1m", platform:"FB Marketplace" },
+    { cat:"📸 Photo", title:"Canon R6 + 24-70 2.8 — 2100 $", sub:"Marché estimé 3 500 $ · -40%", time:"2m", platform:"Kijiji" },
+  ],
+  en: [
+    { cat:"🪑 Furniture", title:"Italian leather sofa — $450", sub:"Est. market $1,200 · -62%", time:"Just now", platform:"FB Marketplace" },
+    { cat:"📱 Electronics", title:"iPhone 15 Pro 256GB — $720", sub:"Est. market $1,050 · -31%", time:"12s", platform:"Kijiji" },
+    { cat:"🚴 Bike", title:"Cervélo carbon R5 — $890", sub:"Est. market $2,400 · -63%", time:"47s", platform:"Craigslist" },
+    { cat:"🛠️ Tools", title:"DeWalt 60gal compressor — $380", sub:"Est. market $799 · -52%", time:"1m", platform:"FB Marketplace" },
+    { cat:"📸 Photo", title:"Canon R6 + 24-70 2.8 — $2,100", sub:"Est. market $3,500 · -40%", time:"2m", platform:"Kijiji" },
+  ],
+};
 
 /* ─── PRIMITIVES ────────────────────────────────────────────────────────── */
 function Eyebrow({ children, style }) {
@@ -225,8 +237,10 @@ const IC_DL = <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke
 const IC_CHECK = <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{flexShrink:0,marginTop:2}}><polyline points="20 6 9 17 4 12"/></svg>;
 
 /* ─── PHONE MOCKUP ──────────────────────────────────────────────────────── */
-function PhoneMockup({ accent }) {
+function PhoneMockup({ accent, lang="fr" }) {
+  const NOTIFS = NOTIFS_BY_LANG[lang] || NOTIFS_BY_LANG.fr;
   const [notifs, setNotifs] = useState([NOTIFS[0], NOTIFS[1], NOTIFS[2]]);
+  useEffect(() => { const arr = NOTIFS_BY_LANG[lang] || NOTIFS_BY_LANG.fr; setNotifs([arr[0], arr[1], arr[2]]); }, [lang]);
   const idxRef = useRef(3);
   const [time, setTime] = useState("");
   useEffect(() => {
@@ -269,8 +283,8 @@ function PhoneMockup({ accent }) {
               <span style={{ width:6, height:6, borderRadius:999, background:accent, boxShadow:`0 0 12px ${accent}`, animation:"blink 1.2s infinite" }} />
               FLIPIT · LIVE
             </div>
-            <div style={{ fontSize:20, fontWeight:600, letterSpacing:"-0.02em", color:"#f5eedd" }}>Nouvelles offres</div>
-            <div style={{ fontSize:10, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", marginTop:3 }}>3 plateformes · 24/7</div>
+            <div style={{ fontSize:20, fontWeight:600, letterSpacing:"-0.02em", color:"#f5eedd" }}>{lang==="fr"?"Nouvelles offres":"New deals"}</div>
+            <div style={{ fontSize:10, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", marginTop:3 }}>{lang==="fr"?"3 plateformes · 24/7":"3 platforms · 24/7"}</div>
           </div>
           {/* scan sweep */}
           <div style={{ position:"absolute", left:0, right:0, top:130, height:36, background:`linear-gradient(180deg,transparent,${accent}20,transparent)`, animation:"scan-sweep 3.5s linear infinite", pointerEvents:"none" }} />
@@ -367,7 +381,7 @@ function Nav({ lang, setLang, bannerOffset, onContactClick }) {
             ))}
           </div>
           <div className="fi-download-btn" style={{ display:"flex", gap:8 }}>
-            <a href="waitlist-standalone.html" style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"10px 16px", borderRadius:999, background:"rgba(174,232,61,0.10)", color:"var(--accent)", border:"1px solid rgba(174,232,61,0.4)", fontWeight:600, fontSize:13, transition:"all 0.2s" }}
+            <a href="/waitlist" style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"10px 16px", borderRadius:999, background:"rgba(174,232,61,0.10)", color:"var(--accent)", border:"1px solid rgba(174,232,61,0.4)", fontWeight:600, fontSize:13, transition:"all 0.2s" }}
               onMouseEnter={e=>{ e.currentTarget.style.background="rgba(174,232,61,0.18)"; e.currentTarget.style.transform="translateY(-1px)"; }}
               onMouseLeave={e=>{ e.currentTarget.style.background="rgba(174,232,61,0.10)"; e.currentTarget.style.transform="translateY(0)"; }}>
               <span style={{ width:6, height:6, borderRadius:999, background:"var(--accent)", boxShadow:"0 0 8px var(--accent)" }} />
@@ -384,7 +398,7 @@ function Nav({ lang, setLang, bannerOffset, onContactClick }) {
       {open && (
         <div style={{ background:"rgba(10,9,6,0.98)", backdropFilter:"blur(20px)", borderTop:"1px solid var(--line)", padding:"20px 32px", display:"flex", flexDirection:"column", gap:14 }}>
           {links.map(([h,l]) => <a key={h} href={h} onClick={(e)=>{ setOpen(false); if(h==="#contact"){ onContactClick && onContactClick(e); } }} style={{ fontSize:16, color:"var(--ink)", padding:"8px 0" }}>{l}</a>)}
-          <a href="waitlist-standalone.html" style={{ fontSize:16, color:"var(--accent)", padding:"10px 14px", borderRadius:10, background:"rgba(174,232,61,0.10)", border:"1px solid rgba(174,232,61,0.35)", fontWeight:600, display:"inline-flex", alignItems:"center", gap:8, alignSelf:"flex-start" }}>
+          <a href="/waitlist" style={{ fontSize:16, color:"var(--accent)", padding:"10px 14px", borderRadius:10, background:"rgba(174,232,61,0.10)", border:"1px solid rgba(174,232,61,0.35)", fontWeight:600, display:"inline-flex", alignItems:"center", gap:8, alignSelf:"flex-start" }}>
             <span style={{ width:6, height:6, borderRadius:999, background:"var(--accent)", boxShadow:"0 0 8px var(--accent)" }} />
             {lang==="fr"?"Rejoindre la waitlist":"Join the waitlist"}
           </a>
@@ -444,7 +458,7 @@ function Hero({ lang, accent }) {
             </Reveal>
           </div>
           <div className="fi-hero-phone" style={{ display:"flex", justifyContent:"center" }}>
-            <Reveal delay={200}><PhoneMockup accent={accent} /></Reveal>
+            <Reveal delay={200}><PhoneMockup lang={lang} accent={accent} /></Reveal>
           </div>
         </div>
       </div>
@@ -458,7 +472,7 @@ function StepVisual({ idx, accent }) {
   if (idx === 0) {
     return (
       <div style={{ display:"flex", flexDirection:"column", gap:6, marginTop:24 }}>
-        {[["Catégorie","Vélos · Route"],["Prix max","1 200 $"],["Rayon","50 km · Montréal"],["Mots-clés","carbone, Shimano"]].map(([k,v],i) => (
+        {(lang==="fr" ? [["Catégorie","Vélos · Route"],["Prix max","1 200 $"],["Rayon","50 km · Montréal"],["Mots-clés","carbone, Shimano"]] : [["Category","Bikes · Road"],["Max price","$1,200"],["Radius","50 km · Montreal"],["Keywords","carbon, Shimano"]]).map(([k,v],i) => (
           <div key={i} style={{ display:"flex", justifyContent:"space-between", padding:"9px 12px", background:"rgba(245,238,221,0.03)", border:"1px solid var(--line)", borderRadius:8, fontFamily:"'JetBrains Mono',monospace", fontSize:11 }}>
             <span style={{ color:"var(--ink-mute)" }}>{k}</span>
             <span style={{ color:"var(--ink)" }}>{v}</span>
@@ -472,17 +486,17 @@ function StepVisual({ idx, accent }) {
       <div style={{ position:"relative", height:120, marginTop:24, background:"#070604", border:"1px solid var(--line)", borderRadius:10, overflow:"hidden", fontFamily:"'JetBrains Mono',monospace", fontSize:11 }}>
         <div style={{ position:"absolute", left:0, right:0, top:0, height:18, background:`linear-gradient(180deg,${accent}44,transparent)`, animation:"scan-sweep 2.5s linear infinite" }} />
         <div style={{ padding:"12px 14px", color:"var(--ink-mute)", lineHeight:1.8 }}>
-          <div>[fb] scan annonce #8224...</div>
-          <div style={{ color:"var(--ok)" }}>[ok] marché estimé 1 200$</div>
-          <div style={{ color:accent }}>[!] sous-évaluée -62%</div>
-          <div>[push] envoi notification...</div>
+          <div>{lang==="fr"?"[fb] scan annonce #8224...":"[fb] scan listing #8224..."}</div>
+          <div style={{ color:"var(--ok)" }}>{lang==="fr"?"[ok] marché estimé 1 200$":"[ok] est. market $1,200"}</div>
+          <div style={{ color:accent }}>{lang==="fr"?"[!] sous-évaluée -62%":"[!] underpriced -62%"}</div>
+          <div>{lang==="fr"?"[push] envoi notification...":"[push] sending notification..."}</div>
         </div>
       </div>
     );
   }
   return (
     <div style={{ marginTop:24, background:`linear-gradient(135deg,${accent}22,${accent}08)`, border:`1px solid ${accent}55`, borderRadius:14, padding:"14px 16px" }}>
-      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, color:accent, letterSpacing:"0.08em", marginBottom:6 }}>FLIPIT AI · À L'INSTANT</div>
+      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, color:accent, letterSpacing:"0.08em", marginBottom:6 }}>{lang==="fr"?"FLIPIT AI · À L'INSTANT":"FLIPIT AI · JUST NOW"}</div>
       <div style={{ fontSize:14, fontWeight:600, color:"var(--ink)", marginBottom:3 }}>Nouvelle alerte — Vélo route</div>
       <div style={{ fontSize:12, color:"var(--ink-dim)" }}>Cervélo R5 carbone · 890 $ · -63%</div>
     </div>
@@ -835,7 +849,7 @@ function Footer({ lang, accent }) {
               </div>
               <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:14, flexWrap:"wrap", paddingTop:24, borderTop:"1px solid var(--line)" }}>
                 <span style={{ fontSize:12, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.08em", textTransform:"uppercase" }}>{lang==="fr"?"Pas encore lancé ?":"Not launched yet?"}</span>
-                <a href="waitlist-standalone.html" style={{ display:"inline-flex", alignItems:"center", gap:10, padding:"11px 22px", borderRadius:999, background:"rgba(174,232,61,0.12)", color:"var(--accent)", border:"1px solid rgba(174,232,61,0.45)", fontWeight:600, fontSize:14, transition:"all 0.2s" }}
+                <a href="/waitlist" style={{ display:"inline-flex", alignItems:"center", gap:10, padding:"11px 22px", borderRadius:999, background:"rgba(174,232,61,0.12)", color:"var(--accent)", border:"1px solid rgba(174,232,61,0.45)", fontWeight:600, fontSize:14, transition:"all 0.2s" }}
                   onMouseEnter={e=>{ e.currentTarget.style.background="var(--accent)"; e.currentTarget.style.color="#0a0906"; e.currentTarget.style.transform="translateY(-2px)"; }}
                   onMouseLeave={e=>{ e.currentTarget.style.background="rgba(174,232,61,0.12)"; e.currentTarget.style.color="var(--accent)"; e.currentTarget.style.transform="translateY(0)"; }}>
                   <span style={{ width:7, height:7, borderRadius:999, background:"currentColor", boxShadow:"0 0 8px currentColor" }} />
@@ -850,7 +864,7 @@ function Footer({ lang, accent }) {
         <div className="fi-footer-grid" style={{ display:"grid", gridTemplateColumns:"1.4fr 1fr 1fr 1fr", gap:36, paddingBottom:56, borderBottom:"1px solid var(--line)" }}>
           <div>
             <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:14 }}><LogoMark /><span style={{ fontWeight:600, fontSize:17, letterSpacing:"-0.02em" }}>FlipIt <span style={{ color:accent }}>AI</span></span></div>
-            <p style={{ fontSize:14, color:"var(--ink-dim)", lineHeight:1.55, margin:0, maxWidth:260 }}>{lang==="fr"?"Scanner intelligent pour Facebook Marketplace, Kijiji et Craigslist.":"Smart scanner for Facebook Marketplace, Kijiji and Craigslist."}</p>
+            <p style={{ fontSize:14, color:"var(--ink-dim)", lineHeight:1.55, margin:0, maxWidth:260 }}>{lang==="fr"?"Détecteur intelligent pour Facebook Marketplace, Kijiji et Craigslist.":"Smart monitor for Facebook Marketplace, Kijiji and Craigslist."}</p>
           </div>
           {Object.entries(c.sections).map(([key,sec]) => (
             <div key={key}>
@@ -867,8 +881,8 @@ function Footer({ lang, accent }) {
         <div style={{ paddingTop:28, display:"flex", justifyContent:"space-between", alignItems:"center", gap:16, flexWrap:"wrap", fontSize:13, color:"var(--ink-mute)", fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.02em" }}>
           <div>{c.copy}</div>
           <div style={{ display:"flex", gap:20, alignItems:"center" }}>
-            <a href="privacy-standalone.html" style={{ color:"var(--ink-mute)" }}>{lang==="fr"?"Confidentialité":"Privacy"}</a>
-            <a href="terms-standalone.html" style={{ color:"var(--ink-mute)" }}>{lang==="fr"?"Termes":"Terms"}</a>
+            <a href="/privacy" style={{ color:"var(--ink-mute)" }}>{lang==="fr"?"Confidentialité":"Privacy"}</a>
+            <a href="/terms" style={{ color:"var(--ink-mute)" }}>{lang==="fr"?"Termes":"Terms"}</a>
             <span>{c.madein}</span>
           </div>
         </div>
@@ -1089,6 +1103,15 @@ function App() {
     document.documentElement.style.setProperty("--accent", accent);
     document.documentElement.style.setProperty("--accent2", "#c8f050");
   }, [accent]);
+
+  // Update document title, html lang, and meta description on lang change
+  useEffect(() => {
+    const meta = (copy[lang] && copy[lang].meta) || {};
+    if (meta.title) document.title = meta.title;
+    document.documentElement.lang = lang;
+    const d = document.getElementById("meta-desc");
+    if (d && meta.desc) d.setAttribute("content", meta.desc);
+  }, [lang]);
 
   // Intercept mailto: and support link clicks globally
   useEffect(() => {

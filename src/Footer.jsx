@@ -66,7 +66,7 @@ function Footer({ lang, accent }) {
               }}>FlipIt <span style={{ color: accent }}>AI</span></span>
             </div>
             <p style={{ fontSize: 14, color: "var(--ink-dim)", lineHeight: 1.55, margin: 0, maxWidth: 280 }}>
-              Scanner intelligent pour Facebook Marketplace, Kijiji et Craigslist. Soyez le premier sur chaque bonne affaire.
+              Détecteur intelligent pour Facebook Marketplace, Kijiji et Craigslist. Soyez le premier sur chaque bonne affaire.
             </p>
           </div>
 
@@ -84,8 +84,8 @@ function Footer({ lang, accent }) {
                 {sec.links.map((l, i) => {
                   // Resolve href
                   let href = "#";
-                  if (l === "Politique de confidentialité") href = "privacy.html";
-                  else if (l === "Termes et conditions") href = "terms.html";
+                  if (l === "Politique de confidentialité") href = "/privacy";
+                  else if (l === "Termes et conditions") href = "/terms";
                   else if (l === "Fonctionnalités") href = "#features";
                   else if (l === "Tarifs") href = "#pricing";
                   else if (l === "Comment ça marche") href = "#how";
@@ -124,8 +124,8 @@ function Footer({ lang, accent }) {
         }}>
           <div>{c.copy}</div>
           <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-            <a href="privacy.html" style={{ color: "var(--ink-mute)" }}>Confidentialité</a>
-            <a href="terms.html" style={{ color: "var(--ink-mute)" }}>Termes</a>
+            <a href="/privacy" style={{ color: "var(--ink-mute)" }}>Confidentialité</a>
+            <a href="/terms" style={{ color: "var(--ink-mute)" }}>Termes</a>
             <span>{c.madein}</span>
           </div>
         </div>

@@ -111,7 +111,7 @@ function App(){
       <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:100,padding:"14px 32px",background:scrolled?"rgba(10,9,6,0.92)":"transparent",backdropFilter:scrolled?"blur(14px)":"none",borderBottom:scrolled?"1px solid var(--line)":"1px solid transparent",transition:"all 0.3s",display:"flex",alignItems:"center",gap:12}}>
         <LogoMark/>
         <span style={{fontWeight:600,fontSize:17,letterSpacing:"-0.02em"}}>FlipIt <span style={{color:"var(--accent)"}}>AI</span></span>
-        <a href="flipit-landing-standalone.html" style={{fontSize:13,color:"var(--ink-dim)",border:"none",display:"flex",alignItems:"center",gap:6,fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.04em"}}>
+        <a href="/" style={{fontSize:13,color:"var(--ink-dim)",border:"none",display:"flex",alignItems:"center",gap:6,fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.04em"}}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
           {lang==="fr"?"Accueil":"Home"}
         </a>
@@ -161,10 +161,10 @@ function App(){
       <div style={{borderTop:"1px solid var(--line)",padding:"28px 32px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16,fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink-mute)"}}>
         <span>© 2026 FlipIt AI Inc.</span>
         <div style={{display:"flex",gap:20}}>
-          <a href="privacy-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Privacy</a>
-          <a href="terms-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Terms</a>
-          <a href="cookies-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Cookies</a>
-          <a href="mentions-legales-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>{lang==="fr"?"Mentions légales":"Legal notices"}</a>
+          <a href="/privacy" style={{color:"var(--ink-mute)",border:"none"}}>Privacy</a>
+          <a href="/terms" style={{color:"var(--ink-mute)",border:"none"}}>Terms</a>
+          <a href="/cookies" style={{color:"var(--ink-mute)",border:"none"}}>Cookies</a>
+          <a href="/mentions-legales" style={{color:"var(--ink-mute)",border:"none"}}>{lang==="fr"?"Mentions légales":"Legal notices"}</a>
         </div>
       </div>
     </div>

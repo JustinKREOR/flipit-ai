@@ -36,7 +36,7 @@ const COPY = {
       {num:"03",title:"Aucun conseil financier",body:"FlipIt AI ne fournit AUCUN conseil financier, légal ou d'investissement. Toutes les décisions prises sur la base des informations fournies par l'application sont de la responsabilité exclusive de l'utilisateur."},
       {num:"04",title:"Aucune garantie",list:["L'exactitude des informations","La profitabilité des opportunités détectées","La disponibilité continue du service","La rapidité des alertes"]},
       {num:"05",title:"Transactions externes",callout:"CRITIQUE — FlipIt AI n'est PAS impliqué dans les transactions entre utilisateurs et vendeurs. Nous déclinons toute responsabilité concernant les rencontres physiques, transactions Marketplace, fraudes, vols, blessures, agressions ou tout autre incident. Vous assumez 100 % des risques liés à toute transaction."},
-      {num:"06",title:"Plateformes tierces",body:"FlipIt AI dépend de plateformes externes (Facebook Marketplace, Kijiji, Craigslist, etc.). Nous ne sommes pas responsables de leur contenu, de leur disponibilité, ni des changements qu'elles peuvent apporter à leurs services."},
+      {num:"06",title:"Plateformes tierces",body:"FlipIt AI dépend de plateformes externes (Facebook Marketplace, Kijiji, Craigslist, etc.). Nous ne sommes pas responsables de leur contenu, de leur disponibilité, ni des changements qu'elles peuvent apporter à leurs services. Les données publiques analysées par FlipIt AI sont obtenues via des canaux autorisés d'accès aux données et non par extraction non autorisée (scraping) des plateformes concernées."},
       {num:"07",title:"Données publiques",body:"FlipIt AI peut s'appuyer sur des données accessibles publiquement. L'accès à ces données peut changer, être restreint ou disparaître à tout moment sans que notre responsabilité ne puisse être engagée."},
       {num:"08",title:"Limitation de responsabilité",body:"Dans la limite maximale permise par la loi, FlipIt AI ne sera pas responsable des pertes financières, dommages indirects, opportunités manquées, erreurs de données ou décisions prises par l'utilisateur. La responsabilité maximale de FlipIt AI est limitée au montant payé par l'utilisateur au cours des 12 derniers mois."},
       {num:"09",title:"Indemnisation",body:"Vous acceptez d'indemniser FlipIt AI contre toute réclamation liée à votre utilisation du service, à vos transactions ou à vos interactions avec des tiers."},
@@ -63,7 +63,7 @@ const COPY = {
       {num:"03",title:"No financial advice",body:"FlipIt AI provides NO financial, legal or investment advice. All decisions made based on information provided by the application are the sole responsibility of the user."},
       {num:"04",title:"No guarantee",list:["The accuracy of information","The profitability of detected opportunities","The continuous availability of the service","The speed of alerts"]},
       {num:"05",title:"External transactions",callout:"CRITICAL — FlipIt AI is NOT involved in transactions between users and sellers. We disclaim all liability for physical meetings, Marketplace transactions, fraud, theft, injuries, assaults or any other incident. You assume 100% of the risks associated with any transaction."},
-      {num:"06",title:"Third-party platforms",body:"FlipIt AI depends on external platforms (Facebook Marketplace, Kijiji, Craigslist, etc.). We are not responsible for their content, availability, or changes they may make to their services."},
+      {num:"06",title:"Third-party platforms",body:"FlipIt AI depends on external platforms (Facebook Marketplace, Kijiji, Craigslist, etc.). We are not responsible for their content, availability, or changes they may make to their services. Public data analyzed by FlipIt AI is obtained through authorized data access channels, not through unauthorized extraction (scraping) of the relevant platforms."},
       {num:"07",title:"Public data",body:"FlipIt AI may rely on publicly accessible data. Access to this data may change, be restricted or disappear at any time without any liability on our part."},
       {num:"08",title:"Limitation of liability",body:"To the maximum extent permitted by law, FlipIt AI will not be liable for financial losses, indirect damages, missed opportunities, data errors or decisions made by the user. FlipIt AI's maximum liability is limited to the amount paid by the user in the last 12 months."},
       {num:"09",title:"Indemnification",body:"You agree to indemnify FlipIt AI against any claims related to your use of the service, your transactions or your interactions with third parties."},
@@ -99,7 +99,7 @@ function App(){
       <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:100,padding:"14px 32px",background:scrolled?"rgba(10,9,6,0.92)":"transparent",backdropFilter:scrolled?"blur(14px)":"none",borderBottom:scrolled?"1px solid var(--line)":"1px solid transparent",transition:"all 0.3s",display:"flex",alignItems:"center",gap:12}}>
         <LogoMark/>
         <span style={{fontWeight:600,fontSize:17,letterSpacing:"-0.02em"}}>FlipIt <span style={{color:"var(--accent)"}}>AI</span></span>
-        <a href="flipit-landing-standalone.html" style={{fontSize:13,color:"var(--ink-dim)",border:"none",display:"flex",alignItems:"center",gap:6,fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.04em"}}>
+        <a href="/" style={{fontSize:13,color:"var(--ink-dim)",border:"none",display:"flex",alignItems:"center",gap:6,fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.04em"}}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
           {lang==="fr"?"Accueil":"Home"}
         </a>
@@ -139,10 +139,10 @@ function App(){
       <div style={{borderTop:"1px solid var(--line)",padding:"28px 32px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16,fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink-mute)"}}>
         <span>© 2026 FlipIt AI Inc.</span>
         <div style={{display:"flex",gap:20}}>
-          <a href="privacy-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Privacy</a>
-          <a href="terms-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Terms</a>
-          <a href="cookies-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>Cookies</a>
-          <a href="mentions-legales-standalone.html" style={{color:"var(--ink-mute)",border:"none"}}>{lang==="fr"?"Mentions légales":"Legal notices"}</a>
+          <a href="/privacy" style={{color:"var(--ink-mute)",border:"none"}}>Privacy</a>
+          <a href="/terms" style={{color:"var(--ink-mute)",border:"none"}}>Terms</a>
+          <a href="/cookies" style={{color:"var(--ink-mute)",border:"none"}}>Cookies</a>
+          <a href="/mentions-legales" style={{color:"var(--ink-mute)",border:"none"}}>{lang==="fr"?"Mentions légales":"Legal notices"}</a>
         </div>
       </div>
     </div>
