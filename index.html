@@ -31,6 +31,10 @@
 <meta name="twitter:description" content="FlipIt AI surveille Facebook Marketplace, Kijiji et Craigslist 24/7. Recevez les alertes sur les annonces sous-évaluées avant tout le monde. Bientôt eBay, OfferUp (US), Leboncoin (FR), Gumtree (UK)." />
 <meta name="twitter:image" content="https://flipitapp.ai/og-image.png" />
 <title>FlipIt AI — Soyez le premier sur chaque deal</title>
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet" />
@@ -546,8 +550,7 @@ function Nav({ lang, setLang, bannerOffset, onContactClick }) {
     <nav style={{ position:"fixed", top:bannerOffset, left:0, right:0, zIndex:100, padding:scrolled?"12px 0":"20px 0", background:scrolled?"rgba(10,9,6,0.88)":"transparent", backdropFilter:scrolled?"blur(14px)":"none", WebkitBackdropFilter:scrolled?"blur(14px)":"none", borderBottom:scrolled?"1px solid var(--line)":"1px solid transparent", transition:"all 0.3s" }}>
       <div className="fi-container" style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
         <a href="#top" style={{ display:"flex", alignItems:"center", gap:10 }}>
-          <LogoMark />
-          <span style={{ fontWeight:600, fontSize:18, letterSpacing:"-0.02em" }}>FlipIt <span style={{ color:"var(--accent)" }}>AI</span></span>
+          <img src="/flipit-logo.png" alt="FlipIt AI" style={{ height:34, width:"auto", display:"block" }} />
         </a>
         {/* desktop links */}
         <div className="fi-nav-links" style={{ display:"flex", alignItems:"center", gap:28 }}>
@@ -1029,7 +1032,7 @@ function Footer({ lang, accent }) {
         {/* footer grid */}
         <div className="fi-footer-grid" style={{ display:"grid", gridTemplateColumns:"1.4fr 1fr 1fr 1fr", gap:36, paddingBottom:56, borderBottom:"1px solid var(--line)" }}>
           <div>
-            <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:14 }}><LogoMark /><span style={{ fontWeight:600, fontSize:17, letterSpacing:"-0.02em" }}>FlipIt <span style={{ color:accent }}>AI</span></span></div>
+            <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:14 }}><img src="/flipit-logo.png" alt="FlipIt AI" style={{ height:30, width:"auto", display:"block" }} /></div>
             <p style={{ fontSize:14, color:"var(--ink-dim)", lineHeight:1.55, margin:0, maxWidth:260 }}>{lang==="fr"?"Détecteur intelligent pour Facebook Marketplace, Kijiji et Craigslist.":"Smart monitor for Facebook Marketplace, Kijiji and Craigslist."}</p>
           </div>
           {Object.entries(c.sections).map(([key,sec]) => (

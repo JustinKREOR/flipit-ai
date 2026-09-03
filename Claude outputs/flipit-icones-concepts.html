@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlipIt — Concepts d'icône</title>
+<style>
+  :root{
+    --ink:#17150d; --muted:#6b6a5e; --line:#e7e5da; --card:#ffffff; --bg:#f6f5ef;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1040px;margin:0 auto;padding:40px 24px 64px}
+  header h1{font-size:30px;letter-spacing:-.02em;margin:0 0 6px}
+  header p{color:var(--muted);margin:0;font-size:15px;line-height:1.5;max-width:640px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:22px 0 34px;font-size:13px;color:var(--muted)}
+  .legend b{color:var(--ink);font-weight:600}
+  .concept{background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:24px;margin-bottom:22px;}
+  .concept-head{display:flex;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap}
+  .concept-head h2{font-size:19px;margin:0;letter-spacing:-.01em}
+  .tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+    color:#5f7a12;background:#eef7d4;border-radius:999px;padding:3px 10px}
+  .concept p.desc{color:var(--muted);font-size:14px;line-height:1.55;margin:6px 0 20px;max-width:720px}
+  .variants{display:flex;gap:28px;flex-wrap:wrap}
+  .variant{display:flex;gap:16px;align-items:center}
+  .big{width:132px;height:132px;border-radius:30px;overflow:hidden;
+    box-shadow:0 6px 20px rgba(20,18,7,.14);flex:0 0 auto}
+  .big svg,.mini svg{display:block;width:100%;height:100%}
+  .mini{width:52px;height:52px;border-radius:12px;overflow:hidden;
+    box-shadow:0 2px 6px rgba(20,18,7,.16)}
+  .vlabel{font-size:12.5px;color:var(--muted);line-height:1.5}
+  .vlabel b{color:var(--ink);display:block;font-weight:600;font-size:13px;margin-bottom:2px}
+  .homerow{margin-top:14px;display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px}
+  footer{color:var(--muted);font-size:13px;margin-top:26px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>FlipIt — 4 concepts d'icône</h1>
+    <p>Deux pistes « monogramme F » et deux pistes « pouls modernisé », chacune montrée dans les deux styles de fond. Les petites vignettes montrent la lisibilité à la taille réelle sur l'écran d'accueil.</p>
+  </header>
+
+  <div class="legend">
+    <span><b>Variante A</b> — fond chartreuse, symbole foncé (comme l'icône actuelle)</span>
+    <span><b>Variante B</b> — fond foncé, symbole chartreuse (comme ton site)</span>
+  </div>
+
+  <div id="board"></div>
+
+  <footer>
+    Palette : chartreuse #aee83d → #c8f050 · foncé #0a0906. Dis-moi le concept + la variante que tu préfères et je peux l'affiner (couleur, épaisseur, arrondi) puis l'exporter en PNG 1024×1024 prêt pour l'App Store / Play et pour ton dev.
+  </footer>
+</div>
+
+<script>
+const GRAD = (id)=>`<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#aee83d"/><stop offset="1" stop-color="#c8f050"/></linearGradient></defs>`;
+
+// each concept returns the inner mark markup, given the mark paint
+const CONCEPTS = [
+  {
+    id:'fbold', name:'F — Monogramme franc', tag:'Monogramme',
+    desc:"Un « F » géométrique gras, très lisible même en tout petit. Simple, moderne, mémorable — il devient une vraie signature de marque plutôt qu'un pictogramme générique.",
+    draw:(m)=>`
+      <rect x="36" y="26" width="13" height="48" rx="2.5" fill="${m}"/>
+      <rect x="36" y="26" width="32" height="13" rx="2.5" fill="${m}"/>
+      <rect x="36" y="44" width="24" height="12" rx="2.5" fill="${m}"/>`
+  },
+  {
+    id:'fitalic', name:'F — Monogramme dynamique', tag:'Monogramme',
+    desc:"Le même « F » mais incliné vers l'avant, avec une petite flèche montante qui remplace la barre du milieu — évoque la vitesse des alertes et la valeur qui grimpe.",
+    draw:(m)=>`
+      <g transform="translate(9,0) skewX(-11)">
+        <rect x="33" y="26" width="13" height="48" rx="2.5" fill="${m}"/>
+        <rect x="33" y="26" width="30" height="13" rx="2.5" fill="${m}"/>
+      </g>
+      <path d="M46 55 L58 43 L58 49 L69 49" fill="none" stroke="${m}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M69 42 L69 49 L62 49" fill="none" stroke="${m}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`
+  },
+  {
+    id:'pulserise', name:'Pouls — Version montante', tag:'Pouls modernisé',
+    desc:"On garde ta ligne de pouls (continuité de marque), mais le dernier segment se prolonge en flèche vers le haut : le « battement » devient une valeur qui monte, un bon deal détecté.",
+    draw:(m)=>`
+      <path d="M15 57 H32 L40 33 L49 71 L57 47 L69 47 L81 31" fill="none" stroke="${m}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M73 31 L81 31 L81 39" fill="none" stroke="${m}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`
+  },
+  {
+    id:'pulsespike', name:'Pouls — Version épurée', tag:'Pouls modernisé',
+    desc:"Une ligne de pouls unique, plus épaisse et arrondie, avec un seul pic net. Épurée et confiante — se reconnaît instantanément en petit, sans détails qui se perdent.",
+    draw:(m)=>`
+      <path d="M17 53 H34 L45 31 L55 69 L65 48 H83" fill="none" stroke="${m}" stroke-width="9.5" stroke-linecap="round" stroke-linejoin="round"/>`
+  }
+];
+
+function icon(concept, variant, size){
+  const gid = concept.id+'-'+variant+'-'+size;
+  const bg = variant==='A' ? `url(#${gid})` : '#0a0906';
+  const mark = variant==='A' ? '#141207' : `url(#${gid})`;
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    ${GRAD(gid)}
+    <rect x="0" y="0" width="100" height="100" fill="${bg}"/>
+    ${concept.draw(mark)}
+  </svg>`;
+}
+
+const board = document.getElementById('board');
+board.innerHTML = CONCEPTS.map(c=>`
+  <div class="concept">
+    <div class="concept-head"><h2>${c.name}</h2><span class="tag">${c.tag}</span></div>
+    <p class="desc">${c.desc}</p>
+    <div class="variants">
+      <div class="variant">
+        <div class="big">${icon(c,'A',1)}</div>
+        <div class="vlabel"><b>Variante A</b>fond chartreuse<br>symbole foncé
+          <div class="homerow"><div class="mini">${icon(c,'A',2)}</div> aperçu réel</div>
+        </div>
+      </div>
+      <div class="variant">
+        <div class="big">${icon(c,'B',1)}</div>
+        <div class="vlabel"><b>Variante B</b>fond foncé<br>symbole chartreuse
+          <div class="homerow"><div class="mini">${icon(c,'B',2)}</div> aperçu réel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+`).join('');
+</script>
+</body>
+</html>

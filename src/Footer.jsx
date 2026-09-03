@@ -57,13 +57,7 @@ function Footer({ lang, accent }) {
         }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <LogoMark />
-              <span style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontWeight: 600,
-                fontSize: 18,
-                letterSpacing: "-0.02em",
-              }}>FlipIt <span style={{ color: accent }}>AI</span></span>
+              <img src="/flipit-logo.png" alt="FlipIt AI" style={{ height: 30, width: "auto", display: "block" }} />
             </div>
             <p style={{ fontSize: 14, color: "var(--ink-dim)", lineHeight: 1.55, margin: 0, maxWidth: 280 }}>
               Détecteur intelligent pour Facebook Marketplace, Kijiji et Craigslist. Soyez le premier sur chaque bonne affaire.

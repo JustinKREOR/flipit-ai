@@ -34,16 +34,7 @@ function Nav({ lang = "fr", setLang, bannerOffset = 0 }) {
       <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         {/* Logo */}
         <a href="#top" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-          <LogoMark />
-          <span style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontWeight: 600,
-            fontSize: 18,
-            letterSpacing: "-0.02em",
-            color: "var(--ink)",
-          }}>
-            FlipIt <span style={{ color: "var(--accent)" }}>AI</span>
-          </span>
+          <img src="/flipit-logo.png" alt="FlipIt AI" style={{ height: 34, width: "auto", display: "block" }} />
         </a>
 
         {/* Desktop links */}

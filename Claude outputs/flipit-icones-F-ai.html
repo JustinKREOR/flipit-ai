@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlipIt — Icône F (AI robot)</title>
+<style>
+  :root{--ink:#17150d;--muted:#6b6a5e;--line:#e7e5da;--card:#ffffff;--bg:#f6f5ef;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1040px;margin:0 auto;padding:40px 24px 64px}
+  header h1{font-size:30px;letter-spacing:-.02em;margin:0 0 6px}
+  header p{color:var(--muted);margin:0;font-size:15px;line-height:1.5;max-width:660px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:22px 0 34px;font-size:13px;color:var(--muted)}
+  .legend b{color:var(--ink);font-weight:600}
+  .concept{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:24px;margin-bottom:22px;}
+  .concept-head{display:flex;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap}
+  .concept-head h2{font-size:19px;margin:0;letter-spacing:-.01em}
+  .tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+    color:#5f7a12;background:#eef7d4;border-radius:6px;padding:3px 10px}
+  .concept p.desc{color:var(--muted);font-size:14px;line-height:1.55;margin:6px 0 20px;max-width:720px}
+  .variants{display:flex;gap:28px;flex-wrap:wrap}
+  .variant{display:flex;gap:16px;align-items:center}
+  .big{width:132px;height:132px;border-radius:20px;overflow:hidden;
+    box-shadow:0 6px 20px rgba(20,18,7,.14);flex:0 0 auto}
+  .big svg,.mini svg{display:block;width:100%;height:100%}
+  .mini{width:52px;height:52px;border-radius:9px;overflow:hidden;
+    box-shadow:0 2px 6px rgba(20,18,7,.16)}
+  .vlabel{font-size:12.5px;color:var(--muted);line-height:1.5}
+  .vlabel b{color:var(--ink);display:block;font-weight:600;font-size:13px;margin-bottom:2px}
+  .homerow{margin-top:14px;display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px}
+  footer{color:var(--muted);font-size:13px;margin-top:26px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>FlipIt — l'icône « F », version AI / robot</h1>
+    <p>Nouvelle identité bâtie sur le « F », avec un traitement machine : grille de pixels, puce électronique, tête de robot, circuit imprimé. Coins plus carrés pour le côté tech. Chaque concept est montré fond chartreuse et fond foncé, avec l'aperçu à taille réelle.</p>
+  </header>
+
+  <div class="legend">
+    <span><b>Variante A</b> — fond chartreuse, symbole foncé</span>
+    <span><b>Variante B</b> — fond foncé, symbole chartreuse (esprit tech / premium)</span>
+  </div>
+
+  <div id="board"></div>
+
+  <footer>
+    Palette : chartreuse #aee83d → #c8f050 · foncé #0a0906. Sur un vrai téléphone, iOS/Android arrondit lui-même les coins — l'image reste carrée pleine page. Dis-moi le concept + la variante que tu préfères ; on l'affine (épaisseur, détails robot, couleur) puis je l'exporte en PNG 1024×1024 pour les stores et ton dev.
+  </footer>
+</div>
+
+<script>
+const GRAD = (id)=>`<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#aee83d"/><stop offset="1" stop-color="#c8f050"/></linearGradient></defs>`;
+
+function pixelF(m){
+  const cells=[[0,0],[1,0],[2,0],[3,0],[0,1],[0,2],[1,2],[2,2],[0,3],[0,4],[0,5]];
+  const x0=30,y0=25,cw=11.3,ch=9.6,w=9.4,h=8;
+  return cells.map(([c,r])=>`<rect x="${(x0+c*cw).toFixed(1)}" y="${(y0+r*ch).toFixed(1)}" width="${w}" height="${h}" rx="1.6" fill="${m}"/>`).join('');
+}
+
+const CONCEPTS = [
+  {
+    id:'chip', name:'F — Puce (CPU)', tag:'AI · carré',
+    desc:"Le « F » logé dans une puce électronique avec ses broches sur les quatre côtés. Lecture immédiate « intelligence / traitement » — le cerveau AI de l'app. Très géométrique et carré.",
+    draw:(m)=>`
+      <rect x="26" y="26" width="48" height="48" rx="6" fill="none" stroke="${m}" stroke-width="4"/>
+      ${[35,47.5,60].map(x=>`<rect x="${x}" y="18" width="5" height="8" rx="1.4" fill="${m}"/>`).join('')}
+      ${[35,47.5,60].map(x=>`<rect x="${x}" y="74" width="5" height="8" rx="1.4" fill="${m}"/>`).join('')}
+      ${[35,47.5,60].map(y=>`<rect x="18" y="${y}" width="8" height="5" rx="1.4" fill="${m}"/>`).join('')}
+      ${[35,47.5,60].map(y=>`<rect x="74" y="${y}" width="8" height="5" rx="1.4" fill="${m}"/>`).join('')}
+      <rect x="41" y="37" width="8.5" height="26" rx="1.4" fill="${m}"/>
+      <rect x="41" y="37" width="19" height="8.5" rx="1.4" fill="${m}"/>
+      <rect x="41" y="47.5" width="14" height="7.5" rx="1.4" fill="${m}"/>`
+  },
+  {
+    id:'pixel', name:'F — Pixels', tag:'AI · carré',
+    desc:"Le « F » construit en modules carrés, façon pixel / 8-bit. Ultra digital, très reconnaissable, et se décline facilement (animation d'apparition des pixels, motif de fond dans l'app).",
+    draw:(m)=>pixelF(m)
+  },
+  {
+    id:'robot', name:'F — Tête de robot', tag:'AI · robot',
+    desc:"Un petit robot : antenne, deux yeux carrés, et le corps est le « F ». Sympathique et mémorable — donne une vraie mascotte à FlipIt tout en gardant la lettre au centre.",
+    draw:(m)=>`
+      <line x1="50" y1="15" x2="50" y2="24" stroke="${m}" stroke-width="4" stroke-linecap="round"/>
+      <rect x="47" y="9" width="6" height="6" rx="1.5" fill="${m}"/>
+      <rect x="33" y="27" width="9" height="9" rx="2" fill="${m}"/>
+      <rect x="58" y="27" width="9" height="9" rx="2" fill="${m}"/>
+      <rect x="40" y="41" width="10" height="33" rx="2" fill="${m}"/>
+      <rect x="40" y="41" width="25" height="10" rx="2" fill="${m}"/>
+      <rect x="40" y="55" width="18" height="9" rx="2" fill="${m}"/>`
+  },
+  {
+    id:'circuit', name:'F — Circuit', tag:'AI · robot',
+    desc:"Le « F » dessiné comme une piste de circuit imprimé, avec des nœuds (points de connexion) au bout de chaque trait. Épuré, techy, et superbe en chartreuse sur fond foncé.",
+    draw:(m)=>`
+      <rect x="37.5" y="24" width="8.5" height="8.5" rx="1.5" fill="${m}"/>
+      <path d="M42 30 V72" stroke="${m}" stroke-width="7" stroke-linecap="round"/>
+      <path d="M42 31 H63" stroke="${m}" stroke-width="7" stroke-linecap="round"/>
+      <path d="M42 50 H57" stroke="${m}" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="64" cy="31" r="5.2" fill="${m}"/>
+      <circle cx="58" cy="50" r="5.2" fill="${m}"/>
+      <circle cx="42" cy="72" r="5.2" fill="${m}"/>`
+  }
+];
+
+function icon(concept, variant, n){
+  const gid = concept.id+'-'+variant+'-'+n;
+  const bg = variant==='A' ? `url(#${gid})` : '#0a0906';
+  const mark = variant==='A' ? '#141207' : `url(#${gid})`;
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    ${GRAD(gid)}
+    <rect x="0" y="0" width="100" height="100" fill="${bg}"/>
+    ${concept.draw(mark)}
+  </svg>`;
+}
+
+document.getElementById('board').innerHTML = CONCEPTS.map(c=>`
+  <div class="concept">
+    <div class="concept-head"><h2>${c.name}</h2><span class="tag">${c.tag}</span></div>
+    <p class="desc">${c.desc}</p>
+    <div class="variants">
+      <div class="variant">
+        <div class="big">${icon(c,'A',1)}</div>
+        <div class="vlabel"><b>Variante A</b>fond chartreuse<br>symbole foncé
+          <div class="homerow"><div class="mini">${icon(c,'A',2)}</div> aperçu réel</div>
+        </div>
+      </div>
+      <div class="variant">
+        <div class="big">${icon(c,'B',1)}</div>
+        <div class="vlabel"><b>Variante B</b>fond foncé<br>symbole chartreuse
+          <div class="homerow"><div class="mini">${icon(c,'B',2)}</div> aperçu réel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+`).join('');
+</script>
+</body>
+</html>
