@@ -550,7 +550,7 @@ function Nav({ lang, setLang, bannerOffset, onContactClick }) {
     <nav style={{ position:"fixed", top:bannerOffset, left:0, right:0, zIndex:100, padding:scrolled?"12px 0":"20px 0", background:scrolled?"rgba(10,9,6,0.88)":"transparent", backdropFilter:scrolled?"blur(14px)":"none", WebkitBackdropFilter:scrolled?"blur(14px)":"none", borderBottom:scrolled?"1px solid var(--line)":"1px solid transparent", transition:"all 0.3s" }}>
       <div className="fi-container" style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
         <a href="#top" style={{ display:"flex", alignItems:"center", gap:10 }}>
-          <img src="/flipit-logo.png" alt="FlipIt AI" style={{ height:34, width:"auto", display:"block" }} />
+          <img src="/flipit-logo.png" alt="FlipIt AI" style={{ height:52, width:"auto", display:"block" }} />
         </a>
         {/* desktop links */}
         <div className="fi-nav-links" style={{ display:"flex", alignItems:"center", gap:28 }}>
@@ -1032,7 +1032,7 @@ function Footer({ lang, accent }) {
         {/* footer grid */}
         <div className="fi-footer-grid" style={{ display:"grid", gridTemplateColumns:"1.4fr 1fr 1fr 1fr", gap:36, paddingBottom:56, borderBottom:"1px solid var(--line)" }}>
           <div>
-            <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:14 }}><img src="/flipit-logo.png" alt="FlipIt AI" style={{ height:30, width:"auto", display:"block" }} /></div>
+            <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:14 }}><img src="/flipit-logo.png" alt="FlipIt AI" style={{ height:44, width:"auto", display:"block" }} /></div>
             <p style={{ fontSize:14, color:"var(--ink-dim)", lineHeight:1.55, margin:0, maxWidth:260 }}>{lang==="fr"?"Détecteur intelligent pour Facebook Marketplace, Kijiji et Craigslist.":"Smart monitor for Facebook Marketplace, Kijiji and Craigslist."}</p>
           </div>
           {Object.entries(c.sections).map(([key,sec]) => (

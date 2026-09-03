@@ -34,7 +34,7 @@ function Nav({ lang = "fr", setLang, bannerOffset = 0 }) {
       <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         {/* Logo */}
         <a href="#top" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-          <img src="/flipit-logo.png" alt="FlipIt AI" style={{ height: 34, width: "auto", display: "block" }} />
+          <img src="/flipit-logo.png" alt="FlipIt AI" style={{ height: 52, width: "auto", display: "block" }} />
         </a>
 
         {/* Desktop links */}
